@@ -1,0 +1,45 @@
+image: node:22
+
+pipelines:
+  branches:
+    main:
+    - step:
+        name: Build Production
+        deployment: Production
+        caches:
+          - node
+        script:
+          - echo "Adaptive Website has fired the thrusters"
+          - echo "The S3 bucket is ${S3_BUCKET}"
+          - echo "The CF distro is ${CF_DISTRO_ID}"
+          - mkdir build
+          - yarn install --force
+          - SASS_SUPPRESS_DEPRECATION_WARNINGS=1 CI=false yarn --silent build
+          - echo export S3_BUCKET_NEW=$S3_BUCKET CF_DISTRO_ID_NEW=$CF_DISTRO_ID >> build.env
+          - echo "Build Complete!"
+        artifacts:
+          - build/**
+          - build.env
+    - step:
+        name: Deploy to Production
+        caches:
+          - docker
+        script:
+          - source build.env
+          - echo "the current directory has the following files"
+          - ls -la
+          - echo "The S3 bucket is ${S3_BUCKET_NEW}"
+          - echo "This pipeline will run invalidation on the cloudfront specified ${CF_DISTRO_ID_NEW}"
+          - pipe: atlassian/aws-s3-deploy:1.1.0
+            variables:
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              S3_BUCKET: $S3_BUCKET_NEW
+              LOCAL_PATH: 'build'
+          - pipe: atlassian/aws-cloudfront-invalidate:0.6.0
+            variables:
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              DISTRIBUTION_ID: $CF_DISTRO_ID_NEW

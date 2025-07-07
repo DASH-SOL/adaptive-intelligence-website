@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".next",
+    "build",
+    "coverage",
+    "**/*.test.js",
+    "**/*.spec.js"
+  ]
+}
