@@ -55,7 +55,7 @@ const Feedback = () => {
         <Image
           src="/images/team/adam.jpeg"
           alt="Adam Isaac Itkoff"
-          className="icon lazy-img m-auto rounded-circle"
+          className="feedback-avatar-image lazy-img m-auto rounded-circle"
           width={100}
           height={100}
         />
@@ -65,20 +65,18 @@ const Feedback = () => {
               <div className="item">
                 <div className="feedback-block-eight text-center">
                   <p className="font-recoleta tx-dark mt-60 mb-65 lg-mt-40 lg-mb-40">
-                    Adaptive Intelligence is pushing the <span>boundaries</span> of creative norms, and our work showcases that.
+                    Adaptive Intelligence is pushing the <span>boundaries</span>{" "}
+                    of creative norms, and our work showcases that.
                   </p>
                   <h6 className="fw-normal fs-20 d-inline-block fst-italic position-relative ps-4">
                     Adam Isaac Itkoff, Chief Executive Officer
                   </h6>
-                </div>{" "}
-                {/* /.feedback-block-eight */}
+                </div>
               </div>
-            </div>{" "}
-            {/* /.feedback_slider_eight */}
+            </div>
           </div>
         </div>
-      </div>{" "}
-      {/* /.container */}
+      </div>
       {images.map((image, index) => (
         <Image
           key={index}

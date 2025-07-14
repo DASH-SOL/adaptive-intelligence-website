@@ -1,11 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  servicesItems,
-  aboutItems,
-  caseStudiesItems,
-} from "@/data/menu";
+import { servicesItems, aboutItems, caseStudiesItems } from "@/data/menu";
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -26,7 +22,7 @@ const MainMenu = () => {
           <Link
             href={items[0].link || items[0].text}
             className={`nav-link ${checkActive(items[0]) ? "active-menu" : ""}`}
-            style={{ userSelect: 'none' }}
+            style={{ userSelect: "none" }}
           >
             {label}
           </Link>
@@ -48,11 +44,11 @@ const MainMenu = () => {
           data-bs-toggle="dropdown"
           data-bs-auto-close="outside"
           aria-expanded="false"
-          style={{ userSelect: 'none' }}
+          style={{ userSelect: "none" }}
         >
           {label}
         </a>
-        <ul className="dropdown-menu" style={{ userSelect: 'none' }}>
+        <ul className="dropdown-menu" style={{ userSelect: "none" }}>
           {items.map((item, index) => (
             <li key={index}>
               <Link
@@ -60,9 +56,11 @@ const MainMenu = () => {
                 className={`dropdown-item ${
                   isActive(item.link || item.text) ? "active" : ""
                 }`}
-                style={{ userSelect: 'none' }}
+                style={{ userSelect: "none" }}
               >
-                <span style={{ userSelect: 'none' }}>{item.name || item.text}</span>
+                <span style={{ userSelect: "none" }}>
+                  {item.name || item.text}
+                </span>
               </Link>
             </li>
           ))}
@@ -88,15 +86,16 @@ const MainMenu = () => {
 
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
+          {/* Mobile Logo - Updated to match desktop */}
           <li className="d-block d-lg-none">
-            <div className="logo">
+            <div className="logo mobile-logo">
               <Link href="/" className="d-block">
                 <Image
-                  src="/images/logo/logo_01.png"
+                  src="/images/logo/logo_06.svg"
                   alt="logo"
-                  width={95}
-                  height={30}
-                  style={{ userSelect: 'none' }}
+                  width={115}
+                  height={80}
+                  style={{ userSelect: "none" }}
                 />
               </Link>
             </div>
@@ -107,7 +106,7 @@ const MainMenu = () => {
             <Link
               href="/"
               className={pathname === "/" ? "nav-link active-menu" : "nav-link"}
-              style={{ userSelect: 'none' }}
+              style={{ userSelect: "none" }}
             >
               Home
             </Link>
@@ -115,16 +114,20 @@ const MainMenu = () => {
           {/* End li (pages) */}
 
           {renderNavItem(aboutItems, "About", (item) => isActive(item.link))}
-          {renderNavItem(caseStudiesItems, "Case Studies", (item) => isActive(item.link))}
-          {renderNavItem(servicesItems, "Services", (item) => isActive(item.link))}
-
+          {renderNavItem(caseStudiesItems, "Case Studies", (item) =>
+            isActive(item.link)
+          )}
+          {renderNavItem(servicesItems, "Services", (item) =>
+            isActive(item.link)
+          )}
 
           {/* Mobile Content */}
           <div className="mobile-content d-block d-lg-none">
             <div className="d-flex flex-column align-items-center justify-content-center mt-70">
               <Link
-                href="/contact/contact-v1"
-                className="btn-twentyOne fw-500 tran3s"
+                href="/contact"
+                className="signup-btn-two fw-500 tran3s"
+                style={{ userSelect: "none" }}
               >
                 Contact us
               </Link>

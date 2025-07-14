@@ -497,3 +497,343 @@
   transition: color 0.3s ease, border-color 0.3s ease,
     background-color 0.3s ease;
 }
+/* Header Menu Color Styles - Add this to your _style.scss or _navbar.scss file */
+
+/* Override white-vr to make menu items BLACK initially (Desktop) */
+.white-vr.theme-main-menu .navbar .navbar-nav .nav-link {
+  color: #000;
+}
+
+.white-vr.theme-main-menu .navbar .navbar-nav .nav-item.active .nav-link,
+.white-vr.theme-main-menu .navbar .navbar-nav .nav-item:hover .nav-link {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* Contact Us button BLACK initially (Desktop) */
+.white-vr.theme-main-menu .signup-btn-two {
+  color: #000;
+  border-color: #000;
+}
+
+.white-vr.theme-main-menu .signup-btn-two:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* Dropdown items BLACK initially (Desktop) */
+.white-vr.theme-main-menu .dropdown-menu .dropdown-item {
+  color: #000;
+}
+
+.white-vr.theme-main-menu .nav-link.dropdown-toggle {
+  color: #000;
+}
+
+/* When STICKY: Menu items become WHITE (Desktop) */
+.white-vr.theme-main-menu.sticky-menu.fixed .navbar .navbar-nav .nav-link {
+  color: #fff;
+}
+
+.white-vr.theme-main-menu.sticky-menu.fixed
+  .navbar
+  .navbar-nav
+  .nav-item.active
+  .nav-link,
+.white-vr.theme-main-menu.sticky-menu.fixed
+  .navbar
+  .navbar-nav
+  .nav-item:hover
+  .nav-link {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Contact Us button WHITE when sticky (Desktop) */
+.white-vr.theme-main-menu.sticky-menu.fixed .signup-btn-two {
+  color: #fff;
+  border-color: #fff;
+}
+
+.white-vr.theme-main-menu.sticky-menu.fixed .signup-btn-two:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+/* Dropdown items when sticky (Desktop) */
+.white-vr.theme-main-menu.sticky-menu.fixed .dropdown-menu .dropdown-item {
+  color: #000; /* Keep dropdown items readable on white background */
+}
+
+.white-vr.theme-main-menu.sticky-menu.fixed .nav-link.dropdown-toggle {
+  color: #fff;
+}
+
+/* Mobile menu toggle */
+.white-vr.theme-main-menu .navbar-toggler span,
+.white-vr.theme-main-menu .navbar-toggler::before,
+.white-vr.theme-main-menu .navbar-toggler::after {
+  background: #000;
+}
+
+.white-vr.theme-main-menu.sticky-menu.fixed .navbar-toggler span,
+.white-vr.theme-main-menu.sticky-menu.fixed .navbar-toggler::before,
+.white-vr.theme-main-menu.sticky-menu.fixed .navbar-toggler::after {
+  background: #fff;
+}
+
+/* Smooth transitions */
+.theme-main-menu .navbar .navbar-nav .nav-link,
+.theme-main-menu .signup-btn-two {
+  transition: color 0.3s ease, border-color 0.3s ease,
+    background-color 0.3s ease;
+}
+
+/* Header Menu Color Styles - Add this to your _style.scss or _navbar.scss file */
+
+/* Override white-vr to make menu items BLACK initially (Desktop) */
+.white-vr.theme-main-menu .navbar .navbar-nav .nav-link {
+  color: #000;
+}
+
+.white-vr.theme-main-menu .navbar .navbar-nav .nav-item.active .nav-link,
+.white-vr.theme-main-menu .navbar .navbar-nav .nav-item:hover .nav-link {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* Contact Us button BLACK initially (Desktop) */
+.white-vr.theme-main-menu .signup-btn-two {
+  color: #000;
+  border-color: #000;
+}
+
+.white-vr.theme-main-menu .signup-btn-two:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* Dropdown items BLACK initially (Desktop) */
+.white-vr.theme-main-menu .dropdown-menu .dropdown-item {
+  color: #000;
+}
+
+.white-vr.theme-main-menu .nav-link.dropdown-toggle {
+  color: #000;
+}
+
+/* When STICKY: Menu items become WHITE (Desktop) */
+.white-vr.theme-main-menu.sticky-menu.fixed .navbar .navbar-nav .nav-link {
+  color: #fff;
+}
+
+.white-vr.theme-main-menu.sticky-menu.fixed
+  .navbar
+  .navbar-nav
+  .nav-item.active
+  .nav-link,
+.white-vr.theme-main-menu.sticky-menu.fixed
+  .navbar
+  .navbar-nav
+  .nav-item:hover
+  .nav-link {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Contact Us button WHITE when sticky (Desktop) */
+.white-vr.theme-main-menu.sticky-menu.fixed .signup-btn-two {
+  color: #fff;
+  border-color: #fff;
+}
+
+.white-vr.theme-main-menu.sticky-menu.fixed .signup-btn-two:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+/* Dropdown items when sticky (Desktop) */
+.white-vr.theme-main-menu.sticky-menu.fixed .dropdown-menu .dropdown-item {
+  color: #000; /* Keep dropdown items readable on white background */
+}
+
+.white-vr.theme-main-menu.sticky-menu.fixed .nav-link.dropdown-toggle {
+  color: #fff;
+}
+
+/* Mobile menu toggle */
+.white-vr.theme-main-menu .navbar-toggler span,
+.white-vr.theme-main-menu .navbar-toggler::before,
+.white-vr.theme-main-menu .navbar-toggler::after {
+  background: #000;
+}
+
+.white-vr.theme-main-menu.sticky-menu.fixed .navbar-toggler span,
+.white-vr.theme-main-menu.sticky-menu.fixed .navbar-toggler::before,
+.white-vr.theme-main-menu.sticky-menu.fixed .navbar-toggler::after {
+  background: #fff;
+}
+
+/* Smooth transitions */
+.theme-main-menu .navbar .navbar-nav .nav-link,
+.theme-main-menu .signup-btn-two {
+  transition: color 0.3s ease, border-color 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.white-vr.theme-main-menu .navbar .navbar-nav .nav-link {
+  color: #000;
+}
+
+.white-vr.theme-main-menu .navbar .navbar-nav .nav-item.active .nav-link,
+.white-vr.theme-main-menu .navbar .navbar-nav .nav-item:hover .nav-link {
+  color: #000;
+  text-decoration: underline;
+}
+
+.white-vr.theme-main-menu .signup-btn-two {
+  color: #000;
+  border-color: var(--prime-nine);
+}
+
+.white-vr.theme-main-menu .signup-btn-two:hover {
+  background: var(--prime-nine);
+  color: #fff;
+  border-color: var(--prime-nine);
+}
+
+.white-vr.theme-main-menu .dropdown-menu .dropdown-item {
+  color: #000;
+}
+
+.white-vr.theme-main-menu .nav-link.dropdown-toggle {
+  color: #000;
+}
+
+.white-vr.theme-main-menu.sticky-menu.fixed .navbar .navbar-nav .nav-link {
+  color: #fff;
+}
+
+.white-vr.theme-main-menu.sticky-menu.fixed
+  .navbar
+  .navbar-nav
+  .nav-item.active
+  .nav-link,
+.white-vr.theme-main-menu.sticky-menu.fixed
+  .navbar
+  .navbar-nav
+  .nav-item:hover
+  .nav-link {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.white-vr.theme-main-menu.sticky-menu.fixed .signup-btn-two {
+  color: #fff;
+  border-color: var(--prime-nine);
+  background: var(--prime-nine);
+}
+
+.white-vr.theme-main-menu.sticky-menu.fixed .signup-btn-two:hover {
+  background: #fff;
+  color: var(--prime-nine);
+  border-color: var(--prime-nine);
+}
+
+.white-vr.theme-main-menu.sticky-menu.fixed .dropdown-menu .dropdown-item {
+  color: #000;
+}
+
+.white-vr.theme-main-menu.sticky-menu.fixed .nav-link.dropdown-toggle {
+  color: #fff;
+}
+
+.white-vr.theme-main-menu .navbar-toggler span,
+.white-vr.theme-main-menu .navbar-toggler::before,
+.white-vr.theme-main-menu .navbar-toggler::after {
+  background: #000;
+}
+
+.white-vr.theme-main-menu.sticky-menu.fixed .navbar-toggler span,
+.white-vr.theme-main-menu.sticky-menu.fixed .navbar-toggler::before,
+.white-vr.theme-main-menu.sticky-menu.fixed .navbar-toggler::after {
+  background: #fff;
+}
+
+.theme-main-menu .navbar .navbar-nav .nav-link,
+.theme-main-menu .signup-btn-two {
+  transition: color 0.3s ease, border-color 0.3s ease,
+    background-color 0.3s ease;
+}
+
+@media screen and (max-width: 991px) {
+  .white-vr.theme-main-menu .navbar-toggler span,
+  .white-vr.theme-main-menu .navbar-toggler::before,
+  .white-vr.theme-main-menu .navbar-toggler::after {
+    background: #fff !important;
+  }
+
+  .white-vr.theme-main-menu .navbar-collapse .navbar-nav .nav-link {
+    color: #fff !important;
+  }
+
+  .white-vr.theme-main-menu.theme-menu-seven
+    .navbar-collapse
+    .navbar-nav
+    .nav-item.active
+    .nav-link,
+  .white-vr.theme-main-menu .navbar-collapse .navbar-nav .nav-link.active-menu {
+    color: var(--prime-nine) !important;
+    text-decoration: underline;
+  }
+
+  .white-vr.theme-main-menu
+    .navbar-collapse
+    .navbar-nav
+    .nav-item:hover
+    .nav-link:not(.active-menu) {
+    color: #fff !important;
+    text-decoration: underline;
+  }
+
+  .white-vr.theme-main-menu .navbar-collapse .nav-link.dropdown-toggle {
+    color: #fff !important;
+  }
+
+  .white-vr.theme-main-menu
+    .navbar-collapse
+    .nav-link.dropdown-toggle.active-menu {
+    color: var(--prime-nine) !important;
+  }
+
+  .white-vr.theme-main-menu .navbar-collapse .mobile-logo {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+  }
+
+  .white-vr.theme-main-menu .navbar-collapse .mobile-content .signup-btn-two {
+    color: #fff !important;
+    border-color: #fff !important;
+    background: transparent;
+    padding: 12px 30px;
+    border-radius: 28px;
+    text-decoration: none;
+    border: 2px solid #fff;
+    line-height: normal;
+    display: inline-block;
+  }
+
+  .white-vr.theme-main-menu
+    .navbar-collapse
+    .mobile-content
+    .signup-btn-two:hover {
+    background: #fff !important;
+    color: #000 !important;
+    border-color: #fff !important;
+  }
+}
