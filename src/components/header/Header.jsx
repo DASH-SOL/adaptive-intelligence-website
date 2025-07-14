@@ -32,7 +32,7 @@ const Header = ({ style }) => {
       <div className="inner-content position-relative">
         <div className="d-flex align-items-center justify-content-between">
           <div className="logo order-lg-0">
-            <Link href="/" className="d-block" style={{ userSelect: 'none' }}>
+            <Link href="/" className="d-block" style={{ userSelect: "none" }}>
               <Image
                 src="/images/logo/logo_06.svg"
                 alt="logo"
@@ -41,11 +41,14 @@ const Header = ({ style }) => {
               />
             </Link>
           </div>
-          <div className="right-widget d-flex align-items-center ms-auto ms-lg-0 order-lg-3" style={{ userSelect: 'none' }}>
+          <div
+            className="right-widget d-flex align-items-center ms-auto ms-lg-0 order-lg-3"
+            style={{ userSelect: "none" }}
+          >
             <Link
               href="/contact"
               className="signup-btn-two fw-500 tran3s d-none d-lg-block"
-              style={{ userSelect: 'none' }}
+              style={{ userSelect: "none" }}
             >
               Contact Us
             </Link>
