@@ -10,12 +10,12 @@ export const homeItems = [
     ],
   },
   {
-    titles sfaf saf as s gasg ss ag agagas gsssfsafas: "Landing",
+    title: "Landing",
     items: [
       { title: "Sass Product", link: "/home/sass-product" },
       { title: "App Landing", link: "/home/app-landing" },
       { title: "Crypto", link: "/home/crypto" },
-      { title: "Personal Portfolio", link: "/home/personal-portfolios" },
+      { title: "Personal Portfolio", link: "/home/personal-portfolio" },
     ],
   },
   {
@@ -84,7 +84,9 @@ export const pagesItems = [
   },
 ];
 
-export const aboutItems = [{ title: "About", link: "/about" }];
+export const aboutItems = [
+  { title: "About", link: "/about" },
+];
 
 export const portfolioItems = [
   { name: "Portfolio 01", link: "/portfolio/portfolio-v1" },
@@ -97,6 +99,7 @@ export const portfolioItems = [
   { name: "Portfolio Details", link: "/portfolio/1" },
 ];
 
+
 export const caseStudiesItems = [
   { name: "Case Studies 01", link: "/case-studies/case-studies-v1" },
   { name: "Case Studies 02", link: "/case-studies/case-studies-v2" },
@@ -104,8 +107,12 @@ export const caseStudiesItems = [
   { name: "Case Studies 04", link: "/case-studies/case-studies-v4" },
 ];
 
-export const servicesItems = [{ link: "/services", text: "Services" }];
-export const contactItems = [{ link: "/contact", text: "Contact" }];
+export const servicesItems = [
+  { link: "/services", text: "Services" },
+];
+export const contactItems = [
+  { link: "/contact", text: "Contact" }
+];
 
 export const navItems = [
   {
