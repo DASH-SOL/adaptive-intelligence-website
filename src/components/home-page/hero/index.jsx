@@ -530,7 +530,7 @@ const Hero = ({ isHomePage = false, children }) => {
             mobileWidth={232}
             mobileHeight={237}
             mobileTop={20}
-            mobileLeft={25}
+            mobileLeft={5}
             duration="25s"
             delay="1s"
             animation="slowSpinWithFloat"
@@ -635,16 +635,16 @@ const Hero = ({ isHomePage = false, children }) => {
             tabletHeight={270}
             tabletTop={30}
             tabletLeft={80}
-            mobileWidth={114}
-            mobileHeight={132}
-            mobileTop={50}
+            mobileWidth={200}
+            mobileHeight={270}
+            mobileTop={20}
             mobileLeft={70}
             animation="slowSpinWithFloat"
             duration="35s"
             delay="5s"
             opacity={1}
             zIndex={1}
-            hideOnMobile={true}  // Hide this shape on mobile to reduce clutter
+            hideOnMobile={false}  // Hide this shape on mobile to reduce clutter
           />
           
         </div>
