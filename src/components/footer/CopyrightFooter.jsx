@@ -13,16 +13,29 @@ const links = [
 ];
 
 const icons = [
-  {
-    icon: "/images/icon/upwork.svg",
-    href: "https://www.upwork.com/agencies/adaptiveintelligence/",
-  },
+  
   {
     icon: "fab fa-twitter",
     href: "https://twitter.com/aii_agency",
   },
   {
     icon: "fab fa-linkedin-in",
+    href: "https://www.linkedin.com/company/adaptiveintelligenceinternational",
+  },
+  {
+    icon: "fab fa-google",
+    href: "https://share.google/wqS5CzKTOC81TZj03",
+  },
+  {
+    icon: "/images/icon/upwork.svg",
+    href: "https://www.upwork.com/agencies/adaptiveintelligence/",
+  },
+  {
+    icon: "fab fa-spotify",
+    href: "https://www.linkedin.com/company/adaptiveintelligenceinternational",
+  },
+  {
+    icon: "fab fa-instagram",
     href: "https://www.linkedin.com/company/adaptiveintelligenceinternational",
   },
 ];
