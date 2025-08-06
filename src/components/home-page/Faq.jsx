@@ -28,7 +28,7 @@ const Faq = () => {
       id: "faq-5",
       question: "How exactly and how often will you communicate?",
       answer:
-        "We defer to the method and frequency of communication our clients prefer. Our team at Adaptive Intelligence views creative work as a collaboration, which is why we’re happy to let you know what decisions we’re making and why during each phase of your project. If you have questions or just want a little reassurance that your project is in good hands, we’re here. If you prefer a hands-off relationship, we can complete your project after intake and discovery, allowing you to focus on other critical business needs.",
+        "We defer to the method and frequency of communication our clients prefer. Our team at Adaptive Intelligence views creative work as a collaboration, which is why we’re happy to let you know what decisions we’re making and why during each phase of your project. If you have questions or just want a little reassurance that your project is in good hands, we’re here. If you prefer a hands-off relationship, we can complete your project after intake and discovery, allowing you to focus on other critical business needss.",
     },
   ];
 
