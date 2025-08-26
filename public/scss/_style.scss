@@ -10587,3 +10587,39 @@ body .btn-twentySix:hover:after {
   background: #FF1292;
   border-radius: 0 0 400px 400px;
 }
+/* Make consultation CTA heading white and center items */
+.consultation-cta h3 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: white; /* Make heading white */
+}
+
+.cta-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center; /* Center align all content */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align items */
+}
+
+.cta-icon {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center; /* Center the logo */
+}
+
+.cta-button {
+  background: white;
+  color: #FF1292;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: center; /* Center the button */
+}

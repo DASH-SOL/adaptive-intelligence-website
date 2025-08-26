@@ -9,7 +9,7 @@ const testimonialData = [
     position: "Founder & CEO",
     name: "Jarad",
     background: "#FA0B5F",
-    text: "Gifted brand and content strategists. They will work with you to understand your business and your core philosophy at its deepest levels. They fundamentally understand that we write copy for the benefit of people first, SEO second - but certainly not to the latter's detriment.",
+    text: "Gifted brand and content strategists. They will work with you to understand your business and your core philosophy at its deepest levels. They fundamentally understand that we write copy for the benefit of people first, SEO second — but certainly not to the latter's detriment.",
   },
   {
     company: "Advantage Benefit Solutions",

@@ -4,31 +4,55 @@ const Faq = () => {
       id: "faq-1",
       question: "What type of companies do you work with?",
       answer:
-        "Adaptive Intelligence International works with companies of all shapes and sizes. Both F500 and small and medium-sized enterprises have each benefited from our bespoke approach to strategy, branding and dramatically enhanced key messaging. We’re focused on working with companies that have open minds, moral caliber and wish to make a lasting impression in their industry.",
+        "Adaptive Intelligence partners with a wide range of brands, from startups to Fortune 500 companies. We specialize in brand strategy, content marketing, and digital campaigns for businesses that want to make a lasting impact in their industry. Our clients value innovative, data-driven solutions and strategic storytelling.",
     },
     {
       id: "faq-2",
-      question: "Why invest in branding?",
+      question: "Why should I invest in branding?",
       answer:
-        "The power of your brand ultimately determines how successful you are over time. While marketing gimmicks can turn heads for a moment, real brands make an impression that lasts a lifetime. We build our campaigns around the heart of both what you do, and why you do it. As it turns out, this is what actually matters to customers no matter where they are around the globe.",
+        "A strong brand drives long-term growth. While marketing campaigns may grab attention briefly, strategic branding ensures your business is remembered, trusted, and differentiated. We focus on building brand identity, voice, and messaging that resonate globally and create measurable business outcomes.",
     },
     {
       id: "faq-3",
-      question: "What is our process?",
+      question: "What is your creative process?",
       answer:
-        "We lead our process with a comprehensive discovery phase that allows us to learn the ins and outs of your company and the campaign at hand. From founder interviews to creative ideation sessions with your core team and leadership, we only dive headfirst into our campaigns after asking the right questions. From there, we’ll enter your project into production and regularly communicate key milestones with stakeholders.",
+        "Every project begins with a comprehensive discovery phase, including founder interviews, stakeholder workshops, and audience research. From there, we develop a strategic plan and execute campaigns with SEO-optimized content, PPC strategy, and multi-channel creative. We provide clear communication at every milestone to ensure alignment and transparency.",
     },
     {
       id: "faq-4",
-      question: "What are our timeframes?",
+      question: "How long do projects typically take?",
       answer:
-        "Production timeframes vary based on the complexity and size of your project. If your timeframe is especially sensitive, we recommend letting us know from the get-go. We’ll let you know what’s possible and can deploy rush-services under special circumstances.",
+        "Project timelines vary based on size and complexity. Smaller branding or content initiatives can take weeks, while multi-channel campaigns or full brand development may take months. Rush services are available when time is critical.",
     },
     {
       id: "faq-5",
-      question: "How exactly and how often will you communicate?",
+      question: "How do you communicate with clients?",
       answer:
-        "We defer to the method and frequency of communication our clients prefer. Our team at Adaptive Intelligence views creative work as a collaboration, which is why we’re happy to let you know what decisions we’re making and why during each phase of your project. If you have questions or just want a little reassurance that your project is in good hands, we’re here. If you prefer a hands-off relationship, we can complete your project after intake and discovery, allowing you to focus on other critical business needs.",
+        "We adapt to your preferred communication style—regular updates, milestone reviews, or a hands-off approach. Transparency and collaboration are core to our workflow, so you always know the decisions we’re making and why.",
+    },
+    {
+      id: "faq-6",
+      question: "What kind of ROI can I expect from working with Adaptive Intelligence?",
+      answer:
+        "Our work is designed for measurable impact. From higher search engine visibility to increased lead generation and audience engagement, we combine creative storytelling with data-driven strategy to ensure your investment translates into results.",
+    },
+    {
+      id: "faq-7",
+      question: "What services can help my brand grow?",
+      answer:
+        "We offer brand strategy, content creation, SEO copywriting, social media campaigns, PPC management, and full digital marketing strategy. Each service is tailored to your audience, goals, and market, ensuring every campaign contributes to your brand’s growth.",
+    },
+    {
+      id: "faq-8",
+      question: "Do you incorporate sustainability or eco-friendly practices?",
+      answer:
+        "Yes. We prioritize sustainable creative practices, responsible digital design, and eco-conscious partnerships wherever possible. Our approach ensures your brand grows without compromising values or the planet.",
+    },
+    {
+      id: "faq-9",
+      question: "How do you handle pricing and engagement models?",
+      answer:
+        "Our pricing is project-based or retainer-based depending on the scope. Every engagement is scoped with clear deliverables, timelines, and reporting metrics so clients know exactly what to expect.",
     },
   ];
 

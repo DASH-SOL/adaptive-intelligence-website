@@ -68,13 +68,6 @@ const SuccessStory = () => {
                   width={414}
                   height={378}
                 />
-                <Image
-                  src="/images/shape/shape_128.svg"
-                  alt="img"
-                  className="lazy-img shapes shape-two"
-                  width={60}
-                  height={60}
-                />
               </div>
             </div>
           </div>
@@ -96,13 +89,6 @@ const SuccessStory = () => {
           data-aos="fade-up"
           width={200}
           height={250}
-        />
-        <Image
-          src="/images/shape/shape_127.svg"
-          alt="img"
-          className="lazy-img shapes shape-one"
-          width={129}
-          height={147}
         />
       </div>
     </>

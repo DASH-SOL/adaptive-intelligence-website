@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import LetsTalkButton from "@/components/LetsTalkButton";
 const FeaturesBlock = () => {
   return (
     <>
@@ -70,19 +71,7 @@ const FeaturesBlock = () => {
             </div>
           </div>
           {/* /.info */}
-          <Link
-            href="/pages-menu/about-us-v1"
-            className="btn-nineteen d-inline-flex align-items-center tran3s"
-          >
-            More Details? <span className="fw-500 ps-2">Click here</span>
-            <Image
-              src="/images/icon/icon_97.svg"
-              alt=""
-              className="ms-2"
-              width={24}
-              height={12}
-            />
-          </Link>
+          <LetsTalkButton buttonText="More Details?" href="/contact" />
         </div>
         {/* /.block-style-six */}
       </div>

@@ -15,6 +15,7 @@ import Faq from "@/components/home-page/Faq";
 import FooterContent from "@/components/footer/FooterContent";
 import Subscribe from "@/components/footer/Subscribe";
 import CopyrightFooter from "@/components/footer/CopyrightFooter";
+import LetsTalkButton from "@/components/LetsTalkButton";
 
 export const metadata = {
   title: "Insurance || Jano - Creative Multipurpose React NextJS Template",
@@ -143,6 +144,13 @@ const HomePage = () => {
                   </span>
                   of our customers.
                 </h2>
+                <LetsTalkButton 
+  buttonText="Download Template" 
+  usePopup={true}
+  popupTitle="Get Your Free Marketing Plan Template"
+  popupDescription="Enter your email to access the download"
+  downloadRedirect="/download-template"
+/>
               </div>
               {/* /.title-style-ten */}
             </div>
@@ -169,12 +177,14 @@ const HomePage = () => {
                   className="title-style-ten text-center text-lg-start"
                   data-aos="fade-right"
                 >
-                  <div className="sc-title">Testimonials.</div>
+                  <div className="sc-title">
+Client Testimonials
+</div>
                   <h2 className="main-title font-recoleta fw-normal tx-dark">
-                    What
+                    Trusted by
                     <span className="position-relative">
                       {" "}
-                      clients{" "}
+                      Leading{" "}
                       <Image
                         src="/images/shape/shape_129.svg"
                         alt=""
@@ -182,7 +192,7 @@ const HomePage = () => {
                         height={6}
                       />
                     </span>
-                    think about us.
+                    Brands
                   </h2>
                 </div>
                 {/* /.title-style-ten */}
@@ -194,20 +204,7 @@ const HomePage = () => {
         </div>
         {/* End .container */}
 
-        <Image
-          src="/images/shape/shape_130.svg"
-          alt=""
-          className="lazy-img shapes shape-one"
-          width={129}
-          height={147}
-        />
-        <Image
-          src="/images/shape/shape_131.svg"
-          alt=""
-          className="lazy-img shapes shape-two"
-          width={170}
-          height={150}
-        />
+
       </div>
       {/* /.feedback-section-ten */}
 
@@ -219,17 +216,18 @@ const HomePage = () => {
       <div className="fancy-feature-thirtyThree mt-180 lg-mt-120">
         <div className="container">
           <div className="title-style-ten text-center" aos="fade-up">
-            <div className="sc-title">FAQ</div>
+            <div className="sc-title">FAQs</div>
             <h2 className="main-title font-recoleta fw-normal tx-dark">
-              Questions &amp;{" "}
+              Answers to your most &amp;{" "}
               <span className="position-relative">
-                Answers{" "}
+                frequently{" "}
                 <Image
                   width={219}
                   height={7}
                   src="/images/shape/shape_132.svg"
                   alt=""
                 />
+                asked questions.
               </span>
             </h2>
           </div>
@@ -240,13 +238,6 @@ const HomePage = () => {
             aos="fade-up"
           >
             <Faq />
-            <Image
-              width={65}
-              height={66}
-              src="/images/shape/shape_133.svg"
-              alt="shape"
-              className="lazy-img shapes shape-one"
-            />
           </div>
           {/* /.bg-wrapper */}
         </div>
@@ -285,14 +276,7 @@ const HomePage = () => {
               >
                 We’re ready to help you. Our experts are here, just send a message.
               </p>
-              <Link
-                href="/contact"
-                className="btn-twenty fw-500 tran3s"
-                data-aos-delay="300"
-                data-aos="fade-up"
-              >
-                Send Message
-              </Link>
+              <LetsTalkButton buttonText="Send Message" href="/contact" />
             </div>
           </div>
         </div>
@@ -339,13 +323,6 @@ const HomePage = () => {
         <CopyrightFooter />
 
         <div className="shapes shape-one" />
-        <Image
-          width={84}
-          height={104}
-          src="/images/shape/shape_134.svg"
-          alt="shape"
-          className="lazy-img shapes shape-two"
-        />
       </div>
       {/* /.footer-style-nine */}
     </>
