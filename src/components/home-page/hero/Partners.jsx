@@ -3,17 +3,19 @@ import Image from "next/image";
 
 const Partners = () => {
   const partners = [
-    { name: "Upwork", font: "font-recoleta" },
+    { name: "Nike", font: "font-recoleta" },
     { name: "", font: "font-recoleta" },
     { name: "Verizon", font: "font-recoleta" },
     { name: "", font: "font-recoleta" },
-    { name: "Nike", font: "font-recoleta" },
+    { name: "Vimeo", font: "font-recoleta" },
     { name: "", font: "" },
-    { name: "Vimeo", font: "" },
+    { name: "Reebok", font: "" },
     { name: "", font: "font-recoleta" },
-    { name: "Billboard", font: "font-recoleta" },
+    { name: "Upwork", font: "font-recoleta" },
     { name: "", font: "" },
     { name: "Vice", font: "" },
+    { name: "", font: "" },
+    { name: "Billboard", font: "" },
   ];
 
   return (

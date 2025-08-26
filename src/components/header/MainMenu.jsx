@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { servicesItems, aboutItems, caseStudiesItems } from "@/data/menu";
-
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
@@ -12,6 +10,18 @@ const MainMenu = () => {
   const isActive = (link) => {
     return pathname.replace(/\/\d+$/, "") === link.replace(/\/\d+$/, "");
   };
+
+  // New menu structure
+  const clientsItems = [
+    { name: "Services", link: "/services" },
+    { name: "Case Studies", link: "/case-studies" }
+  ];
+
+  const aboutItems = [
+    { name: "Mission", link: "/about/mission" },
+    { name: "Vision", link: "/about/vision" },
+    { name: "Trend Report", link: "/about/trend-report" }
+  ];
 
   // Helper function to render either dropdown or single link
   const renderNavItem = (items, label, checkActive) => {
@@ -69,6 +79,21 @@ const MainMenu = () => {
     );
   };
 
+  // Single link helper
+  const renderSingleNavItem = (label, link) => {
+    return (
+      <li className="nav-item">
+        <Link
+          href={link}
+          className={`nav-link ${isActive(link) ? "active-menu" : ""}`}
+          style={{ userSelect: "none" }}
+        >
+          {label}
+        </Link>
+      </li>
+    );
+  };
+
   return (
     <nav className="navbar navbar-expand-lg order-lg-2">
       <button
@@ -111,30 +136,20 @@ const MainMenu = () => {
               Home
             </Link>
           </li>
-          {/* End li (pages) */}
+          {/* End li (Home) */}
 
+          {/* Clients dropdown with Services and Case Studies */}
+          {renderNavItem(clientsItems, "Clients", (item) => isActive(item.link))}
+
+          {/* Creatives - single link */}
+          {renderSingleNavItem("Creatives", "/creatives")}
+
+          {/* Planet - single link */}
+          {renderSingleNavItem("Planet", "/planet")}
+
+          {/* About dropdown with Mission, Vision, Trend Report */}
           {renderNavItem(aboutItems, "About", (item) => isActive(item.link))}
-          {renderNavItem(caseStudiesItems, "Case Studies", (item) =>
-            isActive(item.link)
-          )}
-          {renderNavItem(servicesItems, "Services", (item) =>
-            isActive(item.link)
-          )}
 
-          {/* Mobile Contact Button - Removed since we now have hamburger menu */}
-          {/* Mobile Content */}
-          {/* <div className="mobile-content d-block d-lg-none">
-            <div className="d-flex flex-column align-items-center justify-content-center mt-70">
-              <Link
-                href="/contact"
-                className="signup-btn-two fw-500 tran3s"
-                style={{ userSelect: "none" }}
-              >
-                Contact us
-              </Link>
-            </div>
-          </div> */}
-          {/* /.mobile-content */}
         </ul>
         {/* End ul */}
       </div>

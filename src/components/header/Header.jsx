@@ -236,7 +236,7 @@ const Header = ({ style }) => {
           min-width: 380px;
           max-width: 500px;
           height: 100vh;
-          background: #151937;
+          background: #000000;
           z-index: 9999;
           transition: right 0.4s ease;
           overflow-y: auto;
@@ -265,8 +265,8 @@ const Header = ({ style }) => {
         }
 
         .close-menu-btn {
-          background: #2a3158;
-          color: white;
+          background: #fff;
+          color: black;
           border: none;
           padding: 12px 20px;
           border-radius: 0;
@@ -278,7 +278,8 @@ const Header = ({ style }) => {
         }
 
         .close-menu-btn:hover {
-          background: #374267;
+          background: #ff1292;
+          color: white;
         }
 
         .hamburger-form {
@@ -293,7 +294,7 @@ const Header = ({ style }) => {
         .form-group textarea {
           width: 100%;
           background: transparent;
-          border: 1px solid #374267;
+          border: 1px solid #ffff;
           color: white;
           padding: 20px;
           border-radius: 0;

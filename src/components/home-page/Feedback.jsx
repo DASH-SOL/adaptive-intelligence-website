@@ -55,7 +55,7 @@ const Feedback = () => {
                     of creative norms, and our work showcases that.
                   </p>
                   <h6 className="fw-normal fs-20 d-inline-block fst-italic position-relative ps-4">
-                    Adam Isaac Itkoff, Chief Executive Officer
+                    Adam Isaac Itkoff, Founder and CEO
                   </h6>
                 </div>
               </div>
