@@ -10533,3 +10533,57 @@ body .btn-twentySix:hover:after {
   top: 65%;
   left: 72%;
 }
+
+
+.hero-heading > span > svg {
+  position: absolute;
+  left: 0;
+  bottom: 14px;
+}
+.curved-underline-span {
+  display: inline-block;
+  font-size: 60px;
+  line-height: 70px;
+  position: relative;
+}
+
+/* Responsive font sizes */
+@media (max-width: 1199px) {
+  .curved-underline-span {
+    font-size: 50px;
+    line-height: 60px;
+  }
+}
+
+@media (max-width: 991px) {
+  .curved-underline-span {
+    font-size: 42px;
+    line-height: 52px;
+  }
+}
+
+@media (max-width: 767px) {
+  .curved-underline-span {
+    font-size: 36px;
+    line-height: 46px;
+  }
+}
+
+@media (max-width: 575px) {
+  .curved-underline-span {
+    font-size: 28px;
+    line-height: 38px;
+  }
+}
+
+/* Simple curved underline effect */
+.curved-underline-span::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #FF1292;
+  border-radius: 0 0 400px 400px;
+}

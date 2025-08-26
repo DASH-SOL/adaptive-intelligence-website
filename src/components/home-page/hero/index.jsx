@@ -431,32 +431,6 @@ const Hero = ({ isHomePage = false, children }) => {
             hideOnMobile={true}  // Hide this large shape on mobile
           />
 
-          <AnimatedShape
-            src="/images/ChromeShapes/shape-circle-left.png"
-            alt="Shape Circle Left"
-            width={500}
-            height={500}
-            top={10}
-            left={3}
-            laptopWidth={350}
-            laptopHeight={350}
-            laptopTop={8}
-            laptopLeft={8}
-            tabletWidth={300}
-            tabletHeight={300}
-            tabletTop={5}
-            tabletLeft={5}
-            mobileWidth={200}
-            mobileHeight={200}
-            mobileTop={20}
-            mobileLeft={15}
-            animation="slowSpin360"
-            duration="30s"
-            delay="0s"
-            opacity={1}
-            zIndex={2}
-            hideOnMobile={true}  // Show this shape on mobile
-          />
 
           <AnimatedShape
             src="/images/ChromeShapes/shape-half-cirlce.png"
