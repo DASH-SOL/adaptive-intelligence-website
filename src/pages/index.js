@@ -92,20 +92,6 @@ const HomePage = () => {
         </div>
         {/* /.container */}
 
-        <Image
-          src="/images/shape/shape_124.svg"
-          alt="icon shape"
-          className="lazy-img shapes shape-one"
-          width={237}
-          height={201}
-        />
-        <Image
-          src="/images/shape/shape_125.svg"
-          alt="icon shape"
-          className="lazy-img shapes shape-two"
-          width={73}
-          height={129}
-        />
       </div>
       {/* /.fancy-feature-thirtyOne */}
 

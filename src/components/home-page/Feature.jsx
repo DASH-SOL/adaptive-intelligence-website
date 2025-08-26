@@ -62,13 +62,6 @@ const Feature = () => {
           width={900}
           height={706}
         />
-        <Image
-          src="/images/shape/shape_123.svg"
-          alt="media"
-          className="lazy-img shapes shape-one"
-          width={70}
-          height={76}
-        />
       </div>
     </div>
   );

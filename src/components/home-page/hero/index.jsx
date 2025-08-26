@@ -407,8 +407,8 @@ const Hero = ({ isHomePage = false, children }) => {
           <AnimatedShape
             src="/images/ChromeShapes/shape-1-left.png"
             alt="Shape 1 Left"
-            width={800}
-            height={800}
+            width={700}
+            height={700}
             top={-10}
             left={-25}
             laptopWidth={600}
@@ -438,7 +438,7 @@ const Hero = ({ isHomePage = false, children }) => {
             width={329}
             height={531}
             top={-4}
-            left={18}
+            left={15}
             laptopWidth={265}
             laptopHeight={426}
             laptopTop={-2}

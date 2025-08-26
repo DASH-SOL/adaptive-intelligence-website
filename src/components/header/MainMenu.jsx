@@ -121,8 +121,9 @@ const MainMenu = () => {
             isActive(item.link)
           )}
 
+          {/* Mobile Contact Button - Removed since we now have hamburger menu */}
           {/* Mobile Content */}
-          <div className="mobile-content d-block d-lg-none">
+          {/* <div className="mobile-content d-block d-lg-none">
             <div className="d-flex flex-column align-items-center justify-content-center mt-70">
               <Link
                 href="/contact"
@@ -132,7 +133,7 @@ const MainMenu = () => {
                 Contact us
               </Link>
             </div>
-          </div>
+          </div> */}
           {/* /.mobile-content */}
         </ul>
         {/* End ul */}

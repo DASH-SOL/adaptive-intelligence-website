@@ -30,20 +30,6 @@ const Feedback = () => {
       width: 200,
       height: 225,
     },
-    {
-      src: "/images/shape/shape_120.svg",
-      alt: "shape",
-      className: "lazy-img shapes shape-five",
-      width: 77,
-      height: 148,
-    },
-    {
-      src: "/images/shape/shape_121.svg",
-      alt: "shape",
-      className: "lazy-img shapes shape-six",
-      width: 234,
-      height: 162,
-    },
   ];
 
   return (
