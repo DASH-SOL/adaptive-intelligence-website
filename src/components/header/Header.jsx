@@ -4,7 +4,7 @@ import MainMenu from "./MainMenu";
 import Link from "next/link";
 import Image from "next/image";
 
-const Header = ({ style }) => {
+const Header = ({ style, menuTextColor }) => {
   const [navbar, setNavbar] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -57,10 +57,11 @@ const Header = ({ style }) => {
 
   return (
     <>
+    
       <header
         className={`theme-main-menu sticky-menu theme-menu-seven white-vr ${
           navbar ? "fixed" : ""
-        }`}
+        } ${menuTextColor === 'white' ? 'white-menu-text' : ''}`}
       >
         <div className="inner-content position-relative">
           <div className="d-flex align-items-center justify-content-between">
@@ -210,6 +211,31 @@ const Header = ({ style }) => {
       </div>
 
       <style jsx>{`
+      .white-menu-text .main-menu ul li a {
+          color: white !important;
+        }
+
+        .white-menu-text .main-menu ul li:hover > a {
+          color: #FF1292 !important;
+        }
+
+        .white-menu-text .main-menu ul li.current-menu-item > a {
+          color: #FF1292 !important;
+        }
+
+        /* For dropdown menus if you have them */
+        .white-menu-text .main-menu ul li ul {
+          background: rgba(0, 0, 0, 0.9);
+        }
+
+        .white-menu-text .main-menu ul li ul li a {
+          color: white !important;
+        }
+
+        /* Mobile menu button if needed */
+        .white-menu-text .mobile-menu-trigger {
+          color: white !important;
+        }
         .lets-talk-btn {
           background: white;
           color: black;
