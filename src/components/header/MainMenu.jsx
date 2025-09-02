@@ -145,7 +145,7 @@ const MainMenu = () => {
           {renderSingleNavItem("Creatives", "/creatives")}
 
           {/* Planet - single link */}
-          {renderSingleNavItem("Planet", "/planet")}
+          {renderSingleNavItem("Eco", "/eco")}
 
           {/* About dropdown with Mission, Vision, Trend Report */}
           {renderNavItem(aboutItems, "About", (item) => isActive(item.link))}

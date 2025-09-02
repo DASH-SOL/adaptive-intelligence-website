@@ -1,3 +1,8 @@
+// ===================================================================
+// Updated LetsTalkButton to use new URL structure
+// ===================================================================
+
+// File: components/LetsTalkButton.js - Updated for dynamic resources
 "use client";
 import Link from "next/link";
 import { useState } from "react";
@@ -9,7 +14,7 @@ const LetsTalkButton = ({
   usePopup = false,
   popupTitle = "Get Your Free Resource",
   popupDescription = "Enter your email to access the download",
-  downloadRedirect = "/download"
+  resourceSlug = "infstones-case-study" // New prop for dynamic resources
 }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -45,25 +50,33 @@ const LetsTalkButton = ({
 
     setIsSubmitting(true);
     
-    // Here you can add your email collection logic
-    // For example, send to your backend API
     try {
-      // Example API call - replace with your actual endpoint
-      // await fetch('/api/collect-email', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ email })
-      // });
-
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Store email locally
+      const emailData = {
+        email,
+        resourceSlug,
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        referrer: document.referrer,
+        url: window.location.href
+      };
       
-      // Redirect to download page with email as query parameter
-      window.location.href = `${downloadRedirect}?email=${encodeURIComponent(email)}`;
+      const existingEmails = JSON.parse(localStorage.getItem('downloadRequests') || '[]');
+      existingEmails.push(emailData);
+      localStorage.setItem('downloadRequests', JSON.stringify(existingEmails));
+      
+      console.log('New Download Request:', emailData);
+      console.log('Total Collected Emails:', existingEmails.length);
+
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      // Redirect to download page with slug parameter
+      const redirectUrl = `/download?email=${encodeURIComponent(email)}&slug=${resourceSlug}`;
+      window.location.href = redirectUrl;
+      
     } catch (error) {
-      console.error('Error submitting email:', error);
-      alert('There was an error. Please try again.');
-    } finally {
+      console.error('Error processing request:', error);
+      alert('There was an error processing your request. Please try again.');
       setIsSubmitting(false);
     }
   };
@@ -78,7 +91,43 @@ const LetsTalkButton = ({
   const closePopup = () => {
     setIsPopupOpen(false);
     setEmail("");
+    setIsSubmitting(false);
   };
+
+  // Export functions (same as before)
+  if (typeof window !== 'undefined') {
+    window.exportDownloadRequests = () => {
+      const data = JSON.parse(localStorage.getItem('downloadRequests') || '[]');
+      if (data.length === 0) {
+        console.log('No download requests found');
+        return;
+      }
+      
+      const csvHeaders = 'Email,Resource Slug,Timestamp,URL,User Agent';
+      const csvRows = data.map(item => 
+        `"${item.email}","${item.resourceSlug || item.downloadType}","${item.timestamp}","${item.url}","${item.userAgent}"`
+      );
+      const csvContent = [csvHeaders, ...csvRows].join('\n');
+      
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `download-requests-${new Date().toISOString().split('T')[0]}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      console.log(`Exported ${data.length} download requests as CSV`);
+    };
+
+    window.viewDownloadRequests = () => {
+      const data = JSON.parse(localStorage.getItem('downloadRequests') || '[]');
+      console.table(data);
+      console.log(`Total requests: ${data.length}`);
+    };
+  }
 
   if (usePopup) {
     return (
@@ -117,14 +166,17 @@ const LetsTalkButton = ({
           )}
         </button>
 
-        {/* Popup Modal */}
+        {/* Popup Modal - same as before */}
         {isPopupOpen && (
-          <div className="popup-overlay">
+          <div className="popup-overlay" onClick={(e) => {
+            if (e.target === e.currentTarget && !isSubmitting) closePopup();
+          }}>
             <div className="popup-modal">
               <button 
                 className="popup-close"
                 onClick={closePopup}
                 type="button"
+                disabled={isSubmitting}
               >
                 &times;
               </button>
@@ -149,20 +201,26 @@ const LetsTalkButton = ({
                   <button 
                     type="submit" 
                     className="submit-button"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !email}
                   >
-                    {isSubmitting ? 'Submitting...' : 'Get Access'}
+                    {isSubmitting ? (
+                      <>
+                        <span className="spinner"></span>
+                        Processing...
+                      </>
+                    ) : (
+                      'Get Access'
+                    )}
                   </button>
                 </form>
                 
                 <p className="privacy-note">
-                  We respect your privacy. Your email will only be used to send you the requested resource.
+                  We respect your privacy. Your email will only be used to send you valuable resources and insights.
                 </p>
               </div>
             </div>
           </div>
         )}
-
         <style jsx>{`
           .popup-overlay {
             position: fixed;
@@ -180,13 +238,25 @@ const LetsTalkButton = ({
 
           .popup-modal {
             background: white;
-            border-radius: 8px;
+            border-radius: 12px;
             max-width: 480px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+          }
+
+          @keyframes modalSlideIn {
+            from {
+              opacity: 0;
+              transform: translateY(-30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
 
           .popup-close {
@@ -208,9 +278,14 @@ const LetsTalkButton = ({
             transition: all 0.2s ease;
           }
 
-          .popup-close:hover {
+          .popup-close:hover:not(:disabled) {
             background: #f5f5f5;
             color: #333;
+          }
+
+          .popup-close:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
           }
 
           .popup-content {
@@ -245,10 +320,11 @@ const LetsTalkButton = ({
             width: 100%;
             padding: 15px;
             border: 2px solid #e9ecef;
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 16px;
-            transition: border-color 0.3s ease;
+            transition: all 0.3s ease;
             box-sizing: border-box;
+            font-family: inherit;
           }
 
           .email-input:focus {
@@ -260,6 +336,7 @@ const LetsTalkButton = ({
           .email-input:disabled {
             background: #f8f9fa;
             cursor: not-allowed;
+            opacity: 0.7;
           }
 
           .submit-button {
@@ -272,7 +349,12 @@ const LetsTalkButton = ({
             cursor: pointer;
             width: 100%;
             transition: all 0.3s ease;
-            border-radius: 4px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 50px;
           }
 
           .submit-button:hover:not(:disabled) {
@@ -286,6 +368,20 @@ const LetsTalkButton = ({
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
+          }
+
+          .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+          }
+
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
           }
 
           .privacy-note {
@@ -315,7 +411,6 @@ const LetsTalkButton = ({
     );
   }
 
-  // Original button for non-popup use
   return (
     <Link
       href={href}

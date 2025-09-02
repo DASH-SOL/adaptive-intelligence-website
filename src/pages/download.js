@@ -1,0 +1,263 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
+import Link from 'next/link';
+import Header from '@/components/header/Header';
+import LetsTalkButton from '@/components/LetsTalkButton';
+import CopyrightFooter from '@/components/footer/CopyrightFooter';
+import FooterContent from '@/components/footer/FooterContent';
+import Subscribe from '@/components/footer/Subscribe';
+import { resourceDatabase } from '@/data/resources'; // UPDATED: Import from central file
+
+const DownloadPage = () => {
+  const router = useRouter();
+  const [resourceData, setResourceData] = useState(null);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadComplete, setDownloadComplete] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+
+  // This function is now only called once we have the resource data
+  const handleDownload = async (resource) => {
+    setIsDownloading(true);
+
+    try {
+      // Wait 3 seconds for good UX
+      await new Promise(resolve => setTimeout(resolve, 3000));
+
+      // Trigger the download using the dynamic file path
+      const link = document.createElement('a');
+      link.href = `/downloads/${resource.fileName}`;
+      link.download = resource.downloadName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Download error:', error);
+      // Fallback download for safety
+      window.open(`/downloads/${resource.fileName}`, '_blank');
+    } finally {
+      setIsDownloading(false);
+      setDownloadComplete(true);
+    }
+  };
+
+  useEffect(() => {
+    if (!router.isReady) return;
+
+    const emailParam = router.query.email;
+    const slugParam = router.query.slug || 'infstones-case-study'; // Keep a fallback just in case
+    
+    if (emailParam) {
+      const resource = resourceDatabase[slugParam];
+      if (resource) {
+        setResourceData(resource);
+        handleDownload(resource); // Pass the found resource to the download handler
+      } else {
+        // Fallback to a default resource if the slug is not found
+        const fallbackResource = resourceDatabase['infstones-case-study'];
+        setResourceData(fallbackResource);
+        handleDownload(fallbackResource);
+      }
+      setIsReady(true);
+    } else {
+      // If no email is in the URL, redirect to the main case studies page
+      router.push('/case-studies');
+    }
+  }, [router.isReady, router.query]);
+
+
+  if (!isReady || !resourceData) {
+    return (
+      <>
+        <Header />
+        <div className="download-page pt-200 pb-150 lg-pt-150 lg-pb-120">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-8 mx-auto text-center">
+                <div className="download-processing">
+                  <div className="download-spinner"></div>
+                  <h2>Loading...</h2>
+                  <p>Preparing your download page...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <style jsx>{`
+          .download-page { min-height: 70vh; background: #f8f9fa; }
+          .download-processing { background: white; padding: 60px 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
+          .download-spinner { width: 50px; height: 50px; border: 4px solid #f3f3f3; border-top: 4px solid #FF1292; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 30px; }
+          @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+          h2 { color: #151937; font-family: 'Recoleta', serif; font-size: 2.5rem; margin-bottom: 20px; }
+        `}</style>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <Header />
+      
+      <div className="download-page pt-200 pb-150 lg-pt-150 lg-pb-120">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-8 mx-auto text-center">
+              {isDownloading ? (
+                <div className="download-processing">
+                  <div className="download-spinner"></div>
+                  <h2>Preparing Your Download...</h2>
+                  <p>Your {resourceData.title.toLowerCase()} will begin downloading shortly.</p>
+                  <div className="download-benefits">
+                    <h4>What's included in your download:</h4>
+                    <ul>
+                      {resourceData.benefits.map((benefit, index) => (
+                        <li key={index}>{benefit}</li>
+                      ))}
+                    </ul>
+                    {resourceData.metrics && (
+                      <div className="download-metrics">
+                        <h5>Key Highlights:</h5>
+                        <div className="metrics-grid">
+                          {Object.entries(resourceData.metrics).map(([key, value]) => (
+                            <div key={key} className="metric-item">
+                              <span className="metric-value">{value}</span>
+                              <span className="metric-label">{key.replace(/([A-Z])/g, ' $1').toLowerCase()}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ) : downloadComplete ? (
+                <div className="download-success">
+                  <h2>Download Complete!</h2>
+                  <p>Check your downloads folder for the {resourceData.title}.</p>
+                  
+                  <div className="resource-summary">
+                    <h3>{resourceData.title}</h3>
+                    <p className="resource-description">{resourceData.description}</p>
+                    
+                    {resourceData.client && (
+                      <div className="client-info">
+                        <span className="client-label">Client:</span>
+                        <span className="client-name">{resourceData.client}</span>
+                        <span className="industry">({resourceData.industry})</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="download-confirmation">
+                    <div className="success-icon">✓</div>
+                    <p className="confirmation-text">
+                      Your file has been downloaded to your device. 
+                      If the download didn't start automatically, 
+                      <a href={`/downloads/${resourceData.fileName}`} 
+                         download 
+                         className="download-link"> click here to download</a>.
+                    </p>
+                  </div>
+
+                  <div className="next-steps">
+                    <h4>Ready to {resourceData.nextStepsCTA}?</h4>
+                    <p>Let's discuss how to apply these strategies to your specific business.</p>
+                    <LetsTalkButton 
+                      buttonText="Schedule a Strategy Call" 
+                      href="/contact"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="download-processing">
+                  <div className="download-spinner"></div>
+                  <h2>Initializing Download...</h2>
+                  <p>Setting up your {resourceData.title.toLowerCase()}...</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="footer-style-nine theme-basic-footer zn2 position-relative">
+        <div className="bg-wrapper">
+          <div className="container">
+            <div className="row justify-content-between">
+              <div className="col-lg-2 footer-intro mb-40">
+                <div className="logo">
+                  <Link href="/">
+                    <Image
+                      src="/images/logo/logo_06.svg"
+                      alt="logo"
+                      width={115}
+                      height={80}
+                    />
+                  </Link>
+                </div>
+              </div>
+              <FooterContent />
+
+              <div className="col-lg-4 mb-30 form-widget">
+                <h5 className="footer-title fw-normal">Newsletter</h5>
+                <h6 className="pt-15 pb-20 text-white">Join our newsletter</h6>
+                <Subscribe />
+                <div className="fs-14 mt-10 text-white opacity-50">
+                  We only send interesting and relevant emails.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <CopyrightFooter />
+
+        <div className="shapes shape-one" />
+        <Image
+          width={84}
+          height={104}
+          src="/images/shape/shape_134.svg"
+          alt="shape"
+          className="lazy-img shapes shape-two"
+        />
+      </div>
+
+      <style jsx>{`
+        /* All your existing styles for this page */
+        .download-page { min-height: 70vh; background: #f8f9fa; }
+        .download-processing, .download-success { background: white; padding: 60px 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
+        .download-spinner { width: 50px; height: 50px; border: 4px solid #f3f3f3; border-top: 4px solid #FF1292; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 30px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        h2 { color: #151937; font-family: 'Recoleta', serif; font-size: 2.5rem; margin-bottom: 20px; }
+        .download-benefits { margin-top: 40px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .download-benefits h4 { color: #151937; margin-bottom: 20px; text-align: center; }
+        .download-benefits ul { list-style: none; padding: 0; margin-bottom: 30px; }
+        .download-benefits li { padding: 8px 0; padding-left: 30px; position: relative; }
+        .download-benefits li:before { content: '✓'; position: absolute; left: 0; color: #FF1292; font-weight: bold; }
+        .download-metrics { margin-top: 30px; padding-top: 20px; border-top: 1px solid #f0f0f0; }
+        .download-metrics h5 { color: #151937; margin-bottom: 15px; text-align: center; font-size: 1.1rem; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; justify-content: center; }
+        .metric-item { text-align: center; background: #f8f9fa; padding: 15px 10px; border-radius: 8px; }
+        .metric-value { display: block; color: #FF1292; font-size: 1.5rem; font-weight: 600; line-height: 1; }
+        .metric-label { display: block; color: #666; font-size: 0.8rem; margin-top: 5px; text-transform: capitalize; }
+        .resource-summary { background: #f8f9fa; padding: 30px; border-radius: 8px; margin: 30px 0; text-align: left; }
+        .resource-summary h3 { color: #151937; font-family: 'Recoleta', serif; font-size: 1.4rem; margin-bottom: 15px; font-weight: 600; }
+        .resource-description { color: #666; line-height: 1.6; margin-bottom: 20px; }
+        .client-info { border-top: 1px solid #e9ecef; padding-top: 15px; font-size: 0.95rem; }
+        .client-label { color: #666; margin-right: 8px; }
+        .client-name { color: #FF1292; font-weight: 600; margin-right: 8px; }
+        .industry { color: #888; font-style: italic; }
+        .download-confirmation { background: #f8f9fa; border-radius: 8px; padding: 30px; margin: 30px 0; }
+        .success-icon { width: 60px; height: 60px; background: #28a745; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; margin: 0 auto 20px; }
+        .confirmation-text { color: #666; line-height: 1.6; margin: 0; text-align: center; }
+        .download-link { color: #FF1292; text-decoration: none; font-weight: 500; }
+        .download-link:hover { text-decoration: underline; }
+        .next-steps { margin-top: 40px; padding-top: 30px; border-top: 1px solid #f0f0f0; }
+        .next-steps h4 { color: #151937; margin-bottom: 15px; }
+        .next-steps p { margin-bottom: 30px; color: #666; }
+      `}</style>
+    </>
+  );
+};
+
+export default DownloadPage;
