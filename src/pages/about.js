@@ -28,28 +28,26 @@ export async function getStaticProps() {
     const sheetId = '1ICb8PWttvv0leKmfmJWXSGhXkZz5UAxChmFamV_bh1c';
     const url = `https://docs.google.com/sheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=Sheet1`;
     const response = await fetch(url);
-    if (!response.ok) {
-        throw new Error(`Failed to fetch Google Sheet: ${response.statusText}`);
-    }
     
-    const csvText = await response.text();
-    const rows = csvText.replace(/"/g, '').split('\n');
-    const parsedData = {};
-    rows.forEach(row => {
-      const [key, value] = row.split(',');
-      if (key && value) {
-        parsedData[key.trim().toLowerCase()] = parseFloat(value.trim());
-      }
-    });
+    if (response.ok) {
+      const csvText = await response.text();
+      const rows = csvText.replace(/"/g, '').split('\n');
+      const parsedData = {};
+      
+      rows.forEach(row => {
+        const [key, value] = row.split(',');
+        if (key && value) {
+          parsedData[key.trim().toLowerCase()] = parseFloat(value.trim());
+        }
+      });
 
-    if (parsedData.trees !== undefined && parsedData.acres !== undefined && parsedData.carbon !== undefined && parsedData.bottles !== undefined) {
+      if (parsedData.trees && parsedData.acres && parsedData.carbon && parsedData.bottles) {
         finalStats = parsedData;
-    } else {
-        console.warn("Parsed Google Sheet data was incomplete. Using fallback data.");
+      }
     }
-
   } catch (error) {
-    console.error('Error in getStaticProps for About page:', error.message);
+    // Silently fall back to default data
+    console.log('Using fallback data for sustainability stats');
   }
 
   return {
