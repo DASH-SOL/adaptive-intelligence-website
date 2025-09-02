@@ -3,10 +3,6 @@ import Image from "next/image";
 
 const links = [
   {
-    title: "Privacy & Terms.",
-    href: "/faq",
-  },
-  {
     title: "Contact Us",
     href: "/contact",
   },
@@ -30,13 +26,10 @@ const icons = [
     icon: "/images/icon/upwork.svg",
     href: "https://www.upwork.com/agencies/adaptiveintelligence/",
   },
-  {
-    icon: "fab fa-spotify",
-    href: "https://www.linkedin.com/company/adaptiveintelligenceinternational",
-  },
+
   {
     icon: "fab fa-instagram",
-    href: "https://www.linkedin.com/company/adaptiveintelligenceinternational",
+    href: "https://www.instagram.com/adaptiveintelligence.online/",
   },
 ];
 
