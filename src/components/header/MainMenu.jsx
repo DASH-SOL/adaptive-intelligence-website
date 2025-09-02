@@ -106,28 +106,25 @@ const MainMenu = () => {
           {renderSingleNavItem("Eco", "/eco")}
           
           {/* UPDATED: About link with its specific dropdown */}
-          <li className="nav-item dropdown">
-            <Link
-              href="/about"
-              className={`nav-link dropdown-toggle ${isActive("/about") ? "active-menu" : ""}`}
-              role="button"
-              data-bs-toggle="dropdown"
-              data-bs-auto-close="outside"
-              aria-expanded="false"
-              style={{ userSelect: "none" }}
-            >
-              About
-            </Link>
-            <ul className="dropdown-menu">
-              {aboutDropdownItems.map((item, index) => (
-                <li key={index}>
-                  <Link href={item.link} className="dropdown-item">
-                    <span>{item.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </li>
+          {/* FIXED: About link that goes to /about page AND has dropdown */}
+<li className="nav-item dropdown">
+  <Link
+    href="/about"
+    className={`nav-link dropdown-toggle ${isActive("/about") ? "active-menu" : ""}`}
+    style={{ userSelect: "none" }}
+  >
+    About
+  </Link>
+  <ul className="dropdown-menu">
+    {aboutDropdownItems.map((item, index) => (
+      <li key={index}>
+        <Link href={item.link} className="dropdown-item">
+          <span>{item.name}</span>
+        </Link>
+      </li>
+    ))}
+  </ul>
+</li>
         </ul>
       </div>
     </nav>
