@@ -68,15 +68,16 @@ const ServicesPage = () => {
   ];
 
   const clientLogos = [
-    { name: "Nike", logo: "/images/clients/verizon.svg" },
-    { name: "Verizon", logo: "/images/clients/verizon.svg" },
-    { name: "Vimeo", logo: "/images/clients/vimeo.svg" },
-    { name: "Reebok", logo: "/images/clients/reebok.svg" },
-    { name: "AV Club", logo: "/images/clients/avclub.svg" },
-    { name: "Upwork", logo: "/images/clients/upwork.svg" },
-    { name: "Billboard", logo: "/images/clients/billboard.svg" },
-    { name: "Vice", logo: "/images/clients/vice.svg" },
-    { name: "Atlantic Records", logo: "/images/clients/atlantic.svg" }
+    { name: "Nike", logo: "/images/logo/digital-agency-manhattan-611.png" },
+    { name: "Verizon", logo: "/images/logo/digital-agency-manhattan-714.png" },
+    { name: "Vimeo", logo: "/images/logo/digital-agency-manhattan-716.png" },
+    { name: "Reebok", logo: "/images/logo/digital-agency-manhattan-718.png" },
+    { name: "AV Club", logo: "/images/logo/digital-agency-manhattan-720.png" },
+    { name: "Upwork", logo: "/images/logo/digital-agency-manhattan-722.png" },
+    { name: "Billboard", logo: "/images/logo/digital-agency-manhattan-911.png" },
+    { name: "Vice", logo: "/images/logo/digital-agency-manhattan-913.png" },
+    { name: "Atlantic Records", logo: "/images/logo/digital-agency-manhattan-918.png" },
+    { name: "Atlantic Records", logo: "/images/logo/digital-agency-manhattan-content-412.png" }
   ];
 
   const clientCarouselRef = useRef(null);
@@ -430,12 +431,18 @@ const ServicesPage = () => {
                 <div key={index} className="client-slide-modern">
                   <div className="client-logo-wrapper-modern">
                     <Image 
-                      src={client.logo} 
-                      alt={client.name}
-                      width={120}
-                      height={60}
-                      className="client-logo-modern"
-                    />
+  src={client.logo} 
+  alt={client.name}
+  width={0}
+  height={0}
+  sizes="100vw"
+  style={{
+    width: 'auto',
+    height: 'auto',
+    maxWidth: '100%',
+    maxHeight: '60px'
+  }}
+/>
                   </div>
                 </div>
               ))}
@@ -955,11 +962,12 @@ const ServicesPage = () => {
         }
 
         .client-logo-modern {
-          max-width: 100%;
-          height: auto;
-          opacity: 0.7;
-          transition: opacity 0.3s ease;
-        }
+  max-width: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  max-height: 60px !important;
+  object-fit: contain !important;
+}
 
         .client-logo-wrapper-modern:hover .client-logo-modern {
           opacity: 1;
