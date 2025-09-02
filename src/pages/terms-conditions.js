@@ -186,9 +186,6 @@ const TermsConditionsPage = () => {
 
       <style jsx>{`
         /* White Header Menu Fix */
-        :global(body .theme-main-menu:not(.fixed) .logo img) {
-          filter: brightness(0) invert(1) !important;
-        }
         :global(body .theme-main-menu.white-vr:not(.fixed) .navbar .navbar-nav .nav-link) {
           color: white !important;
         }
