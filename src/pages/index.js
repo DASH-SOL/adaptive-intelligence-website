@@ -144,13 +144,6 @@ const HomePage = () => {
                   </span>
                   of our customers.
                 </h2>
-                <LetsTalkButton 
-  buttonText="Download Template" 
-  usePopup={true}
-  popupTitle="Get Your Free Marketing Plan Template"
-  popupDescription="Enter your email to access the download"
-  downloadRedirect="/download-template"
-/>
               </div>
               {/* /.title-style-ten */}
             </div>

@@ -180,7 +180,7 @@ const ServicesPage = () => {
                     <div className="service-cta-dark">
                       <LetsTalkButton 
                         buttonText="Learn More" 
-                        href={`/services/${service.title.toLowerCase()}`}
+                        href={`/contact`}
                       />
                     </div>
                   </div>
@@ -237,7 +237,7 @@ const ServicesPage = () => {
               <div className="approach-visual-white">
                 <div className="approach-image-wrapper">
                   <Image 
-                    src="/images/media/img_32.jpg" 
+                    src="/images/assets/Strategic-Excellence-How-We-Help-Organizations-Achieve-Sustainable-Success-scaled.jpg" 
                     alt="Our strategic approach"
                     width={600}
                     height={400}
@@ -252,7 +252,7 @@ const ServicesPage = () => {
                   <div className="feature-item-dark">
                     <div className="feature-icon">
                       <Image 
-                        src="/images/icon/icon_94.svg" 
+                        src="/images/icon/innovation.png" 
                         alt="Creative Excellence"
                         width={30}
                         height={30}
@@ -266,7 +266,7 @@ const ServicesPage = () => {
                   <div className="feature-item-dark">
                     <div className="feature-icon">
                       <Image 
-                        src="/images/icon/icon_95.svg" 
+                        src="/images/icon/focus.png" 
                         alt="Results Focus"
                         width={30}
                         height={30}
@@ -322,7 +322,7 @@ const ServicesPage = () => {
               <div className="capabilities-image-section">
                 <div className="capabilities-image-wrapper">
                   <Image 
-                    src="/images/media/img_33.jpg" 
+                    src="/images/assets/team-diverse-analysts-consultants-reviewing-data-checklists_482257-125957.jpg" 
                     alt="Our team capabilities"
                     width={600}
                     height={450}
@@ -338,7 +338,7 @@ const ServicesPage = () => {
                   <div className="capability-card-enhanced">
                     <div className="capability-icon">
                       <Image 
-                        src="/images/icon/icon_94.svg" 
+                        src="/images/icon/support.png" 
                         alt="Support"
                         width={35}
                         height={35}
@@ -354,7 +354,7 @@ const ServicesPage = () => {
                   <div className="capability-card-enhanced">
                     <div className="capability-icon">
                       <Image 
-                        src="/images/icon/icon_95.svg" 
+                        src="/images/icon/reach.png" 
                         alt="Global Reach"
                         width={35}
                         height={35}
@@ -370,7 +370,7 @@ const ServicesPage = () => {
                   <div className="capability-card-enhanced">
                     <div className="capability-icon">
                       <Image 
-                        src="/images/icon/icon_96.svg" 
+                        src="/images/icon/trophy.png" 
                         alt="Award Winning"
                         width={35}
                         height={35}
@@ -386,7 +386,7 @@ const ServicesPage = () => {
                   <div className="capability-card-enhanced">
                     <div className="capability-icon">
                       <Image 
-                        src="/images/icon/icon_96.svg" 
+                        src="/images/icon/innovation.png" 
                         alt="Award Winning"
                         width={35}
                         height={35}
@@ -406,7 +406,7 @@ const ServicesPage = () => {
                   </p>
                   <LetsTalkButton 
                     buttonText="View Our Work" 
-                    href="/portfolio"
+                    href="/case-studies"
                   />
                 </div>
               </div>
@@ -570,14 +570,6 @@ const ServicesPage = () => {
           </div>
         </div>
         <CopyrightFooter />
-        <div className="shapes shape-one" />
-        <Image
-          width={84}
-          height={104}
-          src="/images/shape/shape_134.svg"
-          alt="shape"
-          className="lazy-img shapes shape-two"
-        />
       </div>
 
       <style jsx>{`

@@ -1,7 +1,56 @@
-// This is your new single source of truth for all resources.
-// It combines data from all pages into one consistent database.
+// This is your single source of truth for all resources.
+// The new MyMood AI case study has been added.
 
 export const resourceDatabase = {
+  'mymood-ai-case-study': {
+    // --- Core Info ---
+    id: 5,
+    slug: 'mymood-ai-case-study',
+    title: 'Case Study: How MyMood AI Hit 1M+ Downloads',
+    description: 'Discover how Adaptive Intelligence launched MyMood AI to #26 in the App Store with 1M+ downloads and $200K+ monthly revenue.',
+    client: 'MyMood AI',
+    
+    // --- Page Display Info ---
+    type: 'case-study',
+    badge: 'Case Study: MyMood AI',
+    category: 'App Marketing',
+    industry: 'AI & Mobile Apps',
+    tags: ['Brand Identity', 'UX/UI Copywriting', 'PPC Strategy', 'Influencer Marketing'],
+    duration: 'Launch Campaign',
+    featured: true,
+    heroImage: '/images/case-studies/unnamed.png', // Placeholder path for the new image
+    
+    // --- Download Info ---
+    fileName: 'MyMood_AI_Case_Study.pdf',
+    downloadName: 'MyMood_AI_Case_Study.pdf',
+    nextStepsCTA: 'launch your app',
+    
+    // --- Page Content ---
+    testimonial: {
+      quote: "Very professional and amazing work. Great communicator and able to adapt to what we needed!",
+      author: "Kale Abrahamson",
+      position: "CEO of MyMood AI"
+    },
+    insights: [
+      'Naming, brand identity, and messaging frameworks',
+      'UX/UI copywriting for app engagement and retention',
+      'Digital marketing and PPC strategies that fueled adoption',
+      'Influencer partnerships that drove early growth',
+      'Metrics and results that set the foundation for scaling'
+    ],
+    benefits: [
+      'Spark ideas for brand positioning and market entry',
+      'Learn proven strategies for digital growth for mobile apps',
+      'Avoid common pitfalls in launching new applications and products',
+      'Complete MyMood AI success story analysis'
+    ],
+    metrics: {
+      downloads: '1M+',
+      appStoreRank: '#26',
+      revenue: '$200K+/mo'
+    },
+    results: "1M+ Downloads",
+  },
   'infstones-case-study': {
     // --- Core Info ---
     id: 1,
@@ -105,7 +154,6 @@ export const resourceDatabase = {
     results: "8+ Key Insights", // For the archive page
   },
   
-  // These resources are ready for the download page but need more detail to have their own single pages.
   'marketing-strategy-template': {
     id: 3,
     slug: 'marketing-strategy-template',
@@ -132,29 +180,4 @@ export const resourceDatabase = {
     featured: false,
   },
   
-  'saas-growth-case-study': {
-    id: 4,
-    slug: 'saas-growth-case-study',
-    title: 'SaaS Growth Case Study',
-    description: 'Complete playbook for SaaS growth including acquisition strategies, retention tactics, and scaling insights.',
-    fileName: 'SaaS_Growth_Case_Study.pdf',
-    downloadName: 'SaaS_Growth_Case_Study.pdf',
-    type: 'case-study',
-    client: 'TechStartup Co',
-    industry: 'SaaS & Technology',
-    benefits: [
-      'Complete SaaS growth methodology',
-      'Customer acquisition strategies that work',
-      'Retention and expansion playbooks',
-      'Pricing strategy optimization',
-      'Scaling team and operations insights'
-    ],
-    metrics: {
-      arr: '$1M+',
-      growth: '400%',
-      retention: '95%'
-    },
-    nextStepsCTA: 'scale your SaaS',
-    featured: false,
-  }
 };

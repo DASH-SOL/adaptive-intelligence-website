@@ -22,7 +22,7 @@ const SuccessStory = () => {
               </div>
               <div className="col-xl-6 col-lg-5 col-md-6 m-auto order-lg-first">
                 <Image
-                  src="/images/gradient/bird-gradient.jpg"
+                  src="/images/assets/krakenimages-Y5bvRlcCx8k-unsplash.jpg"
                   alt="img"
                   className="lazy-img img-one md-mt-40"
                   data-aos="fade-up"

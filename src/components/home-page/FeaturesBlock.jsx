@@ -80,7 +80,7 @@ const FeaturesBlock = () => {
       <div className="col-lg-7 col-md-9 m-auto">
         <div className="illustration-holder md-mt-60 position-relative">
           <Image
-            src="/images/gradient/gradient-7.png"
+            src="/images/assets/john-FlPc9_VocJ4-unsplash.jpg"
             alt="media"
             className="lazy-img main-img ms-auto"
             width={680}

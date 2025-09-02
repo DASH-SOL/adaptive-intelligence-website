@@ -20,7 +20,7 @@ const CaseStudies = () => {
 
   return (
     <>
-      <Header />
+      <Header menuTextColor="white" />
       
       {/* Hero Section */}
       <div className="case-studies-hero pt-200 pb-100 lg-pt-150 lg-pb-80" style={{ background: 'linear-gradient(135deg, #000 0%, #1a1a1a 100%)' }}>
@@ -63,7 +63,7 @@ const CaseStudies = () => {
                 <div className="sc-title">
                   Featured Work
                 </div>
-                <h2 className="main-title font-recoleta fw-normal tx-dark">
+                <h2 className="main-title alt_main_title font-recoleta fw-normal tx-dark">
                   Success
                   <span className="position-relative">
                     {" "}
@@ -82,7 +82,9 @@ const CaseStudies = () => {
 
           <div className="row g-4">
             {featuredCaseStudies.map((study) => (
-              <div key={study.id} className="col-lg-6">
+              // UPDATED: Changed col-lg-6 (2 columns) to col-lg-4 (3 columns)
+              // Added col-md-6 for better tablet view (2 columns)
+              <div key={study.id} className="col-lg-4 col-md-6">
                 <div className="featured-case-card">
                   <div className="case-image">
                     <Image
@@ -187,24 +189,18 @@ const CaseStudies = () => {
       </div>
 
       <style jsx>{`
-        /* FINAL FIX - With Active Link Color Restored */
+        /* White Header Fix */
         :global(body .theme-main-menu:not(.fixed) .logo img) {
           filter: brightness(0) invert(1) !important;
         }
-
-        /* This sets the default link color to white before you scroll */
         :global(body .theme-main-menu.white-vr:not(.fixed) .navbar .navbar-nav .nav-link) {
           color: white !important;
         }
-
-        /* UPDATED: This now sets the link color to pink for hover AND active states */
         :global(body .theme-main-menu.white-vr:not(.fixed) .navbar .navbar-nav .nav-item:hover .nav-link),
         :global(body .theme-main-menu.white-vr:not(.fixed) .navbar .navbar-nav .nav-item.active .nav-link),
         :global(body .theme-main-menu.white-vr:not(.fixed) .navbar .navbar-nav .nav-item.current-menu-item .nav-link) {
           color: #FF1292 !important;
         }
-
-        /* Styles for the "Let's Talk" button */
         :global(body .theme-main-menu:not(.fixed) .lets-talk-btn) {
           color: white !important;
           border-color: white !important;
@@ -215,10 +211,11 @@ const CaseStudies = () => {
           background: white !important;
         }
 
-        /* All your other existing styles for this page */
+        /* All other existing styles for this page */
         .case-studies-hero { position: relative; overflow: hidden; }
         .sc-title { color: #FF1292; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; font-weight: 600; margin-bottom: 20px; }
         .main-title { color: white; margin-bottom: 20px; font-size: 3.5rem; line-height: 1.2; }
+        .alt_main_title { color: black; }
         .hero-description { color: rgba(255, 255, 255, 0.7); font-size: 1.2rem; max-width: 600px; margin: 20px auto 0; line-height: 1.6; }
         .featured-case-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; }
         .featured-case-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); }

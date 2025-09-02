@@ -56,7 +56,7 @@ const Feature = () => {
       {/* /.container */}
       <div className="illustration-holder" data-aos="fade-right">
         <Image
-          src="/images/gradient/gradient-5.png"
+          src="/images/assets/mathias-reding-YyIgIirt5A0-unsplash.jpg"
           alt="media"
           className="lazy-img main-img"
           width={900}
