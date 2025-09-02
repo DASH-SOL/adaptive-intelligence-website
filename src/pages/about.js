@@ -322,7 +322,7 @@ const About = ({ treeCardStats }) => {
             </div>
             <div className="col-lg-6 order-lg-first" data-aos="fade-right">
               <div className="client-logos-wrapper text-center">
-                  <div className="logo-item"><Image src="/images/logo/P-1.svg" alt="Nike logo" width={90} height={35} /></div>
+                  <div className="logo-item"><Image src="/images/logo/digital-agency-manhattan-611.png" alt="Nike logo" width={90} height={35} /></div>
                   <div className="logo-item"><Image src="/images/logo/P-2.svg" alt="Verizon logo" width={120} height={40} /></div>
                   <div className="logo-item"><Image src="/images/logo/P-3.svg" alt="Vimeo logo" width={110} height={35} /></div>
                   <div className="logo-item"><Image src="/images/logo/P-4.svg" alt="Reebok logo" width={105} height={40} /></div>
