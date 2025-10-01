@@ -1,7 +1,7 @@
+// Remove "use client" from the top
 import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Slider from "react-slick";
 import Header from "@/components/header/Header";
 import Hero from "@/components/home-page/hero";
 import LetsTalkButton from "@/components/LetsTalkButton";
@@ -10,14 +10,15 @@ import Subscribe from "@/components/footer/Subscribe";
 import CopyrightFooter from "@/components/footer/CopyrightFooter";
 import Testimonial from "@/components/home-page/Testimonial";
 import Faq from "@/components/home-page/Faq";
+import ClientCarousel from "@/components/ClientCarousel"; // Import the new client component
 
-// Services Hero Content Component
-const ServicesHeroContent = () => {
+
+const ServicesHeroContent = ({ servicesData }) => {
   return (
     <div className="title-style-fourteen text-center mt-50 mb-50 lg-mb-70">
       <div className="col-lg-8 mx-auto">
         <h2 className="main-title font-recoleta fw-normal" style={{ color: 'white', marginTop: '10px' }}>
-          Services.
+          {servicesData?.servicesHeroTitle || "Services"}.
           <span className="position-relative">
             <Image
               width={302}
@@ -28,44 +29,22 @@ const ServicesHeroContent = () => {
           </span>
         </h2>
         <p className="text-lg text-center lh-lg mt-25 md-mt-20" style={{ color: 'white' }}>
-          We deliver comprehensive solutions that drive growth, enhance brand visibility, 
-          and create meaningful connections with your audience.
+          {servicesData?.servicesHeroDescription || "We deliver comprehensive solutions that drive growth, enhance brand visibility, and create meaningful connections with your audience."}
         </p>
       </div>
     </div>
   );
 };
-
-const ServicesPage = () => {
-  const servicesData = [
-    {
-      id: 1,
-      title: "Content",
-      subtitle: "Smart Content Strategy",
-      description: "Smart content is more than words on a page. Our content marketing services include SEO-driven website copy, blog writing, social media posts, and custom graphic design. Each piece is designed to increase visibility, improve search rankings, and generate qualified leads. Cut through the noise and position your brand at the forefront.",
-      services: [],
-      icon: "/images/shape/content.png",
-      color: "#FF1292"
-    },
-    {
-      id: 2,
-      title: "Strategy",
-      subtitle: "Data-Driven Marketing",
-      description: "Our marketing specialists use data-driven marketing strategies that combine PPC management, conversion optimization, audience targeting, and analytics. Whether you're building awareness or scaling performance, we turn insights into measurable growth.",
-      services: [],
-      icon: "/images/shape/analysis.png",
-      color: "#FF1292"
-    },
-    {
-      id: 3,
-      title: "Brand Narrative",
-      subtitle: "Story-Driven Identity", 
-      description: "Our brand architects recognize that your brand's story is everything. We'll guide you through the essential elements of brand identity, brand kits, audience personas, messaging frameworks, and creative design systems, ensuring your story connects with the right audience across every platform.",
-      services: [],
-      icon: "/images/shape/brand-asset-management.png",
-      color: "#FF6B9D"
-    }
-  ];
+const ServicesPage = ({ servicesPageData }) => {
+  // Get services from the relation
+  const servicesData = servicesPageData?.services?.map(service => ({
+    id: service.id,
+    title: service.title,
+    subtitle: service.subtitle,
+    description: service.description,
+    icon: service.icon?.url ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${service.icon.url}` : "/images/shape/content.png",
+    color: service.color || "#FF1292"
+  })) || [];
 
   const clientLogos = [
     { name: "Nike", logo: "/images/logo/digital-agency-manhattan-611.png" },
@@ -111,11 +90,10 @@ const ServicesPage = () => {
       <Header />
       
       {/* Hero Section using your existing Hero component */}
-      <Hero isHomePage={false}>
-        <ServicesHeroContent />
+     <Hero isHomePage={false}>
+        <ServicesHeroContent servicesData={servicesPageData} />
       </Hero>
 
-      {/* Services Section - Black Background */}
       <div className="fancy-feature-thirtyOne position-relative zn2 pt-180 pb-140 lg-pt-140 lg-pb-100" style={{ background: 'linear-gradient(135deg, #000 0%, #1a1a1a 100%)' }}>
         <div className="container">
           <div className="row">
@@ -125,13 +103,13 @@ const ServicesPage = () => {
                 data-aos="fade-up"
               >
                 <div className="sc-title" style={{ color: '#FF1292', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '14px', fontWeight: '600', marginBottom: '20px' }}>
-                  Our Services
+                  {servicesPageData?.servicesSectionTagline || "Our Services"}
                 </div>
                 <h2 className="main-title font-recoleta fw-normal" style={{ color: 'white' }}>
-                  Powered by
+                  {servicesPageData?.servicesSectionTitle || "Powered by"}
                   <span className="position-relative">
                     {" "}
-                    Innovation
+                    {servicesPageData?.servicesSectionTitleHighlight || "Innovation"}
                     <Image
                       src="/images/shape/shape_122.svg"
                       alt="icon shape"
@@ -141,20 +119,20 @@ const ServicesPage = () => {
                   </span>
                 </h2>
                 <p className="fs-20 mt-20" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                  Comprehensive solutions that drive growth and enhance brand visibility.
+                  {servicesPageData?.servicesSectionDescription || "Comprehensive solutions that drive growth and enhance brand visibility."}
                 </p>
               </div>
             </div>
           </div>
           <div className="row g-4">
             {servicesData.map((service, index) => (
-              <div key={service.id} className="col-lg-4 col-md-6">
+              <div key={service.id || index} className="col-lg-4 col-md-6">
                 <div className="service-card-dark">
                   <div className="service-header-dark">
                     <div className="service-number-dark">0{index + 1}</div>
                     <div className="service-icon-dark">
                       <Image 
-                        src={service.icon} 
+                        src={service.icon || "/images/shape/content.png"}
                         alt={service.title}
                         width={50}
                         height={50}
@@ -166,17 +144,6 @@ const ServicesPage = () => {
                     <h3 className="service-title-dark">{service.title}</h3>
                     <p className="service-subtitle-dark">{service.subtitle}</p>
                     <p className="service-description-dark">{service.description}</p>
-                    
-                    <div className="service-features-dark">
-                      <ul>
-                        {service.services.map((item, idx) => (
-                          <li key={idx}>
-                            <span className="feature-dot-dark"></span>
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
 
                     <div className="service-cta-dark">
                       <LetsTalkButton 
@@ -186,101 +153,102 @@ const ServicesPage = () => {
                     </div>
                   </div>
 
-                  <div className="service-accent-dark" style={{ backgroundColor: service.color }}></div>
+                  <div className="service-accent-dark" style={{ backgroundColor: service.color || '#FF1292' }}></div>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
-
-      {/* Approach Section - White Background */}
-      <div className="fancy-feature-thirtyOne position-relative zn2 pt-180 pb-180 lg-pt-140 lg-pb-140" style={{ background: 'white' }}>
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-6">
-              <div className="approach-content-white">
-                <div className="sc-title" style={{ color: '#FF1292', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '14px', fontWeight: '600', marginBottom: '20px' }}>
-                  Our Approach
-                </div>
-                <h2 className="main-title font-recoleta fw-normal tx-dark">
-                  Strategic
-                  <span className="position-relative">
-                    {" "}
-                    Excellence
-                    <Image
-                      src="/images/shape/shape_122.svg"
-                      alt="icon shape"
-                      width={220}
-                      height={5}
-                    />
-                  </span>
-                </h2>
-                <p className="approach-text-dark">
-                  While we deploy tried and true marketing methodology and brand strategy 
-                  to each of our accounts, we also emphasize a bespoke approach that takes 
-                  a deeper look at your marketplace positioning and what's needed to make a 
-                  splash that both your audience and industry will care about.
-                </p>
-                <div className="approach-stats-dark">
-                  <div className="stat-item-dark">
-                    <div className="stat-number-dark">500+</div>
-                    <div className="stat-label-dark">Projects Delivered</div>
-                  </div>
-                  <div className="stat-item-dark">
-                    <div className="stat-number-dark">98%</div>
-                    <div className="stat-label-dark">Client Satisfaction</div>
-                  </div>
-                </div>
-              </div>
+     {/* Approach Section - White Background */}
+<div className="fancy-feature-thirtyOne position-relative zn2 pt-180 pb-180 lg-pt-140 lg-pb-140" style={{ background: 'white' }}>
+  <div className="container">
+    <div className="row align-items-center">
+      <div className="col-lg-6">
+        <div className="approach-content-white">
+          <div className="sc-title" style={{ color: '#FF1292', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '14px', fontWeight: '600', marginBottom: '20px' }}>
+            {servicesPageData?.approachTagline || "Our Approach"}
+          </div>
+          <h2 className="main-title font-recoleta fw-normal tx-dark">
+            {servicesPageData?.approachTitle || "Strategic"}
+            <span className="position-relative">
+              {" "}
+              {servicesPageData?.approachTitleHighlight || "Excellence"}
+              <Image
+                src="/images/shape/shape_122.svg"
+                alt="icon shape"
+                width={220}
+                height={5}
+              />
+            </span>
+          </h2>
+          <p className="approach-text-dark">
+            {servicesPageData?.approachDescription || "While we deploy tried and true marketing methodology and brand strategy to each of our accounts, we also emphasize a bespoke approach that takes a deeper look at your marketplace positioning and what's needed to make a splash that both your audience and industry will care about."}
+          </p>
+          <div className="approach-stats-dark">
+            <div className="stat-item-dark">
+              <div className="stat-number-dark">{servicesPageData?.approachStat1Number || "500+"}</div>
+              <div className="stat-label-dark">{servicesPageData?.approachStat1Label || "Projects Delivered"}</div>
             </div>
-            <div className="col-lg-6">
-              <div className="approach-visual-white">
-                <div className="approach-image-wrapper">
-                  <Image 
-                    src="/images/assets/Strategic-Excellence-How-We-Help-Organizations-Achieve-Sustainable-Success-scaled.jpg" 
-                    alt="Our strategic approach"
-                    width={600}
-                    height={400}
-                    className="approach-main-image"
-                  />
-                  <div className="approach-overlay-card">
-                    <h4>Strategic Planning</h4>
-                    <p>Data-driven insights for market positioning</p>
-                  </div>
-                </div>
-                <div className="approach-features-white">
-                  <div className="feature-item-dark">
-                    <div className="feature-icon">
-                      <Image 
-                        src="/images/icon/innovation.png" 
-                        alt="Creative Excellence"
-                        width={30}
-                        height={30}
-                      />
-                    </div>
-                    <div>
-                      <h4>Creative Excellence</h4>
-                      <p>Award-winning design and content creation</p>
-                    </div>
-                  </div>
-                  <div className="feature-item-dark">
-                    <div className="feature-icon">
-                      <Image 
-                        src="/images/icon/focus.png" 
-                        alt="Results Focus"
-                        width={30}
-                        height={30}
-                      />
-                    </div>
-                    <div>
-                      <h4>Results Focus</h4>
-                      <p>Measurable outcomes that drive growth</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="stat-item-dark">
+              <div className="stat-number-dark">{servicesPageData?.approachStat2Number || "98%"}</div>
+              <div className="stat-label-dark">{servicesPageData?.approachStat2Label || "Client Satisfaction"}</div>
             </div>
+          </div>
+        </div>
+      </div>
+   
+<div className="col-lg-6">
+  <div className="approach-visual-white">
+    <div className="approach-image-wrapper">
+      <Image 
+        src={
+          servicesPageData?.approachImage?.url
+            ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${servicesPageData.approachImage.url}`
+            : "/images/assets/Strategic-Excellence-How-We-Help-Organizations-Achieve-Sustainable-Success-scaled.jpg"
+        }
+        alt="Our strategic approach"
+        width={600}
+        height={400}
+        className="approach-main-image"
+      />
+      <div className="approach-overlay-card">
+        <h4>{servicesPageData?.approachOverlayTitle || "Strategic Planning"}</h4>
+        <p>{servicesPageData?.approachOverlayDescription || "Data-driven insights for market positioning"}</p>
+      </div>
+    </div>
+    <div className="approach-features-white">
+      <div className="feature-item-dark">
+        <div className="feature-icon">
+          <Image
+            src="/images/icon/innovation.png"
+            alt="Creative Excellence"
+            width={30}
+            height={30}
+          />
+        </div>
+        <div>
+          <h4>{servicesPageData?.approachFeature1Title || "Creative Excellence"}</h4>
+          <p>{servicesPageData?.approachFeature1Description || "Award-winning design and content creation"}</p>
+        </div>
+      </div>
+      <div className="feature-item-dark">
+        <div className="feature-icon">
+          <Image
+            src="/images/icon/focus.png"
+            alt="Results Focus"
+            width={30}
+            height={30}
+          />
+        </div>
+        <div>
+          <h4>{servicesPageData?.approachFeature2Title || "Results Focus"}</h4>
+          <p>{servicesPageData?.approachFeature2Description || "Measurable outcomes that drive growth"}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
           </div>
         </div>
       </div>
@@ -416,7 +384,6 @@ const ServicesPage = () => {
         </div>
       </div>
 
-      {/* Clients Carousel - Light Background */}
       <div className="clients-section pt-100 pb-100" style={{ background: '#f8f9fa' }}>
         <div className="container">
           <div className="text-center mb-5">
@@ -426,27 +393,7 @@ const ServicesPage = () => {
           </div>
 
           <div className="clients-carousel">
-            <Slider {...clientSettings} ref={clientCarouselRef} arrows={false}>
-              {clientLogos.map((client, index) => (
-                <div key={index} className="client-slide-modern">
-                  <div className="client-logo-wrapper-modern">
-                    <Image 
-  src={client.logo} 
-  alt={client.name}
-  width={0}
-  height={0}
-  sizes="100vw"
-  style={{
-    width: 'auto',
-    height: 'auto',
-    maxWidth: '100%',
-    maxHeight: '60px'
-  }}
-/>
-                  </div>
-                </div>
-              ))}
-            </Slider>
+            <ClientCarousel clientLogos={clientLogos} />
           </div>
         </div>
       </div>
@@ -1110,5 +1057,28 @@ const ServicesPage = () => {
     </>
   );
 };
+export async function getStaticProps() {
+  const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/services-page?populate[services][populate]=icon&populate=approachImage`;
+  
+  try {
+    const res = await fetch(apiUrl);
+    if (!res.ok) throw new Error(`API fetch failed: ${res.status}`);
+    
+    const data = await res.json();
+    console.log("Services Page API Response:", data);
+    
+    const servicesPageData = data?.data || null;
+    
+    return { 
+      props: { servicesPageData }, 
+      revalidate: 1 
+    };
+  } catch (error) {
+    console.error("Error in getStaticProps:", error);
+    return { 
+      props: { servicesPageData: null } 
+    };
+  }
+}
 
 export default ServicesPage;

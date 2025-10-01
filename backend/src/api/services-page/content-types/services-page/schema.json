@@ -1,0 +1,88 @@
+{
+  "kind": "singleType",
+  "collectionName": "services_pages",
+  "info": {
+    "singularName": "services-page",
+    "pluralName": "services-pages",
+    "displayName": "Services Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "servicesHeroTitle": {
+      "type": "string"
+    },
+    "servicesHeroTitleHighlight": {
+      "type": "string"
+    },
+    "servicesHeroDescription": {
+      "type": "text"
+    },
+    "services": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service.service"
+    },
+    "servicesSectionTagline": {
+    "type": "string"
+  },
+  "servicesSectionTitle": {
+    "type": "string"
+  },
+  "servicesSectionTitleHighlight": {
+    "type": "string"
+  },
+  "servicesSectionDescription": {
+    "type": "text"
+  },
+  "approachTagline": {
+    "type": "string"
+  },
+  "approachTitle": {
+    "type": "string"
+  },
+  "approachTitleHighlight": {
+    "type": "string"
+  },
+  "approachDescription": {
+    "type": "text"
+  },
+  "approachStat1Number": {
+    "type": "string"
+  },
+  "approachStat1Label": {
+    "type": "string"
+  },
+  "approachStat2Number": {
+    "type": "string"
+  },
+  "approachStat2Label": {
+    "type": "string"
+  },
+  "approachImage": {
+    "type": "media",
+    "multiple": false,
+    "allowedTypes": ["images"]
+  },
+  "approachOverlayTitle": {
+    "type": "string"
+  },
+  "approachOverlayDescription": {
+    "type": "string"
+  },
+  "approachFeature1Title": {
+    "type": "string"
+  },
+  "approachFeature1Description": {
+    "type": "string"
+  },
+  "approachFeature2Title": {
+    "type": "string"
+  },
+  "approachFeature2Description": {
+    "type": "string"
+  }
+  }
+}

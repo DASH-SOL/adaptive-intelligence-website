@@ -1,23 +1,12 @@
+"use client";
+
 import BlockContact5 from "@/components/contact/BlockContact5";
 import React from "react";
 import Image from 'next/image';
 
-export const metadata = {
-  title: "Contact v4 || Jano - Creative Multipurpose React NextJS Template",
-};
-const ContactV4 = () => {
+const ContactV4 = ({ settings }) => {
   return (
     <>
-      {/* <!-- 
-      =============================================
-      Theme Default Menu
-      ============================================== 	
-      --> */}
-      {/* 
-			=============================================
-				Contact Section Four
-			============================================== 
-			*/}
       <div className="contact-section-four pt-180 md-pt-150">
         <div className="container">
           <div className="row">
@@ -35,24 +24,13 @@ const ContactV4 = () => {
                   is here to help you.
                 </h2>
               </div>
-              {/* /.title-style-fourteen */}
             </div>
           </div>
           <div className="row">
-            <BlockContact5 />
+            <BlockContact5 settings={settings} />
           </div>
         </div>
-        {/* End .container */}
-
-
-        {/* /.contact-meta */}
       </div>
-      {/* /.contact-section-four */}
-      {/* 
-        =============================================
-        Contact Section One
-        ============================================== 
-        */}
     </>
   );
 };

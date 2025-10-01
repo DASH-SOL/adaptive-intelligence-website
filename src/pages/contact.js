@@ -15,13 +15,14 @@ import Container from '@mui/material/Container';
 import { useSettings } from '@/context/SettingsContext';
 
 const Contact = () => {
-  const { settings } = useSettings();
+  const { settings, loading } = useSettings();
+
 
   return (
     <>
       <Header />
       <Hero isHomePage={false}>
-        <ContactV4 />
+        <ContactV4 settings={settings} />
       </Hero>
       <div className="contact-section-four pt-0 md-pt-0">
         <div className="contact-meta mt-0 lg-mt-40">
@@ -39,13 +40,12 @@ const Contact = () => {
               </div>
             </div>
             <div className="col-lg-6 order-lg-first d-flex">
-              <Map2 />
+              <Map2 settings={settings} />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Footer */}
       <div className="footer-style-nine theme-basic-footer zn2 position-relative">
         <div className="bg-wrapper">
           <div className="container">

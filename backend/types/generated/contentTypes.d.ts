@@ -638,6 +638,56 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiServicesPageServicesPage extends Struct.SingleTypeSchema {
+  collectionName: 'services_pages';
+  info: {
+    displayName: 'Services Page';
+    pluralName: 'services-pages';
+    singularName: 'services-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    approachDescription: Schema.Attribute.Text;
+    approachFeature1Description: Schema.Attribute.String;
+    approachFeature1Title: Schema.Attribute.String;
+    approachFeature2Description: Schema.Attribute.String;
+    approachFeature2Title: Schema.Attribute.String;
+    approachImage: Schema.Attribute.Media<'images'>;
+    approachOverlayDescription: Schema.Attribute.String;
+    approachOverlayTitle: Schema.Attribute.String;
+    approachStat1Label: Schema.Attribute.String;
+    approachStat1Number: Schema.Attribute.String;
+    approachStat2Label: Schema.Attribute.String;
+    approachStat2Number: Schema.Attribute.String;
+    approachTagline: Schema.Attribute.String;
+    approachTitle: Schema.Attribute.String;
+    approachTitleHighlight: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::services-page.services-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
+    servicesHeroDescription: Schema.Attribute.Text;
+    servicesHeroTitle: Schema.Attribute.String;
+    servicesHeroTitleHighlight: Schema.Attribute.String;
+    servicesSectionDescription: Schema.Attribute.Text;
+    servicesSectionTagline: Schema.Attribute.String;
+    servicesSectionTitle: Schema.Attribute.String;
+    servicesSectionTitleHighlight: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSettingSetting extends Struct.SingleTypeSchema {
   collectionName: 'settings';
   info: {
@@ -1238,6 +1288,7 @@ declare module '@strapi/strapi' {
       'api::faq.faq': ApiFaqFaq;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::service.service': ApiServiceService;
+      'api::services-page.services-page': ApiServicesPageServicesPage;
       'api::setting.setting': ApiSettingSetting;
       'api::testimonial.testimonial': ApiTestimonialTestimonial;
       'plugin::content-releases.release': PluginContentReleasesRelease;
