@@ -6,23 +6,22 @@ import FooterContent from '@/components/footer/FooterContent';
 import Subscribe from '@/components/footer/Subscribe';
 import CopyrightFooter from '@/components/footer/CopyrightFooter';
 import LetsTalkButton from '@/components/LetsTalkButton';
-import { resourceDatabase } from '@/data/resources';
 
-const CaseStudies = () => {
+const CaseStudies = ({ allCaseStudies }) => {
   const [activeFilter, setActiveFilter] = useState('All');
 
-  const caseStudiesData = Object.values(resourceDatabase);
-  const categories = ['All', ...new Set(caseStudiesData.map(study => study.category).filter(Boolean))];
+  const categories = ['All', ...new Set(allCaseStudies.map(study => study.category).filter(Boolean))];
+  
   const filteredCaseStudies = activeFilter === 'All' 
-    ? caseStudiesData 
-    : caseStudiesData.filter(study => study.category === activeFilter);
-  const featuredCaseStudies = caseStudiesData.filter(study => study.featured);
+    ? allCaseStudies 
+    : allCaseStudies.filter(study => study.category === activeFilter);
+    
+  const featuredCaseStudies = allCaseStudies.filter(study => study.featured);
 
   return (
     <>
       <Header menuTextColor="white" />
       
-      {/* Hero Section */}
       <div className="case-studies-hero pt-200 pb-100 lg-pt-150 lg-pb-80" style={{ background: 'linear-gradient(135deg, #000 0%, #1a1a1a 100%)' }}>
         <div className="container">
           <div className="row">
@@ -54,7 +53,6 @@ const CaseStudies = () => {
         </div>
       </div>
 
-      {/* Featured Case Studies */}
       <div className="featured-cases pt-180 pb-150 lg-pt-120 lg-pb-120" style={{ background: 'white' }}>
         <div className="container">
           <div className="row">
@@ -81,67 +79,70 @@ const CaseStudies = () => {
           </div>
 
           <div className="row g-4">
-            {featuredCaseStudies.map((study) => (
-              // UPDATED: Changed col-lg-6 (2 columns) to col-lg-4 (3 columns)
-              // Added col-md-6 for better tablet view (2 columns)
-              <div key={study.id} className="col-lg-4 col-md-6">
-                <div className="featured-case-card">
-                  <div className="case-image">
-                    <Image
-                      src={study.heroImage}
-                      alt={study.title}
-                      width={600}
-                      height={400}
-                      className="case-img"
-                      style={{ objectFit: 'cover' }}
-                    />
-                    <div className="case-overlay">
-                      <div className="case-category">{study.category}</div>
-                      {study.metrics &&
-                        <div className="case-metrics">
-                          {Object.entries(study.metrics).map(([key, value], idx) => (
-                            <div key={idx} className="metric-item">
-                              <span className="metric-value">{value}</span>
-                              <span className="metric-label">{key}</span>
-                            </div>
-                          ))}
-                        </div>
-                      }
-                    </div>
-                  </div>
-                  <div className="case-content">
-                    <div className="case-meta">
-                      <span className="client-name">{study.client}</span>
-                      <span className="industry">{study.industry}</span>
-                    </div>
-                    <h3 className="case-title">{study.title}</h3>
-                    <p className="case-description">{study.description}</p>
-                    <div className="case-tags">
-                      {study.tags && study.tags.map(tag => (
-                        <span key={tag} className="tag">{tag}</span>
-                      ))}
-                    </div>
-                    <div className="case-results">
-                      <div className="result-highlight">
-                        <span className="result-number">{study.results}</span>
-                        <span className="result-label">Key Result</span>
+            {featuredCaseStudies.map((study) => {
+              const heroImageUrl = study.heroImage?.url 
+                ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${study.heroImage.url}` 
+                : '/images/placeholder.png';
+
+              return (
+                <div key={study.id} className="col-lg-4 col-md-6">
+                  <div className="featured-case-card">
+                    <div className="case-image">
+                      <Image
+                        src={heroImageUrl}
+                        alt={study.title}
+                        width={600}
+                        height={400}
+                        className="case-img"
+                        style={{ objectFit: 'cover' }}
+                      />
+                      <div className="case-overlay">
+                        <div className="case-category">{study.category}</div>
+                        {study.metrics &&
+                          <div className="case-metrics">
+                            {Object.entries(study.metrics).map(([key, value], idx) => (
+                              <div key={idx} className="metric-item">
+                                <span className="metric-value">{value}</span>
+                                <span className="metric-label">{key}</span>
+                              </div>
+                            ))}
+                          </div>
+                        }
                       </div>
-                      <Link href={`/case-studies/${study.slug}`} className="case-link">
-                        View Details
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                          <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </Link>
+                    </div>
+                    <div className="case-content">
+                      <div className="case-meta">
+                        <span className="client-name">{study.client}</span>
+                        <span className="industry">{study.industry}</span>
+                      </div>
+                      <h3 className="case-title">{study.title}</h3>
+                      <p className="case-description">{study.description}</p>
+                      <div className="case-tags">
+                        {study.tags?.map(tag => (
+                          <span key={tag.id} className="tag">{tag.text}</span>
+                        ))}
+                      </div>
+                      <div className="case-results">
+                        <div className="result-highlight">
+                          <span className="result-number">{study.results}</span>
+                          <span className="result-label">Key Result</span>
+                        </div>
+                        <Link href={`/case-studies/${study.slug}`} className="case-link">
+                          View Details
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
 
-      {/* CTA Section */}
       <div className="cta-section pt-150 pb-150 lg-pt-120 lg-pb-120" style={{ background: 'linear-gradient(135deg, #FF1292 0%, #e60d82 100%)' }}>
         <div className="container">
           <div className="row">
@@ -161,7 +162,6 @@ const CaseStudies = () => {
         </div>
       </div>
 
-      {/* Footer */}
       <div className="footer-style-nine theme-basic-footer zn2 position-relative">
         <div className="bg-wrapper">
           <div className="container">
@@ -187,6 +187,7 @@ const CaseStudies = () => {
         </div>
         <CopyrightFooter />
       </div>
+
 
       <style jsx>{`
         /* White Header Fix */
@@ -257,5 +258,19 @@ const CaseStudies = () => {
     </>
   );
 };
+export async function getStaticProps() {
+  const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/case-studies?populate=deep`;
+  try {
+    const res = await fetch(apiUrl);
+    if (!res.ok) throw new Error("Failed to fetch case studies");
+    const json = await res.json();
+    const normalize = (item) => item?.attributes ? { id: item.id, ...item.attributes } : item;
+    const allCaseStudies = (json.data || []).map(normalize);
+    return { props: { allCaseStudies }, revalidate: 60 };
+  } catch (error) {
+    console.error("Error fetching case studies:", error);
+    return { props: { allCaseStudies: [] } };
+  }
+}
 
 export default CaseStudies;

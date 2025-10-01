@@ -25,11 +25,33 @@ export interface HomepageFeatureListItem extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedInsight extends Struct.ComponentSchema {
+  collectionName: 'components_shared_insights';
+  info: {
+    displayName: 'Insight';
+  };
+  attributes: {
+    text: Schema.Attribute.String;
+  };
+}
+
+export interface SharedTag extends Struct.ComponentSchema {
+  collectionName: 'components_shared_tags';
+  info: {
+    displayName: 'Tag';
+  };
+  attributes: {
+    text: Schema.Attribute.String;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'homepage.counter-item': HomepageCounterItem;
       'homepage.feature-list-item': HomepageFeatureListItem;
+      'shared.insight': SharedInsight;
+      'shared.tag': SharedTag;
     }
   }
 }

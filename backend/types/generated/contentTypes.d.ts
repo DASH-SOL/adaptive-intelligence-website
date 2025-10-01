@@ -467,6 +467,49 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
+  collectionName: 'case_studies';
+  info: {
+    displayName: 'Case Study';
+    pluralName: 'case-studies';
+    singularName: 'case-study';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    badge: Schema.Attribute.String;
+    category: Schema.Attribute.String;
+    client: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    heroImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    industry: Schema.Attribute.String;
+    insights: Schema.Attribute.Component<'shared.insight', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::case-study.case-study'
+    > &
+      Schema.Attribute.Private;
+    metrics: Schema.Attribute.JSON;
+    publishedAt: Schema.Attribute.DateTime;
+    results: Schema.Attribute.String;
+    slug: Schema.Attribute.UID<'title'>;
+    tags: Schema.Attribute.Component<'shared.tag', true>;
+    testimonialAuthor: Schema.Attribute.String;
+    testimonialPosition: Schema.Attribute.String;
+    testimonialQuote: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiClientLogoClientLogo extends Struct.CollectionTypeSchema {
   collectionName: 'client_logos';
   info: {
@@ -1345,6 +1388,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::case-study.case-study': ApiCaseStudyCaseStudy;
       'api::client-logo.client-logo': ApiClientLogoClientLogo;
       'api::faq.faq': ApiFaqFaq;
       'api::homepage.homepage': ApiHomepageHomepage;
