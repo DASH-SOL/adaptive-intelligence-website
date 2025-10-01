@@ -26,113 +26,162 @@
       "target": "api::service.service"
     },
     "servicesSectionTagline": {
-    "type": "string"
-  },
-  "servicesSectionTitle": {
-    "type": "string"
-  },
-  "servicesSectionTitleHighlight": {
-    "type": "string"
-  },
-  "servicesSectionDescription": {
-    "type": "text"
-  },
-  "approachTagline": {
-    "type": "string"
-  },
-  "approachTitle": {
-    "type": "string"
-  },
-  "approachTitleHighlight": {
-    "type": "string"
-  },
-  "approachDescription": {
-    "type": "text"
-  },
-  "approachStat1Number": {
-    "type": "string"
-  },
-  "approachStat1Label": {
-    "type": "string"
-  },
-  "approachStat2Number": {
-    "type": "string"
-  },
-  "approachStat2Label": {
-    "type": "string"
-  },
-  "approachImage": {
-    "type": "media",
-    "multiple": false,
-    "allowedTypes": ["images"]
-  },
-  "approachOverlayTitle": {
-    "type": "string"
-  },
-  "approachOverlayDescription": {
-    "type": "string"
-  },
-  "approachFeature1Title": {
-    "type": "string"
-  },
-  "approachFeature1Description": {
-    "type": "string"
-  },
-  "approachFeature2Title": {
-    "type": "string"
-  },
-  "approachFeature2Description": {
-    "type": "string"
-  },
-  "capabilitiesTagline": {
-    "type": "string"
-  },
-  "capabilitiesTitle": {
-    "type": "string"
-  },
-  "capabilitiesTitleHighlight": {
-    "type": "string"
-  },
-  "capabilitiesDescription": {
-    "type": "text"
-  },
-  "capabilitiesImage": {
-    "type": "media",
-    "multiple": false,
-    "allowedTypes": ["images"]
-  },
-  "capability1Title": {
-    "type": "string"
-  },
-  "capability1Description": {
-    "type": "string"
-  },
-  "capability2Title": {
-    "type": "string"
-  },
-  "capability2Description": {
-    "type": "string"
-  },
-  "capability3Title": {
-    "type": "string"
-  },
-  "capability3Description": {
-    "type": "string"
-  },
-  "capability4Title": {
-    "type": "string"
-  },
-  "capability4Description": {
-    "type": "string"
-  },
-  "capabilitiesBottomText": {
-    "type": "text"
-  },
-  "capabilitiesButtonText": {
-    "type": "string"
-  },
-  "capabilitiesButtonUrl": {
-    "type": "string"
-  }
+      "type": "string"
+    },
+    "servicesSectionTitle": {
+      "type": "string"
+    },
+    "servicesSectionTitleHighlight": {
+      "type": "string"
+    },
+    "servicesSectionDescription": {
+      "type": "text"
+    },
+    "approachTagline": {
+      "type": "string"
+    },
+    "approachTitle": {
+      "type": "string"
+    },
+    "approachTitleHighlight": {
+      "type": "string"
+    },
+    "approachDescription": {
+      "type": "text"
+    },
+    "approachStat1Number": {
+      "type": "string"
+    },
+    "approachStat1Label": {
+      "type": "string"
+    },
+    "approachStat2Number": {
+      "type": "string"
+    },
+    "approachStat2Label": {
+      "type": "string"
+    },
+    "approachImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "approachOverlayTitle": {
+      "type": "string"
+    },
+    "approachOverlayDescription": {
+      "type": "string"
+    },
+    "approachFeature1Title": {
+      "type": "string"
+    },
+    "approachFeature1Description": {
+      "type": "string"
+    },
+    "approachFeature2Title": {
+      "type": "string"
+    },
+    "approachFeature2Description": {
+      "type": "string"
+    },
+    "capabilitiesTagline": {
+      "type": "string"
+    },
+    "capabilitiesTitle": {
+      "type": "string"
+    },
+    "capabilitiesTitleHighlight": {
+      "type": "string"
+    },
+    "capabilitiesDescription": {
+      "type": "text"
+    },
+    "capabilitiesImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "capability1Title": {
+      "type": "string"
+    },
+    "capability1Description": {
+      "type": "string"
+    },
+    "capability2Title": {
+      "type": "string"
+    },
+    "capability2Description": {
+      "type": "string"
+    },
+    "capability3Title": {
+      "type": "string"
+    },
+    "capability3Description": {
+      "type": "string"
+    },
+    "capability4Title": {
+      "type": "string"
+    },
+    "capability4Description": {
+      "type": "string"
+    },
+    "capabilitiesBottomText": {
+      "type": "text"
+    },
+    "capabilitiesButtonText": {
+      "type": "string"
+    },
+    "capabilitiesButtonUrl": {
+      "type": "string"
+    },
+    "testimonialsTagline": {
+      "type": "string"
+    },
+    "testimonialsTitle": {
+      "type": "string"
+    },
+    "testimonialsTitleHighlight": {
+      "type": "string"
+    },
+    "testimonialsTitleEnd": {
+      "type": "string"
+    },
+    "testimonialsDescription": {
+      "type": "text"
+    },
+    "faqTagline": {
+      "type": "string"
+    },
+    "faqTitle": {
+      "type": "string"
+    },
+    "faqTitleHighlight": {
+      "type": "string"
+    },
+    "faqTitleEnd": {
+      "type": "string"
+    },
+    "ctaTitle1": {
+      "type": "string"
+    },
+    "ctaTitleHighlight": {
+      "type": "string"
+    },
+    "ctaTitleEnd": {
+      "type": "string"
+    },
+    "ctaDescription": {
+      "type": "text"
+    },
+    "ctaButtonText": {
+      "type": "string"
+    },
+    "ctaButtonUrl": {
+      "type": "string"
+    }
   }
 }

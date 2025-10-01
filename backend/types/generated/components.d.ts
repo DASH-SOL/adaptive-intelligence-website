@@ -25,27 +25,11 @@ export interface HomepageFeatureListItem extends Struct.ComponentSchema {
   };
 }
 
-export interface HomepageServiceCard extends Struct.ComponentSchema {
-  collectionName: 'components_homepage_service_cards';
-  info: {
-    displayName: 'ServiceCard';
-  };
-  attributes: {
-    buttonUrl: Schema.Attribute.String;
-    color: Schema.Attribute.String;
-    description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    subtitle: Schema.Attribute.String;
-    title: Schema.Attribute.String;
-  };
-}
-
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'homepage.counter-item': HomepageCounterItem;
       'homepage.feature-list-item': HomepageFeatureListItem;
-      'homepage.service-card': HomepageServiceCard;
     }
   }
 }

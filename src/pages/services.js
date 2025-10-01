@@ -46,44 +46,7 @@ const ServicesPage = ({ servicesPageData }) => {
     color: service.color || "#FF1292"
   })) || [];
 
-  const clientLogos = [
-    { name: "Nike", logo: "/images/logo/digital-agency-manhattan-611.png" },
-    { name: "Verizon", logo: "/images/logo/digital-agency-manhattan-714.png" },
-    { name: "Vimeo", logo: "/images/logo/digital-agency-manhattan-716.png" },
-    { name: "Reebok", logo: "/images/logo/digital-agency-manhattan-718.png" },
-    { name: "AV Club", logo: "/images/logo/digital-agency-manhattan-720.png" },
-    { name: "Upwork", logo: "/images/logo/digital-agency-manhattan-722.png" },
-    { name: "Billboard", logo: "/images/logo/digital-agency-manhattan-911.png" },
-    { name: "Vice", logo: "/images/logo/digital-agency-manhattan-913.png" },
-    { name: "Atlantic Records", logo: "/images/logo/digital-agency-manhattan-918.png" },
-    { name: "Atlantic Records", logo: "/images/logo/digital-agency-manhattan-content-412.png" }
-  ];
 
-  const clientCarouselRef = useRef(null);
-
-  const clientSettings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: 4 },
-      },
-      {
-        breakpoint: 768,
-        settings: { slidesToShow: 3 },
-      },
-      {
-        breakpoint: 480,
-        settings: { slidesToShow: 2 },
-      },
-    ],
-  };
 
   return (
     <>
@@ -387,6 +350,7 @@ const ServicesPage = ({ servicesPageData }) => {
   </div>
 </div>
 
+      {/* THIS SECTION IS NOW DYNAMIC */}
       <div className="clients-section pt-100 pb-100" style={{ background: '#f8f9fa' }}>
         <div className="container">
           <div className="text-center mb-5">
@@ -394,113 +358,113 @@ const ServicesPage = ({ servicesPageData }) => {
             <div className="title-underline mx-auto"></div>
             <p className="fs-20 mt-20">Trusted by industry leaders worldwide</p>
           </div>
-
           <div className="clients-carousel">
-            <ClientCarousel clientLogos={clientLogos} />
+            <ClientCarousel />
           </div>
         </div>
       </div>
 
       {/* Testimonials Section - Black Background */}
-      <div className="feedback-section-ten position-relative pt-200 pb-200 lg-pt-150 lg-pb-150" style={{ background: 'linear-gradient(135deg, #000 0%, #1a1a1a 100%)' }}>
-        <div className="container">
-          <div className="position-relative">
-            <div className="row">
-              <div className="col-lg-5">
-                <div
-                  className="title-style-ten text-center text-lg-start"
-                  data-aos="fade-right"
-                >
-                  <div className="sc-title" style={{ color: '#FF1292', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '14px', fontWeight: '600', marginBottom: '20px' }}>
-                    Client Testimonials
-                  </div>
-                  <h2 className="main-title font-recoleta fw-normal" style={{ color: 'white', marginTop: '20px' }}>
-                    Trusted by
-                    <span className="position-relative">
-                      {" "}
-                      Leading{" "}
-                      <Image
-                        src="/images/shape/shape_129.svg"
-                        alt=""
-                        width={160}
-                        height={6}
-                      />
-                    </span>
-                    Brands
-                  </h2>
-                  <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '1.1rem', marginTop: '20px', lineHeight: '1.6' }}>
-                    Don't just take our word for it. Here's what our clients say about working with us.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <Testimonial />
-          </div>
-        </div>
-      </div>
-
-      {/* FAQ Section */}
-      <div className="fancy-feature-thirtyThree mt-180 lg-mt-120">
-        <div className="container">
-          <div className="title-style-ten text-center" data-aos="fade-up">
-            <div className="sc-title">FAQs</div>
-            <h2 className="main-title font-recoleta fw-normal tx-dark">
-              Answers to your most &amp;{" "}
-              <span className="position-relative">
-                frequently{" "}
-                <Image
-                  width={219}
-                  height={7}
-                  src="/images/shape/shape_132.svg"
-                  alt=""
-                />
-                asked questions.
-              </span>
-            </h2>
-          </div>
-
+<div className="feedback-section-ten position-relative pt-200 pb-200 lg-pt-150 lg-pb-150" style={{ background: 'linear-gradient(135deg, #000 0%, #1a1a1a 100%)' }}>
+  <div className="container">
+    <div className="position-relative">
+      <div className="row">
+        <div className="col-lg-5">
           <div
-            className="bg-wrapper position-relative mt-80 lg-mt-40"
-            data-aos="fade-up"
+            className="title-style-ten text-center text-lg-start"
+            data-aos="fade-right"
           >
-            <Faq />
-          </div>
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <div className="fancy-short-banner-twelve position-relative zn2 pt-160 pb-150 lg-pt-120 lg-pb-120">
-        <div className="container">
-          <div className="row">
-            <div className="col-xl-8 m-auto text-center">
-              <div className="title-style-ten" data-aos="fade-up">
-                <h2 className="main-title font-recoleta fw-normal tx-dark">
-                  Have an idea for a project? <br />
-                  <span className="position-relative">
-                    Let's Talk{" "}
-                    <Image
-                      width={221}
-                      height={7}
-                      src="/images/shape/shape_132.svg"
-                      alt=""
-                    />
-                  </span>
-                  &amp; Grow your Business
-                </h2>
-              </div>
-              <p
-                className="text-lg mt-45 mb-55 lg-mb-30 lg-mt-40"
-                data-aos="fade-up"
-                data-aos-delay="200"
-              >
-                We're ready to help you. Our experts are here, just send a message.
-              </p>
-              <LetsTalkButton buttonText="Send Message" href="/contact" />
+            <div className="sc-title" style={{ color: '#FF1292', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '14px', fontWeight: '600', marginBottom: '20px' }}>
+              {servicesPageData?.testimonialsTagline || "Client Testimonials"}
             </div>
+            <h2 className="main-title font-recoleta fw-normal" style={{ color: 'white', marginTop: '20px' }}>
+              {servicesPageData?.testimonialsTitle || "Trusted by"}{" "}
+              <span className="position-relative">
+                {servicesPageData?.testimonialsTitleHighlight || "Leading"}{" "}
+                <Image
+                  src="/images/shape/shape_129.svg"
+                  alt=""
+                  width={160}
+                  height={6}
+                />
+              </span>
+              {" "}{servicesPageData?.testimonialsTitleEnd || "Brands"}
+            </h2>
+            <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '1.1rem', marginTop: '20px', lineHeight: '1.6' }}>
+              {servicesPageData?.testimonialsDescription || "Don't just take our word for it. Here's what our clients say about working with us."}
+            </p>
           </div>
         </div>
-        <div className="shapes shape-one" />
       </div>
+      <Testimonial />
+    </div>
+  </div>
+</div>
+
+     {/* FAQ Section */}
+<div className="fancy-feature-thirtyThree mt-180 lg-mt-120">
+  <div className="container">
+    <div className="title-style-ten text-center" data-aos="fade-up">
+      <div className="sc-title">{servicesPageData?.faqTagline || "FAQs"}</div>
+      <h2 className="main-title font-recoleta fw-normal tx-dark">
+        {servicesPageData?.faqTitle || "Answers to your most &"}{" "}
+        <span className="position-relative">
+          {servicesPageData?.faqTitleHighlight || "frequently"}{" "}
+          <Image
+            width={219}
+            height={7}
+            src="/images/shape/shape_132.svg"
+            alt=""
+          />
+        </span>
+        {" "}{servicesPageData?.faqTitleEnd || "asked questions."}
+      </h2>
+    </div>
+    <div
+      className="bg-wrapper position-relative mt-80 lg-mt-40"
+      data-aos="fade-up"
+    >
+      <Faq />
+    </div>
+  </div>
+</div>
+
+{/* CTA Section */}
+<div className="fancy-short-banner-twelve position-relative zn2 pt-160 pb-150 lg-pt-120 lg-pb-120">
+  <div className="container">
+    <div className="row">
+      <div className="col-xl-8 m-auto text-center">
+        <div className="title-style-ten" data-aos="fade-up">
+          <h2 className="main-title font-recoleta fw-normal tx-dark">
+            {servicesPageData?.ctaTitle1 || "Have an idea for a project?"} <br />
+            <span className="position-relative">
+              {servicesPageData?.ctaTitleHighlight || "Let's Talk"}{" "}
+              <Image
+                width={221}
+                height={7}
+                src="/images/shape/shape_132.svg"
+                alt=""
+              />
+            </span>
+            {" "}{servicesPageData?.ctaTitleEnd || "& Grow your Business"}
+          </h2>
+        </div>
+        <p
+          className="text-lg mt-45 mb-55 lg-mb-30 lg-mt-40"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          {servicesPageData?.ctaDescription || "We're ready to help you. Our experts are here, just send a message."}
+        </p>
+        <LetsTalkButton 
+          buttonText={servicesPageData?.ctaButtonText || "Send Message"} 
+          href={servicesPageData?.ctaButtonUrl || "/contact"} 
+        />
+      </div>
+    </div>
+  </div>
+  <div className="shapes shape-one" />
+</div>
 
       {/* Footer */}
       <div className="footer-style-nine theme-basic-footer zn2 position-relative">

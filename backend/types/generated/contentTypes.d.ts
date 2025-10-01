@@ -467,6 +467,35 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiClientLogoClientLogo extends Struct.CollectionTypeSchema {
+  collectionName: 'client_logos';
+  info: {
+    displayName: 'Client Logo';
+    pluralName: 'client-logos';
+    singularName: 'client-logo';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::client-logo.client-logo'
+    > &
+      Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
   collectionName: 'faqs';
   info: {
@@ -683,6 +712,16 @@ export interface ApiServicesPageServicesPage extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    ctaButtonText: Schema.Attribute.String;
+    ctaButtonUrl: Schema.Attribute.String;
+    ctaDescription: Schema.Attribute.Text;
+    ctaTitle1: Schema.Attribute.String;
+    ctaTitleEnd: Schema.Attribute.String;
+    ctaTitleHighlight: Schema.Attribute.String;
+    faqTagline: Schema.Attribute.String;
+    faqTitle: Schema.Attribute.String;
+    faqTitleEnd: Schema.Attribute.String;
+    faqTitleHighlight: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -698,6 +737,11 @@ export interface ApiServicesPageServicesPage extends Struct.SingleTypeSchema {
     servicesSectionTagline: Schema.Attribute.String;
     servicesSectionTitle: Schema.Attribute.String;
     servicesSectionTitleHighlight: Schema.Attribute.String;
+    testimonialsDescription: Schema.Attribute.Text;
+    testimonialsTagline: Schema.Attribute.String;
+    testimonialsTitle: Schema.Attribute.String;
+    testimonialsTitleEnd: Schema.Attribute.String;
+    testimonialsTitleHighlight: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1301,6 +1345,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::client-logo.client-logo': ApiClientLogoClientLogo;
       'api::faq.faq': ApiFaqFaq;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::service.service': ApiServiceService;
