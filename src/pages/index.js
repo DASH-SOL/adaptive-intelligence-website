@@ -122,7 +122,7 @@ const HomePage = ({ homepageData }) => {
                   className="title-style-ten text-center text-lg-start"
                   data-aos="fade-right"
                 >
-                  <div className="sc-title">Client Testimonials</div>
+                  <div className="sc-title">Client Testimonialss</div>
                   <h2 className="main-title font-recoleta fw-normal tx-dark">
                     Trusted by
                     <span className="position-relative">
