@@ -83,6 +83,56 @@
   },
   "approachFeature2Description": {
     "type": "string"
+  },
+  "capabilitiesTagline": {
+    "type": "string"
+  },
+  "capabilitiesTitle": {
+    "type": "string"
+  },
+  "capabilitiesTitleHighlight": {
+    "type": "string"
+  },
+  "capabilitiesDescription": {
+    "type": "text"
+  },
+  "capabilitiesImage": {
+    "type": "media",
+    "multiple": false,
+    "allowedTypes": ["images"]
+  },
+  "capability1Title": {
+    "type": "string"
+  },
+  "capability1Description": {
+    "type": "string"
+  },
+  "capability2Title": {
+    "type": "string"
+  },
+  "capability2Description": {
+    "type": "string"
+  },
+  "capability3Title": {
+    "type": "string"
+  },
+  "capability3Description": {
+    "type": "string"
+  },
+  "capability4Title": {
+    "type": "string"
+  },
+  "capability4Description": {
+    "type": "string"
+  },
+  "capabilitiesBottomText": {
+    "type": "text"
+  },
+  "capabilitiesButtonText": {
+    "type": "string"
+  },
+  "capabilitiesButtonUrl": {
+    "type": "string"
   }
   }
 }

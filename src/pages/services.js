@@ -254,135 +254,138 @@ const ServicesPage = ({ servicesPageData }) => {
       </div>
 
       {/* Enhanced Capabilities Section - Navy Background */}
-      <div className="fancy-feature-thirtyOne position-relative zn2 pt-180 pb-180 lg-pt-140 lg-pb-140" style={{ background: '#151937' }}>
-        <div className="container">
-          <div className="row">
-            <div className="col-xl-8 col-lg-9 m-auto">
-              <div
-                className="title-style-ten text-center pb-40 lg-pb-20"
-                data-aos="fade-up"
-              >
-                <div className="sc-title" style={{ color: '#FF1292', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '14px', fontWeight: '600', marginBottom: '20px' }}>
-                  Our Capabilities
-                </div>
-                <h2 className="main-title font-recoleta fw-normal" style={{ color: 'white' }}>
-                  Industry-Leading
-                  <span className="position-relative">
-                    {" "}
-                    Expertise
-                    <Image
-                      src="/images/shape/shape_122.svg"
-                      alt="icon shape"
-                      width={220}
-                      height={5}
-                    />
-                  </span>
-                </h2>
-                <p className="fs-20 mt-20" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                  Our set of services have been built and refined for over a decade, 
-                  which is why our client success ratings are among the highest in the industry.
-                </p>
-              </div>
-            </div>
+<div className="fancy-feature-thirtyOne position-relative zn2 pt-180 pb-180 lg-pt-140 lg-pb-140" style={{ background: '#151937' }}>
+  <div className="container">
+    <div className="row">
+      <div className="col-xl-8 col-lg-9 m-auto">
+        <div
+          className="title-style-ten text-center pb-40 lg-pb-20"
+          data-aos="fade-up"
+        >
+          <div className="sc-title" style={{ color: '#FF1292', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '14px', fontWeight: '600', marginBottom: '20px' }}>
+            {servicesPageData?.capabilitiesTagline || "Our Capabilities"}
           </div>
-          
-          <div className="row align-items-center">
-            <div className="col-lg-6">
-              <div className="capabilities-image-section">
-                <div className="capabilities-image-wrapper">
-                  <Image 
-                    src="/images/assets/team-diverse-analysts-consultants-reviewing-data-checklists_482257-125957.jpg" 
-                    alt="Our team capabilities"
-                    width={600}
-                    height={450}
-                    className="capabilities-main-image"
-                  />
-                </div>
-              </div>
-            </div>
-            
-            <div className="col-lg-6">
-              <div className="capabilities-content">
-                <div className="capabilities-grid-enhanced">
-                  <div className="capability-card-enhanced">
-                    <div className="capability-icon">
-                      <Image 
-                        src="/images/icon/support.png" 
-                        alt="Support"
-                        width={35}
-                        height={35}
-                      />
-                    </div>
-                    <div className="capability-content">
-                      <h4>24/7 Support</h4>
-                      <p>Available whenever you need us</p>
-                    </div>
-                    <div className="capability-number">01</div>
-                  </div>
-                  
-                  <div className="capability-card-enhanced">
-                    <div className="capability-icon">
-                      <Image 
-                        src="/images/icon/reach.png" 
-                        alt="Global Reach"
-                        width={35}
-                        height={35}
-                      />
-                    </div>
-                    <div className="capability-content">
-                      <h4>Global Reach</h4>
-                      <p>Serving clients worldwide</p>
-                    </div>
-                    <div className="capability-number">02</div>
-                  </div>
-                  
-                  <div className="capability-card-enhanced">
-                    <div className="capability-icon">
-                      <Image 
-                        src="/images/icon/trophy.png" 
-                        alt="Award Winning"
-                        width={35}
-                        height={35}
-                      />
-                    </div>
-                    <div className="capability-content">
-                      <h4>Award Winning</h4>
-                      <p>Recognized industry excellence</p>
-                    </div>
-                    <div className="capability-number">03</div>
-                  </div>
-                  
-                  <div className="capability-card-enhanced">
-                    <div className="capability-icon">
-                      <Image 
-                        src="/images/icon/innovation.png" 
-                        alt="Award Winning"
-                        width={35}
-                        height={35}
-                      />
-                    </div>
-                    <div className="capability-content">
-                      <h4>Innovation</h4>
-                      <p>Cutting-edge solutions</p>
-                    </div>
-                    <div className="capability-number">04</div>
-                  </div>
-                </div>
-                
-                <div className="capabilities-bottom-content">
-                  <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '1rem', lineHeight: '1.6', marginBottom: '25px' }}>
-                    Simply put, expertly crafted content and innovative creative strategy is our bread and butter.
-                  </p>
-                  <LetsTalkButton 
-                    buttonText="View Our Work" 
-                    href="/case-studies"
-                  />
-                </div>
-              </div>
-            </div>
+          <h2 className="main-title font-recoleta fw-normal" style={{ color: 'white' }}>
+            {servicesPageData?.capabilitiesTitle || "Industry-Leading"}
+            <span className="position-relative">
+              {" "}
+              {servicesPageData?.capabilitiesTitleHighlight || "Expertise"}
+              <Image
+                src="/images/shape/shape_122.svg"
+                alt="icon shape"
+                width={220}
+                height={5}
+              />
+            </span>
+          </h2>
+          <p className="fs-20 mt-20" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+            {servicesPageData?.capabilitiesDescription || "Our set of services have been built and refined for over a decade, which is why our client success ratings are among the highest in the industry."}
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div className="row align-items-center">
+      <div className="col-lg-6">
+        <div className="capabilities-image-section">
+          <div className="capabilities-image-wrapper">
+            <Image 
+              src={
+                servicesPageData?.capabilitiesImage?.url
+                  ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${servicesPageData.capabilitiesImage.url}`
+                  : "/images/assets/team-diverse-analysts-consultants-reviewing-data-checklists_482257-125957.jpg"
+              }
+              alt="Our team capabilities"
+              width={600}
+              height={450}
+              className="capabilities-main-image"
+            />
           </div>
         </div>
       </div>
+      
+      <div className="col-lg-6">
+        <div className="capabilities-content">
+          <div className="capabilities-grid-enhanced">
+            <div className="capability-card-enhanced">
+              <div className="capability-icon">
+                <Image 
+                  src="/images/icon/support.png" 
+                  alt="Support"
+                  width={35}
+                  height={35}
+                />
+              </div>
+              <div className="capability-content">
+                <h4>{servicesPageData?.capability1Title || "24/7 Support"}</h4>
+                <p>{servicesPageData?.capability1Description || "Available whenever you need us"}</p>
+              </div>
+              <div className="capability-number">01</div>
+            </div>
+            
+            <div className="capability-card-enhanced">
+              <div className="capability-icon">
+                <Image 
+                  src="/images/icon/reach.png" 
+                  alt="Global Reach"
+                  width={35}
+                  height={35}
+                />
+              </div>
+              <div className="capability-content">
+                <h4>{servicesPageData?.capability2Title || "Global Reach"}</h4>
+                <p>{servicesPageData?.capability2Description || "Serving clients worldwide"}</p>
+              </div>
+              <div className="capability-number">02</div>
+            </div>
+            
+            <div className="capability-card-enhanced">
+              <div className="capability-icon">
+                <Image 
+                  src="/images/icon/trophy.png" 
+                  alt="Award Winning"
+                  width={35}
+                  height={35}
+                />
+              </div>
+              <div className="capability-content">
+                <h4>{servicesPageData?.capability3Title || "Award Winning"}</h4>
+                <p>{servicesPageData?.capability3Description || "Recognized industry excellence"}</p>
+              </div>
+              <div className="capability-number">03</div>
+            </div>
+            
+            <div className="capability-card-enhanced">
+              <div className="capability-icon">
+                <Image 
+                  src="/images/icon/innovation.png" 
+                  alt="Innovation"
+                  width={35}
+                  height={35}
+                />
+              </div>
+              <div className="capability-content">
+                <h4>{servicesPageData?.capability4Title || "Innovation"}</h4>
+                <p>{servicesPageData?.capability4Description || "Cutting-edge solutions"}</p>
+              </div>
+              <div className="capability-number">04</div>
+            </div>
+          </div>
+          
+          <div className="capabilities-bottom-content">
+            <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '1rem', lineHeight: '1.6', marginBottom: '25px' }}>
+              {servicesPageData?.capabilitiesBottomText || "Simply put, expertly crafted content and innovative creative strategy is our bread and butter."}
+            </p>
+            <LetsTalkButton 
+              buttonText={servicesPageData?.capabilitiesButtonText || "View Our Work"}
+              href={servicesPageData?.capabilitiesButtonUrl || "/case-studies"}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
       <div className="clients-section pt-100 pb-100" style={{ background: '#f8f9fa' }}>
         <div className="container">
@@ -1058,7 +1061,8 @@ const ServicesPage = ({ servicesPageData }) => {
   );
 };
 export async function getStaticProps() {
-  const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/services-page?populate[services][populate]=icon&populate=approachImage`;
+  // Use the simple wildcard populate
+  const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/services-page?populate=*`;
   
   try {
     const res = await fetch(apiUrl);
@@ -1066,6 +1070,8 @@ export async function getStaticProps() {
     
     const data = await res.json();
     console.log("Services Page API Response:", data);
+    console.log("Capabilities Image:", data?.data?.capabilitiesImage);
+    console.log("Approach Image:", data?.data?.approachImage);
     
     const servicesPageData = data?.data || null;
     
@@ -1080,5 +1086,4 @@ export async function getStaticProps() {
     };
   }
 }
-
 export default ServicesPage;

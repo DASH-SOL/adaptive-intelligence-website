@@ -664,6 +664,22 @@ export interface ApiServicesPageServicesPage extends Struct.SingleTypeSchema {
     approachTagline: Schema.Attribute.String;
     approachTitle: Schema.Attribute.String;
     approachTitleHighlight: Schema.Attribute.String;
+    capabilitiesBottomText: Schema.Attribute.Text;
+    capabilitiesButtonText: Schema.Attribute.String;
+    capabilitiesButtonUrl: Schema.Attribute.String;
+    capabilitiesDescription: Schema.Attribute.Text;
+    capabilitiesImage: Schema.Attribute.Media<'images'>;
+    capabilitiesTagline: Schema.Attribute.String;
+    capabilitiesTitle: Schema.Attribute.String;
+    capabilitiesTitleHighlight: Schema.Attribute.String;
+    capability1Description: Schema.Attribute.String;
+    capability1Title: Schema.Attribute.String;
+    capability2Description: Schema.Attribute.String;
+    capability2Title: Schema.Attribute.String;
+    capability3Description: Schema.Attribute.String;
+    capability3Title: Schema.Attribute.String;
+    capability4Description: Schema.Attribute.String;
+    capability4Title: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
