@@ -173,6 +173,72 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::service.service"
-    }
+    },
+     "successStoriesTagline": {
+    "type": "string"
+  },
+  "successStoriesTitle": {
+    "type": "string"
+  },
+  "successStoriesTitleHighlight": {
+    "type": "string"
+  },
+  "successStoriesTitleEnd": {
+    "type": "string"
+  },
+  
+  "successStory1Image": {
+    "type": "media",
+    "multiple": false,
+    "required": false,
+    "allowedTypes": [
+      "images"
+    ]
+  },
+  "successStory1QuoteStart": {
+    "type": "text"
+  },
+  "successStory1QuoteHighlight": {
+    "type": "string"
+  },
+  "successStory1QuoteEnd": {
+    "type": "text"
+  },
+  "successStory1AuthorName": {
+    "type": "string"
+  },
+  "successStory1AuthorCompany": {
+    "type": "string"
+  },
+  
+  "successStoriesRatingValue": {
+    "type": "string"
+  },
+  "successStoriesRatingLabel": {
+    "type": "string"
+  },
+  
+  "successStory2QuoteStart": {
+    "type": "text"
+  },
+  "successStory2QuoteHighlight": {
+    "type": "string"
+  },
+  "successStory2QuoteEnd": {
+    "type": "text"
+  },
+  "successStory2AuthorName": {
+    "type": "string"
+  },
+  "successStory2AuthorCompany": {
+    "type": "string"
+  },
+  
+  "successStoriesCustomerCount": {
+    "type": "string"
+  },
+  "successStoriesCustomerLabel": {
+    "type": "string"
+  }
   }
 }

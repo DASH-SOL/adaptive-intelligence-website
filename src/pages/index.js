@@ -87,31 +87,33 @@ const HomePage = ({ homepageData }) => {
         </div>
       </div>
 
-      <div className="feedback-section-nine position-relative mt-200 lg-mt-120">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6 col-md-7 ms-lg-auto" data-aos="fade-left">
-              <div className="title-style-ten">
-                <div className="sc-title">SUCCESS STORIES</div>
-                <h2 className="main-title font-recoleta fw-normal tx-dark">
-                  See success{" "}
-                  <span className="position-relative">
-                    stories{" "}
-                    <Image
-                      src="/images/shape/shape_122.svg"
-                      alt="img"
-                      width={185}
-                      height={5}
-                    />
-                  </span>
-                  of our customers.
-                </h2>
-              </div>
-            </div>
+<div className="feedback-section-nine position-relative mt-200 lg-mt-120">
+  <div className="container">
+    <div className="row">
+      <div className="col-lg-6 col-md-7 ms-lg-auto" data-aos="fade-left">
+        <div className="title-style-ten">
+          <div className="sc-title">
+            {homepageData?.successStoriesTagline || "SUCCESS STORIES"}
           </div>
+          <h2 className="main-title font-recoleta fw-normal tx-dark">
+            {homepageData?.successStoriesTitle || "See success"}{" "}
+            <span className="position-relative">
+              {homepageData?.successStoriesTitleHighlight || "stories"}{" "}
+              <Image
+                src="/images/shape/shape_122.svg"
+                alt="img"
+                width={185}
+                height={5}
+              />
+            </span>
+            {homepageData?.successStoriesTitleEnd || " of our customers."}
+          </h2>
         </div>
-        <SuccessStory />
       </div>
+    </div>
+  </div>
+  <SuccessStory successStoryData={homepageData} />
+</div>
 
       <div className="feedback-section-ten position-relative pt-200 lg-pt-150">
         <div className="container">

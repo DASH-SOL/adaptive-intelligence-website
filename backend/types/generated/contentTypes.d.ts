@@ -520,6 +520,25 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
     servicesSubtitle: Schema.Attribute.String;
     servicesTitle: Schema.Attribute.String;
     servicesTitleHighlight: Schema.Attribute.String;
+    successStoriesCustomerCount: Schema.Attribute.String;
+    successStoriesCustomerLabel: Schema.Attribute.String;
+    successStoriesRatingLabel: Schema.Attribute.String;
+    successStoriesRatingValue: Schema.Attribute.String;
+    successStoriesTagline: Schema.Attribute.String;
+    successStoriesTitle: Schema.Attribute.String;
+    successStoriesTitleEnd: Schema.Attribute.String;
+    successStoriesTitleHighlight: Schema.Attribute.String;
+    successStory1AuthorCompany: Schema.Attribute.String;
+    successStory1AuthorName: Schema.Attribute.String;
+    successStory1Image: Schema.Attribute.Media<'images'>;
+    successStory1QuoteEnd: Schema.Attribute.Text;
+    successStory1QuoteHighlight: Schema.Attribute.String;
+    successStory1QuoteStart: Schema.Attribute.Text;
+    successStory2AuthorCompany: Schema.Attribute.String;
+    successStory2AuthorName: Schema.Attribute.String;
+    successStory2QuoteEnd: Schema.Attribute.Text;
+    successStory2QuoteHighlight: Schema.Attribute.String;
+    successStory2QuoteStart: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
