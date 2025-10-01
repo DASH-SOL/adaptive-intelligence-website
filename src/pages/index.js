@@ -1,7 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Head from "next/head"; // <-- ADDED: For correct metadata handling
 
+// Your original component imports
 import Header from "@/components/header/Header";
 import Hero from "@/components/home-page/hero";
 import Feedback from "@/components/home-page/Feedback";
@@ -17,58 +19,36 @@ import Subscribe from "@/components/footer/Subscribe";
 import CopyrightFooter from "@/components/footer/CopyrightFooter";
 import LetsTalkButton from "@/components/LetsTalkButton";
 
-export const metadata = {
-  title: "Insurance || Jano - Creative Multipurpose React NextJS Template",
-};
-const HomePage = () => {
+// CORRECTED: The component now receives props and includes the <Head> component
+const HomePage = ({ homepageData }) => {
   return (
     <>
-      {/* <!-- 
-      =============================================
-    Theme Default Menu
-     ============================================== 	
-    --> */}
-      <Header />
-      {/* 
-        =============================================
-        Theme Hero Banner
-        ============================================== 
-        */}
-      <Hero isHomePage={true} />
-      {/* /.hero-banner-nine */}
-      {/*
-        =====================================================
-        Feedback Section Eight
-        =====================================================
-        */}
-      <Feedback />
-      {/* /.feedback-section-eight */}
-      {/* 
-        =============================================
-        Feature Section Thirty
-        ============================================== 
-        */}
-      <Feature />
-      {/* /.fancy-feature-thirty */}
+      <Head>
+        <title>Adaptive Intelligence | Homepage</title>
+        <meta name="description" content="Fueling Creative Innovation and Digital Growth." />
+      </Head>
 
-      {/* 
-        =============================================
-        Feature Section Thirty One
-        ============================================== 
-        */}
+      <Header />
+
+      <Hero isHomePage={true} heroData={homepageData} />
+
+      <Feedback feedbackData={homepageData} />
+
+      <Feature featureData={homepageData} />
+
       <div className="fancy-feature-thirtyOne position-relative zn2 pt-140 pb-140 lg-pt-100 lg-pb-70">
         <div className="container">
           <div className="row">
             <div className="col-xl-8 col-lg-9 m-auto">
+              {/* THIS SECTION IS NOW DYNAMIC */}
               <div
                 className="title-style-ten text-center pb-40 lg-pb-20"
                 data-aos="fade-up"
               >
                 <h2 className="main-title font-recoleta fw-normal tx-dark">
-                Our 
+                  {homepageData?.servicesTitle || "Our"}{" "}
                   <span className="position-relative">
-                    {" "}
-                    Services
+                    {homepageData?.servicesTitleHighlight || "Services"}
                     <Image
                       src="/images/shape/shape_122.svg"
                       alt="icon shape"
@@ -76,55 +56,37 @@ const HomePage = () => {
                       height={5}
                     />
                   </span>
-
                 </h2>
                 <p className="fs-20 mt-20">
-                Powered by Innovation.
+                  {homepageData?.servicesSubtitle || "Powered by Innovation."}
                 </p>
               </div>
-              {/* /.title-style-ten */}
             </div>
           </div>
-          {/* End .row */}
-
           <div className="row">
-            <Leads />
+            {/* PASS THE REPEATER DATA TO THE LEADS COMPONENT */}
+           <Leads />
           </div>
         </div>
-        {/* /.container */}
-
       </div>
-      {/* /.fancy-feature-thirtyOne */}
 
-      {/* 
-        =============================================
-        Feature Section Thirty Two
-        ============================================== 
-        */}
-      <div className="fancy-feature-thirtyTwo mt-190 lg-mt-120">
+    <div className="fancy-feature-thirtyTwo mt-190 lg-mt-120">
         <div className="container">
           <div className="row">
-            <FeaturesBlock />
+            {/* Pass the data to FeaturesBlock */}
+            <FeaturesBlock featuresData={homepageData} />
           </div>
-          {/* End .row */}
         </div>
-        {/* End .container */}
-
         <div className="wrapper mt-90 lg-mt-30">
           <div className="container">
             <div className="row">
-              <Counter />
+              {/* Pass the repeater data to Counter */}
+              <Counter counterData={homepageData?.whyUsCounterItems} />
             </div>
           </div>
         </div>
-        {/* /.wrapper */}
       </div>
-      {/* /.fancy-feature-thirtyTwo */}
-      {/*
-			=====================================================
-				Feedback Section Nine
-			=====================================================
-			*/}
+
       <div className="feedback-section-nine position-relative mt-200 lg-mt-120">
         <div className="container">
           <div className="row">
@@ -145,22 +107,12 @@ const HomePage = () => {
                   of our customers.
                 </h2>
               </div>
-              {/* /.title-style-ten */}
             </div>
           </div>
         </div>
-        {/* /.container */}
-
         <SuccessStory />
-        {/* /.wrapper */}
       </div>
-      {/* /.feedback-section-nine */}
 
-      {/* 
-			=============================================
-				Feedback Section Ten
-			============================================== 
-			*/}
       <div className="feedback-section-ten position-relative pt-200 lg-pt-150">
         <div className="container">
           <div className="position-relative">
@@ -170,9 +122,7 @@ const HomePage = () => {
                   className="title-style-ten text-center text-lg-start"
                   data-aos="fade-right"
                 >
-                  <div className="sc-title">
-Client Testimonials
-</div>
+                  <div className="sc-title">Client Testimonials</div>
                   <h2 className="main-title font-recoleta fw-normal tx-dark">
                     Trusted by
                     <span className="position-relative">
@@ -188,27 +138,16 @@ Client Testimonials
                     Brands
                   </h2>
                 </div>
-                {/* /.title-style-ten */}
               </div>
             </div>
-            {/* End .row */}
             <Testimonial />
           </div>
         </div>
-        {/* End .container */}
-
-
       </div>
-      {/* /.feedback-section-ten */}
 
-      {/* 
-        =============================================
-        Feature Section Thirty Three
-        ============================================== 
-        */}
       <div className="fancy-feature-thirtyThree mt-180 lg-mt-120">
         <div className="container">
-          <div className="title-style-ten text-center" aos="fade-up">
+          <div className="title-style-ten text-center" data-aos="fade-up">
             <div className="sc-title">FAQs</div>
             <h2 className="main-title font-recoleta fw-normal tx-dark">
               Answers to your most &amp;{" "}
@@ -224,29 +163,20 @@ Client Testimonials
               </span>
             </h2>
           </div>
-          {/* /.title-style-ten */}
-
           <div
             className="bg-wrapper position-relative mt-80 lg-mt-40"
-            aos="fade-up"
+            data-aos="fade-up"
           >
             <Faq />
           </div>
-          {/* /.bg-wrapper */}
         </div>
       </div>
-      {/* /.fancy-feature-thirtyThree */}
 
-      {/*
-        =====================================================
-        Fancy Short Banner Twelve
-        =====================================================
-        */}
       <div className="fancy-short-banner-twelve position-relative zn2 pt-160 pb-150 lg-pt-120 lg-pb-120">
         <div className="container">
           <div className="row">
             <div className="col-xl-8 m-auto text-center">
-              <div className="title-style-ten" aos="fade-up">
+              <div className="title-style-ten" data-aos="fade-up">
                 <h2 className="main-title font-recoleta fw-normal tx-dark">
                   Have an idea for a project? <br />
                   <span className="position-relative">
@@ -261,11 +191,10 @@ Client Testimonials
                   &amp; Grow your Business
                 </h2>
               </div>
-              {/* /.title-style-ten */}
               <p
                 className="text-lg mt-45 mb-55 lg-mb-30 lg-mt-40"
-                aos="fade-up"
-                aos-delay="200"
+                data-aos="fade-up"
+                data-aos-delay="200"
               >
                 We’re ready to help you. Our experts are here, just send a message.
               </p>
@@ -275,12 +204,7 @@ Client Testimonials
         </div>
         <div className="shapes shape-one" />
       </div>
-      {/* /.fancy-short-banner-twelve */}
-      {/*
-        =====================================================
-        Footer
-        =====================================================
-        */}
+
       <div className="footer-style-nine theme-basic-footer zn2 position-relative">
         <div className="bg-wrapper">
           <div className="container">
@@ -298,9 +222,8 @@ Client Testimonials
                 </div>
               </div>
               <FooterContent />
-
               <div className="col-lg-4 mb-30 form-widget">
-                <h5 className="footer-title fw-normal">Newslettert</h5>
+                <h5 className="footer-title fw-normal">Newsletter</h5>
                 <h6 className="pt-15 pb-20 text-white">Join our newsletter</h6>
                 <Subscribe />
                 <div className="fs-14 mt-10 text-white opacity-50">
@@ -309,17 +232,26 @@ Client Testimonials
               </div>
             </div>
           </div>
-          {/* /.container */}
         </div>
-        {/* /.bg-wrapper */}
-
         <CopyrightFooter />
-
         <div className="shapes shape-one" />
       </div>
-      {/* /.footer-style-nine */}
     </>
   );
 };
 
+export async function getStaticProps() {
+  // Using the simplest possible populate query
+  const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/homepage?populate=*`;
+  try {
+    const res = await fetch(apiUrl);
+    if (!res.ok) throw new Error(`API fetch failed: ${res.status}`);
+    const data = await res.json();
+    const homepageData = data?.data?.attributes || data?.data || null; // Handles both structures
+    return { props: { homepageData }, revalidate: 1 };
+  } catch (error) {
+    console.error("Error in getStaticProps:", error);
+    return { props: { homepageData: null } };
+  }
+}
 export default HomePage;

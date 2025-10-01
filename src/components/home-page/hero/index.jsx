@@ -348,13 +348,16 @@ const AnimatedShape = ({
   );
 };
 
-const HomePageContent = () => {
+const HomePageContent = ({ heroData }) => { // FIX #1: This component now accepts the heroData prop
   return (
     <>
       <div className="container">
         <div className="row">
           <div className="col-lg-8 col-md-6" data-aos="fade-left">
-            <HeroContent />
+            {/* FIX #2: It now passes the heroData down to the REAL HeroContent component.
+              This stops the infinite loop and delivers the data.
+            */}
+            <HeroContent heroData={heroData} />
           </div>
         </div>
       </div>
@@ -367,15 +370,15 @@ const HomePageContent = () => {
   );
 };
 
-const Hero = ({ isHomePage = false, children }) => {
+const Hero = ({ isHomePage = false, children, heroData }) => {
   return (
     <>
       <style jsx>{backgroundAnimations}</style>
       <div
         className="hero-banner-nine position-relative zn2 pt-225 md-pt-150"
-        style={{ 
+        style={{
           height: isHomePage ? "auto" : "100vh",
-          backgroundColor: "white"
+          backgroundColor: "white",
         }}
       >
         {/* Animated Individual Shape Background - Replace single background image */}
@@ -624,7 +627,8 @@ const Hero = ({ isHomePage = false, children }) => {
         </div>
 
         {isHomePage ? (
-          <HomePageContent />
+          // This now correctly calls your layout wrapper and passes the data
+          <HomePageContent heroData={heroData} />
         ) : (
           <div className="container">
             <div className="row">

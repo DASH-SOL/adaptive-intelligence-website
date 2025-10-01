@@ -1,36 +1,20 @@
 import Image from "next/image";
+import React from "react";
 
-const Feedback = () => {
-  const images = [
-    {
-      src: "/images/ChromeShapes/Shape_FatCylinder2.png",
-      alt: "shape",
-      className: "lazy-img shapes shape-one",
-      width: 236,
-      height: 200,
-    },
-    {
-      src: "/images/ChromeShapes/Shape_JellyCube1.png",
-      alt: "shape",
-      className: "lazy-img shapes shape-two",
-      width: 170,
-      height: 150,
-    },
-    {
-      src: "/images/ChromeShapes/Shape_Macaroni2.png",
-      alt: "shape",
-      className: "lazy-img shapes shape-three",
-      width: 153,
-      height: 100,
-    },
-    {
-      src: "/images/ChromeShapes/Shape_Ring1.png",
-      alt: "shape",
-      className: "lazy-img shapes shape-four",
-      width: 200,
-      height: 225,
-    },
-  ];
+const Feedback = ({ feedbackData }) => {
+  const images = [ /* ...your shapes array... */ ];
+
+  // CORRECTED: The avatar URL path is now simpler to match your Strapi data.
+  const avatarUrl = feedbackData?.feedbackAvatar?.url
+    ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${feedbackData.feedbackAvatar.url}`
+    : "/images/team/adam.jpeg";
+  
+  const avatarAlt = feedbackData?.feedbackAvatar?.alternativeText || "Founder and CEO";
+  const quoteStart = feedbackData?.feedbackQuoteStart || "Adaptive Intelligence is pushing the";
+  const quoteHighlight = feedbackData?.feedbackQuoteHighlight || "boundaries";
+  const quoteEnd = feedbackData?.feedbackQuoteEnd || "of creative norms, and our work showcases that.";
+  const authorName = feedbackData?.feedbackAuthorName || "Adam Isaac Itkoff";
+  const authorTitle = feedbackData?.feedbackAuthorTitle || "Founder and CEO";
 
   return (
     <div
@@ -39,11 +23,12 @@ const Feedback = () => {
     >
       <div className="container">
         <Image
-          src="/images/team/adam.jpeg"
-          alt="Adam Isaac Itkoff"
+          src={avatarUrl}
+          alt={avatarAlt}
           className="feedback-avatar-image lazy-img m-auto rounded-circle"
           width={100}
           height={100}
+          style={{ objectFit: 'cover' }}
         />
         <div className="row">
           <div className="col-xxl-11 col-lg-10 col-md-9 m-auto">
@@ -51,11 +36,10 @@ const Feedback = () => {
               <div className="item">
                 <div className="feedback-block-eight text-center">
                   <p className="font-recoleta tx-dark mt-60 mb-65 lg-mt-40 lg-mb-40">
-                    Adaptive Intelligence is pushing the <span>boundaries</span>{" "}
-                    of creative norms, and our work showcases that.
+                    {quoteStart} <span>{quoteHighlight}</span> {quoteEnd}
                   </p>
                   <h6 className="fw-normal fs-20 d-inline-block fst-italic position-relative ps-4">
-                    Adam Isaac Itkoff, Founder and CEO
+                    {authorName}, {authorTitle}
                   </h6>
                 </div>
               </div>

@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_homepage_feature_list_items",
+  "info": {
+    "displayName": "FeatureListItem"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
