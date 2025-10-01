@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head"; // <-- ADDED: For correct metadata handling
+import FooterWithSettings from "@/components/footer/FooterWithSettings";
 
 // Your original component imports
 import Header from "@/components/header/Header";
@@ -115,129 +116,104 @@ const HomePage = ({ homepageData }) => {
   <SuccessStory successStoryData={homepageData} />
 </div>
 
-      <div className="feedback-section-ten position-relative pt-200 lg-pt-150">
-        <div className="container">
-          <div className="position-relative">
-            <div className="row">
-              <div className="col-lg-5">
-                <div
-                  className="title-style-ten text-center text-lg-start"
-                  data-aos="fade-right"
-                >
-                  <div className="sc-title">Client Testimonialss</div>
-                  <h2 className="main-title font-recoleta fw-normal tx-dark">
-                    Trusted by
-                    <span className="position-relative">
-                      {" "}
-                      Leading{" "}
-                      <Image
-                        src="/images/shape/shape_129.svg"
-                        alt=""
-                        width={160}
-                        height={6}
-                      />
-                    </span>
-                    Brands
-                  </h2>
-                </div>
-              </div>
+<div className="feedback-section-ten position-relative pt-200 lg-pt-150">
+  <div className="container">
+    <div className="position-relative">
+      <div className="row">
+        <div className="col-lg-5">
+          <div
+            className="title-style-ten text-center text-lg-start"
+            data-aos="fade-right"
+          >
+            <div className="sc-title">
+              {homepageData?.testimonialsTagline || "Client Testimonials"}
             </div>
-            <Testimonial />
-          </div>
-        </div>
-      </div>
-
-      <div className="fancy-feature-thirtyThree mt-180 lg-mt-120">
-        <div className="container">
-          <div className="title-style-ten text-center" data-aos="fade-up">
-            <div className="sc-title">FAQs</div>
             <h2 className="main-title font-recoleta fw-normal tx-dark">
-              Answers to your most &amp;{" "}
+              {homepageData?.testimonialsTitle || "Trusted by"}
               <span className="position-relative">
-                frequently{" "}
+                {" "}
+                {homepageData?.testimonialsTitleHighlight || "Leading"}{" "}
                 <Image
-                  width={219}
-                  height={7}
-                  src="/images/shape/shape_132.svg"
+                  src="/images/shape/shape_129.svg"
                   alt=""
+                  width={160}
+                  height={6}
                 />
-                asked questions.
               </span>
+              {homepageData?.testimonialsTitleEnd || " Brands"}
             </h2>
           </div>
-          <div
-            className="bg-wrapper position-relative mt-80 lg-mt-40"
-            data-aos="fade-up"
-          >
-            <Faq />
-          </div>
         </div>
       </div>
+      <Testimonial />
+    </div>
+  </div>
+</div>
 
-      <div className="fancy-short-banner-twelve position-relative zn2 pt-160 pb-150 lg-pt-120 lg-pb-120">
-        <div className="container">
-          <div className="row">
-            <div className="col-xl-8 m-auto text-center">
-              <div className="title-style-ten" data-aos="fade-up">
-                <h2 className="main-title font-recoleta fw-normal tx-dark">
-                  Have an idea for a project? <br />
-                  <span className="position-relative">
-                    Let’s Talk{" "}
-                    <Image
-                      width={221}
-                      height={7}
-                      src="/images/shape/shape_132.svg"
-                      alt=""
-                    />
-                  </span>
-                  &amp; Grow your Business
-                </h2>
-              </div>
-              <p
-                className="text-lg mt-45 mb-55 lg-mb-30 lg-mt-40"
-                data-aos="fade-up"
-                data-aos-delay="200"
-              >
-                We’re ready to help you. Our experts are here, just send a message.
-              </p>
-              <LetsTalkButton buttonText="Send Message" href="/contact" />
-            </div>
-          </div>
-        </div>
-        <div className="shapes shape-one" />
-      </div>
+<div className="fancy-feature-thirtyThree mt-180 lg-mt-120">
+  <div className="container">
+    <div className="title-style-ten text-center" data-aos="fade-up">
+      <div className="sc-title">{homepageData?.faqTagline || "FAQs"}</div>
+      <h2 className="main-title font-recoleta fw-normal tx-dark">
+        {homepageData?.faqTitle || "Answers to your most"} &amp;{" "}
+        <span className="position-relative">
+          {homepageData?.faqTitleHighlight || "frequently"}{" "}
+          <Image
+            width={219}
+            height={7}
+            src="/images/shape/shape_132.svg"
+            alt=""
+          />
+          {homepageData?.faqTitleEnd || " asked questions."}
+        </span>
+      </h2>
+    </div>
+    <div
+      className="bg-wrapper position-relative mt-80 lg-mt-40"
+      data-aos="fade-up"
+    >
+      <Faq />
+    </div>
+  </div>
+</div>
 
-      <div className="footer-style-nine theme-basic-footer zn2 position-relative">
-        <div className="bg-wrapper">
-          <div className="container">
-            <div className="row justify-content-between">
-              <div className="col-lg-2 footer-intro mb-40">
-                <div className="logo">
-                  <Link href="/">
-                    <Image
-                      src="/images/logo/logo_06.svg"
-                      alt="logo"
-                      width={115}
-                      height={80}
-                    />
-                  </Link>
-                </div>
-              </div>
-              <FooterContent />
-              <div className="col-lg-4 mb-30 form-widget">
-                <h5 className="footer-title fw-normal">Newsletter</h5>
-                <h6 className="pt-15 pb-20 text-white">Join our newsletter</h6>
-                <Subscribe />
-                <div className="fs-14 mt-10 text-white opacity-50">
-                  We only send interesting and relevant emails.
-                </div>
-              </div>
-            </div>
-          </div>
+ <div className="fancy-short-banner-twelve position-relative zn2 pt-160 pb-150 lg-pt-120 lg-pb-120">
+  <div className="container">
+    <div className="row">
+      <div className="col-xl-8 m-auto text-center">
+        <div className="title-style-ten" data-aos="fade-up">
+          <h2 className="main-title font-recoleta fw-normal tx-dark">
+            {homepageData?.ctaTitle || "Have an idea for a project?"} <br />
+            <span className="position-relative">
+              {homepageData?.ctaTitleHighlight || "Let's Talk"}{" "}
+              <Image
+                width={221}
+                height={7}
+                src="/images/shape/shape_132.svg"
+                alt=""
+              />
+            </span>
+            {homepageData?.ctaTitleEnd || " & Grow your Business"}
+          </h2>
         </div>
-        <CopyrightFooter />
-        <div className="shapes shape-one" />
+        <p
+          className="text-lg mt-45 mb-55 lg-mb-30 lg-mt-40"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          {homepageData?.ctaDescription || "We're ready to help you. Our experts are here, just send a message."}
+        </p>
+        <LetsTalkButton 
+          buttonText={homepageData?.ctaButtonText || "Send Message"} 
+          href={homepageData?.ctaButtonUrl || "/contact"} 
+        />
       </div>
+    </div>
+  </div>
+  <div className="shapes shape-one" />
+</div>
+
+<FooterWithSettings />
     </>
   );
 };

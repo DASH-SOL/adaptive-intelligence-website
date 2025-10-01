@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -10,8 +12,11 @@ import Hero from "@/components/home-page/hero";
 import ContactForm4 from "@/components/contact/ContactForm4";
 import Map2 from "@/components/contact/Map2";
 import Container from '@mui/material/Container';
+import { useSettings } from '@/context/SettingsContext';
 
 const Contact = () => {
+  const { settings } = useSettings();
+
   return (
     <>
       <Header />
@@ -27,29 +32,21 @@ const Contact = () => {
                   <h3 className="form-title font-recoleta fw-normal pb-30 lg-pb-20">
                     Send Us a Message.
                   </h3>
-
                 </div>
                 <Container>
                   <ContactForm4 />
                 </Container>
-                {/* /.form-style-five */}
               </div>
-              {/* /.form-wrapper */}
             </div>
-            {/* End col-lg-6 */}
-
             <div className="col-lg-6 order-lg-first d-flex">
               <Map2 />
             </div>
           </div>
         </div>
-      </div >
-      {/*
-        =====================================================
-        Footer
-        =====================================================
-        */}
-      <div className="footer-style-nine theme-basic-footer zn2 position-relative" >
+      </div>
+
+      {/* Footer */}
+      <div className="footer-style-nine theme-basic-footer zn2 position-relative">
         <div className="bg-wrapper">
           <div className="container">
             <div className="row justify-content-between">
@@ -57,7 +54,11 @@ const Contact = () => {
                 <div className="logo">
                   <Link href="/">
                     <Image
-                      src="/images/logo/logo_06.svg"
+                      src={
+                        settings?.logoFooter?.url
+                          ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${settings.logoFooter.url}`
+                          : "/images/logo/logo_06.svg"
+                      }
                       alt="logo"
                       width={115}
                       height={80}
@@ -66,9 +67,8 @@ const Contact = () => {
                 </div>
               </div>
               <FooterContent />
-
               <div className="col-lg-4 mb-30 form-widget">
-                <h5 className="footer-title fw-normal">Newslettert</h5>
+                <h5 className="footer-title fw-normal">Newsletter</h5>
                 <h6 className="pt-15 pb-20 text-white">Join our newsletter</h6>
                 <Subscribe />
                 <div className="fs-14 mt-10 text-white opacity-50">
@@ -77,12 +77,8 @@ const Contact = () => {
               </div>
             </div>
           </div>
-          {/* /.container */}
         </div>
-        {/* /.bg-wrapper */}
-
         <CopyrightFooter />
-
         <div className="shapes shape-one" />
         <Image
           width={84}
@@ -93,7 +89,7 @@ const Contact = () => {
         />
       </div>
     </>
-  )
+  );
 };
 
 export default Contact;

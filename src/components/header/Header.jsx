@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import MainMenu from "./MainMenu";
 import Link from "next/link";
 import Image from "next/image";
+import { useSettings } from "@/context/SettingsContext";
 
 const Header = ({ style, menuTextColor }) => {
+  const { settings } = useSettings();
   const [navbar, setNavbar] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -32,7 +34,6 @@ const Header = ({ style, menuTextColor }) => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    // Prevent body scroll when menu is open
     document.body.style.overflow = isMenuOpen ? 'auto' : 'hidden';
   };
 
@@ -50,14 +51,11 @@ const Header = ({ style, menuTextColor }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
     console.log('Form submitted:', formData);
-    // You can integrate with your existing contact form logic
   };
 
   return (
     <>
-    
       <header
         className={`theme-main-menu sticky-menu theme-menu-seven white-vr ${
           navbar ? "fixed" : ""
@@ -68,7 +66,11 @@ const Header = ({ style, menuTextColor }) => {
             <div className="logo order-lg-0">
               <Link href="/" className="d-block" style={{ userSelect: "none" }}>
                 <Image
-                  src="/images/logo/logo_06.svg"
+                  src={
+                    settings?.logo?.url
+                      ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${settings.logo.url}`
+                      : "/images/logo/logo_06.svg"
+                  }
                   alt="logo"
                   width={115}
                   height={80}
@@ -80,7 +82,6 @@ const Header = ({ style, menuTextColor }) => {
               className="right-widget d-flex align-items-center ms-auto ms-lg-0 order-lg-3"
               style={{ userSelect: "none" }}
             >
-              {/* Updated Let's Talk Button */}
               <button
                 onClick={toggleMenu}
                 className="lets-talk-btn fw-500 tran3s d-none d-lg-flex align-items-center"
@@ -195,14 +196,14 @@ const Header = ({ style, menuTextColor }) => {
             <div className="help-links">
               <div className="help-item">
                 <span>Become a client</span>
-                <Link href="mailto:hello@aii.agency">
-                  hello@aii.agency
+                <Link href={`mailto:${settings?.clientEmail || 'hello@aii.agency'}`}>
+                  {settings?.clientEmail || 'hello@aii.agency'}
                 </Link>
               </div>
               <div className="help-item">
                 <span>Media inquiries</span>
-                <Link href="mailto:jobs@adaptiveintelligence.com">
-                  press@aii.agency
+                <Link href={`mailto:${settings?.mediaEmail || 'press@aii.agency'}`}>
+                  {settings?.mediaEmail || 'press@aii.agency'}
                 </Link>
               </div>
             </div>

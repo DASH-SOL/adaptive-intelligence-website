@@ -239,6 +239,48 @@
   },
   "successStoriesCustomerLabel": {
     "type": "string"
+  },
+  "testimonialsTagline": {
+    "type": "string"
+  },
+  "testimonialsTitle": {
+    "type": "string"
+  },
+  "testimonialsTitleHighlight": {
+    "type": "string"
+  },
+  "testimonialsTitleEnd": {
+    "type": "string"
+  },
+   "faqTagline": {
+    "type": "string"
+  },
+  "faqTitle": {
+    "type": "string"
+  },
+  "faqTitleHighlight": {
+    "type": "string"
+  },
+  "faqTitleEnd": {
+    "type": "string"
+  },
+  "ctaTitle": {
+    "type": "text"
+  },
+  "ctaTitleHighlight": {
+    "type": "string"
+  },
+  "ctaTitleEnd": {
+    "type": "string"
+  },
+  "ctaDescription": {
+    "type": "text"
+  },
+  "ctaButtonText": {
+    "type": "string"
+  },
+  "ctaButtonUrl": {
+    "type": "string"
   }
   }
 }

@@ -1,56 +1,84 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useSettings } from "@/context/SettingsContext";
 
-const links = [
-  {
-    title: "Contact Us",
-    href: "/contact",
-  },
-];
+const CopyrightFooter = () => {
+  const { settings, loading } = useSettings();
 
-const icons = [
-  
-  {
-    icon: "fab fa-twitter",
-    href: "https://twitter.com/aii_agency",
-  },
-  {
-    icon: "fab fa-linkedin-in",
-    href: "https://www.linkedin.com/company/adaptiveintelligenceinternational",
-  },
-  {
-    icon: "fab fa-google",
-    href: "https://share.google/wqS5CzKTOC81TZj03",
-  },
-  {
-    icon: "/images/icon/upwork.svg",
-    href: "https://www.upwork.com/agencies/adaptiveintelligence/",
-  },
+  // Debug log
+  console.log("Settings in CopyrightFooter:", settings);
+  console.log("Loading:", loading);
 
-  {
-    icon: "fab fa-instagram",
-    href: "https://www.instagram.com/adaptiveintelligence.online/",
-  },
-];
+  if (loading) {
+    return <div>Loading footer...</div>;
+  }
 
-const LinkItem = ({ title, href }) => {
-  return (
-    <li>
-      <Link href={href}>{title}</Link>
-    </li>
-  );
-};
+  // Default social links as fallback
+  const defaultIcons = [
+    {
+      icon: "fab fa-twitter",
+      href: "https://twitter.com/aii_agency",
+    },
+    {
+      icon: "fab fa-linkedin-in",
+      href: "https://www.linkedin.com/company/adaptiveintelligenceinternational",
+    },
+    {
+      icon: "fab fa-google",
+      href: "https://share.google/wqS5CzKTOC81TZj03",
+    },
+    {
+      icon: "/images/icon/upwork.svg",
+      href: "https://www.upwork.com/agencies/adaptiveintelligence/",
+    },
+    {
+      icon: "fab fa-instagram",
+      href: "https://www.instagram.com/adaptiveintelligence.online/",
+    },
+  ];
 
-const IconItem = ({ icon, href }) => {
-  if(icon.startsWith("/images/icon/")) {
-    return (
-      <li style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Link href={href} target="_blank" rel="noopener noreferrer" className="social-icon-link">
-          <Image src={icon} alt={icon} width={24} height={24} style={{ filter: 'brightness(0) invert(1)', transition: 'all 0.3s ease' }} />
-        </Link>
-      </li>
-    );
-  } else {
+  // Use settings if available, otherwise use defaults
+  const icons = settings ? [
+    {
+      icon: "fab fa-twitter",
+      href: settings.twitterUrl || "https://twitter.com/aii_agency",
+    },
+    {
+      icon: "fab fa-linkedin-in",
+      href: settings.linkedinUrl || "https://www.linkedin.com/company/adaptiveintelligenceinternational",
+    },
+    {
+      icon: "fab fa-google",
+      href: settings.googleUrl || "https://share.google/wqS5CzKTOC81TZj03",
+    },
+    {
+      icon: "/images/icon/upwork.svg",
+      href: settings.upworkUrl || "https://www.upwork.com/agencies/adaptiveintelligence/",
+    },
+    {
+      icon: "fab fa-instagram",
+      href: settings.instagramUrl || "https://www.instagram.com/adaptiveintelligence.online/",
+    },
+  ] : defaultIcons;
+
+  const IconItem = ({ icon, href }) => {
+    if (icon.startsWith("/images/icon/")) {
+      return (
+        <li style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Link href={href} target="_blank" rel="noopener noreferrer" className="social-icon-link">
+            <Image 
+              src={icon} 
+              alt="social icon" 
+              width={24} 
+              height={24} 
+              style={{ filter: 'brightness(0) invert(1)', transition: 'all 0.3s ease' }} 
+            />
+          </Link>
+        </li>
+      );
+    }
     return (
       <li>
         <Link href={href} target="_blank" rel="noopener noreferrer">
@@ -58,20 +86,17 @@ const IconItem = ({ icon, href }) => {
         </Link>
       </li>
     );
-  }
+  };
 
-};
-
-const CopyrightFooter = () => {
   return (
     <div className="bottom-footer">
       <div className="container">
         <div className="row">
           <div className="col-lg-4 order-lg-0 mt-15">
             <ul className="d-flex justify-content-center justify-content-lg-start footer-nav style-none">
-              {links.map((link, index) => (
-                <LinkItem key={index} title={link.title} href={link.href} />
-              ))}
+              <li>
+                <Link href="/contact">Contact Us</Link>
+              </li>
             </ul>
           </div>
           <div className="col-lg-4 order-lg-2 mt-15">
@@ -83,15 +108,7 @@ const CopyrightFooter = () => {
           </div>
           <div className="col-lg-4 order-lg-1 mt-15">
             <p className="copyright text-center m0">
-              Copyright © {new Date().getFullYear()}{" "}
-              <a
-                style={{ color: "inherit" }}
-                href="https://adaptiveintelligence.online"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Adaptive Intelligence International LLC. All Rights Reserved.
-              </a>{" "}
+              {settings?.copyrightText || `Copyright © ${new Date().getFullYear()} Adaptive Intelligence International LLC. All Rights Reserved.`}
             </p>
           </div>
         </div>

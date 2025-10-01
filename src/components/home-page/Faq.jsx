@@ -1,5 +1,47 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 const Faq = () => {
-  const accordionItems = [
+  const [accordionItems, setAccordionItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchFaqs = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/faqs?sort=order:asc`
+        );
+        const data = await res.json();
+
+        console.log("FAQs API Response:", data); // Debug log
+
+        if (data?.data && Array.isArray(data.data)) {
+          const formattedData = data.data.map((item, index) => {
+            const attrs = item.attributes || item;
+            return {
+              id: `faq-${item.id || index}`,
+              question: attrs.question || "Question not available",
+              answer: attrs.answer || "Answer not available",
+            };
+          });
+          setAccordionItems(formattedData);
+        } else {
+          console.warn("No FAQs found in API response");
+          setAccordionItems(getDefaultFaqs());
+        }
+      } catch (error) {
+        console.error("Error fetching FAQs:", error);
+        setAccordionItems(getDefaultFaqs());
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFaqs();
+  }, []);
+
+  const getDefaultFaqs = () => [
     {
       id: "faq-1",
       question: "What type of companies do you work with?",
@@ -28,7 +70,7 @@ const Faq = () => {
       id: "faq-5",
       question: "How do you communicate with clients?",
       answer:
-        "We adapt to your preferred communication style—regular updates, milestone reviews, or a hands-off approach. Transparency and collaboration are core to our workflow, so you always know the decisions we’re making and why.",
+        "We adapt to your preferred communication style—regular updates, milestone reviews, or a hands-off approach. Transparency and collaboration are core to our workflow, so you always know the decisions we're making and why.",
     },
     {
       id: "faq-6",
@@ -40,7 +82,7 @@ const Faq = () => {
       id: "faq-7",
       question: "What services can help my brand grow?",
       answer:
-        "We offer brand strategy, content creation, SEO copywriting, social media campaigns, PPC management, and full digital marketing strategy. Each service is tailored to your audience, goals, and market, ensuring every campaign contributes to your brand’s growth.",
+        "We offer brand strategy, content creation, SEO copywriting, social media campaigns, PPC management, and full digital marketing strategy. Each service is tailored to your audience, goals, and market, ensuring every campaign contributes to your brand's growth.",
     },
     {
       id: "faq-8",
@@ -55,6 +97,22 @@ const Faq = () => {
         "Our pricing is project-based or retainer-based depending on the scope. Every engagement is scoped with clear deliverables, timelines, and reporting metrics so clients know exactly what to expect.",
     },
   ];
+
+  if (loading) {
+    return (
+      <div className="text-center py-5">
+        <p>Loading FAQs...</p>
+      </div>
+    );
+  }
+
+  if (accordionItems.length === 0) {
+    return (
+      <div className="text-center py-5">
+        <p>No FAQs available.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="accordion accordion-style-four" id="accordionOne">
