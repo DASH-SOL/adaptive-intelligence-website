@@ -4,14 +4,10 @@ module.exports = ({ env }) => ({
   app: {
     keys: env.array('APP_KEYS'),
   },
+  // Add this configuration
   proxy: true,
-  // ADD THIS BLOCK TO FIX THE ADMIN LOGIN BUG IN STRAPI v5.24.0
+  url: env('PUBLIC_URL', 'https://adaptive-intelligence-website-1.onrender.com'),
   admin: {
-    auth: {
-      secret: env('ADMIN_JWT_SECRET'),
-      session: {
-        secure: false, // This allows the cookie to be sent behind the proxy
-      },
-    },
+    url: '/admin',
   },
 });

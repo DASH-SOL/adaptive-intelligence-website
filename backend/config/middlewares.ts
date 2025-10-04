@@ -7,20 +7,8 @@ module.exports = [
         useDefaults: true,
         directives: {
           'connect-src': ["'self'", 'https:'],
-          'img-src': [
-            "'self'",
-            'data:',
-            'blob:',
-            'market-assets.strapi.io',
-            '*.onrender.com', // Allows images from your Render domains
-          ],
-          'media-src': [
-            "'self'",
-            'data:',
-            'blob:',
-            'market-assets.strapi.io',
-            '*.onrender.com', // Allows media from your Render domains
-          ],
+          'img-src': ["'self'", 'data:', 'blob:', 'https:'],
+          'media-src': ["'self'", 'data:', 'blob:', 'https:'],
           upgradeInsecureRequests: null,
         },
       },
