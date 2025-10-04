@@ -1,4 +1,4 @@
-module.exports = [
+export default [
   'strapi::errors',
   'strapi::security',
   'strapi::cors',
@@ -13,7 +13,7 @@ module.exports = [
       rolling: true,
       renew: true,
       cookie: {
-        secure: process.env.NODE_ENV === 'production' ? false : false,
+        secure: false,
         httpOnly: true,
         maxAge: 86400000,
         sameSite: 'lax',
