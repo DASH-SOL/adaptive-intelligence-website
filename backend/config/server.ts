@@ -4,6 +4,14 @@ module.exports = ({ env }) => ({
   app: {
     keys: env.array('APP_KEYS'),
   },
-  // ADD THIS PROXY CONFIGURATION
   proxy: true,
+  // ADD THIS BLOCK TO FIX THE ADMIN LOGIN BUG IN STRAPI v5.24.0
+  admin: {
+    auth: {
+      secret: env('ADMIN_JWT_SECRET'),
+      session: {
+        secure: false, // This allows the cookie to be sent behind the proxy
+      },
+    },
+  },
 });
