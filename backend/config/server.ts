@@ -6,4 +6,12 @@ module.exports = ({ env }) => ({
   },
   proxy: true,
   url: env('PUBLIC_URL', 'https://adaptive-intelligence-website-1.onrender.com'),
+  session: {
+    clientBasedSessions: true,
+    cookie: {
+      secure: false, // Temporary fix
+      httpOnly: true,
+      maxAge: 86400000,
+    },
+  },
 });
