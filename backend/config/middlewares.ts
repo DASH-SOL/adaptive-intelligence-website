@@ -1,25 +1,25 @@
 module.exports = [
   'strapi::errors',
-  {
-    name: 'strapi::security',
-    config: {
-      contentSecurityPolicy: {
-        useDefaults: true,
-        directives: {
-          'connect-src': ["'self'", 'https:'],
-          'img-src': ["'self'", 'data:', 'blob:', 'https:'],
-          'media-src': ["'self'", 'data:', 'blob:', 'https:'],
-          upgradeInsecureRequests: null,
-        },
-      },
-    },
-  },
+  'strapi::security',
   'strapi::cors',
   'strapi::poweredBy',
   'strapi::logger',
   'strapi::query',
   'strapi::body',
-  'strapi::session',
+  {
+    name: 'strapi::session',
+    config: {
+      clientBasedSessions: true,
+      rolling: true,
+      renew: true,
+      cookie: {
+        secure: process.env.NODE_ENV === 'production' ? false : false,
+        httpOnly: true,
+        maxAge: 86400000,
+        sameSite: 'lax',
+      },
+    },
+  },
   'strapi::favicon',
   'strapi::public',
 ];
