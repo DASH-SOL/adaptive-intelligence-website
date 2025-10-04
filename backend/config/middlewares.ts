@@ -1,25 +1,21 @@
 export default [
   'strapi::errors',
-  'strapi::security',
-  'strapi::cors',
-  'strapi::poweredBy',
-  'strapi::logger',
-  'strapi::query',
-  'strapi::body',
   {
     name: 'strapi::session',
     config: {
-      clientBasedSessions: true,
-      rolling: true,
-      renew: true,
-      cookie: {
-        secure: false,
-        httpOnly: true,
-        maxAge: 86400000,
-        sameSite: 'lax',
-      },
+      key: 'strapi.sid',
+      secure: false,  // Set to false for now
+      sameSite: 'lax',
+      rolling: false,
+      renew: false,
+      proxy: true,  // Tell koa-session to trust the proxy
     },
   },
+  'strapi::security',
+  'strapi::cors',
+  'strapi::body',
+  'strapi::logger',
+  'strapi::query',
   'strapi::favicon',
   'strapi::public',
 ];
