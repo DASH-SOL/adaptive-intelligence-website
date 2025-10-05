@@ -4,8 +4,13 @@
     "displayName": "FAQ Item",
     "description": ""
   },
+  "options": {},
   "attributes": {
-    "question": { "type": "string" },
-    "answer": { "type": "text" }
+    "question": {
+      "type": "string"
+    },
+    "answer": {
+      "type": "text"
+    }
   }
 }
