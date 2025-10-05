@@ -9,6 +9,7 @@
   "options": {
     "draftAndPublish": true
   },
+  "pluginOptions": {},
   "attributes": {
     "ctaLeftTitle": { "type": "string" },
     "ctaLeftDescription": { "type": "text" },
@@ -21,11 +22,6 @@
     "strategyTitle": { "type": "string" },
     "strategyParagraph1": { "type": "text" },
     "strategyParagraph2": { "type": "text" },
-    "strategyCta": { "type": "text" },
-    "faqs": {
-      "type": "component",
-      "repeatable": true,
-      "component": "case-studies.faq-item"
-    }
+    "strategyCta": { "type": "text" }
   }
 }
