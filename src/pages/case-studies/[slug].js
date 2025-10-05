@@ -135,8 +135,26 @@ const SingleCaseStudyPage = ({ resource, relatedResources }) => {
         </div>
       </div>
       
+      {/* Strategy Section - Now using pageSettings */}
       <div className="strategy-section pt-150 pb-150 lg-pt-120 lg-pb-120" style={{ background: 'white' }}>
-        {/* ... Strategy Section Content ... */}
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-8 mx-auto text-center">
+              <h2 className="strategy-title">
+                {pageSettings?.strategyTitle || "Outline your marketing strategy in a simple template."}
+              </h2>
+              <p className="strategy-description">
+                {pageSettings?.strategyParagraph1 || "With so many different marketing and advertising channels, it's a smart move to equip your marketing team with a plan for what to do and why."}
+              </p>
+              <p className="strategy-description">
+                {pageSettings?.strategyParagraph2 || "That's why we've built a marketing plan for your business. You can use it to lay out your budget, team structure, and channels of choice."}
+              </p>
+              <p className="strategy-cta">
+                {pageSettings?.strategyCta || "Download the template now to start organizing and mapping out your marketing strategy."}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       {relatedResources.length > 0 && (
@@ -169,16 +187,51 @@ const SingleCaseStudyPage = ({ resource, relatedResources }) => {
           </div>
         </div>
       )}
+   
+{/* Dual CTA Section - Now using pageSettings */}
+      <div className="dual-cta-section pt-150 pb-150 lg-pt-120 lg-pb-120" style={{ background: 'white' }}>
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-6 mb-lg-0 mb-50">
+              <div className="cta-card cta-primary">
+                <h3 className="cta-card-title alt_cta">
+                  {pageSettings?.ctaLeftTitle || "Let's Build Your Brand Today."}
+                </h3>
+                <p className="cta-card-description">
+                  {pageSettings?.ctaLeftDescription || "Adaptive Intelligence partners with brands ready to make their mark. Whether launching a new app or revitalizing an existing business, we design strategies that deliver results."}
+                </p>
+                <Link href={pageSettings?.ctaLeftButtonUrl || "/contact"} className="cta-button cta-button-primary">
+                  {pageSettings?.ctaLeftButtonText || "Let's Talk"}
+                </Link>
+              </div>
+            </div>
+            <div className="col-lg-6">
+              <div className="cta-card cta-secondary">
+                <h3 className="cta-card-title">
+                  {pageSettings?.ctaRightTitle || "Want More Insights?"}
+                </h3>
+                <p className="cta-card-description">
+                  {pageSettings?.ctaRightDescription || "Adaptive Intelligence aims to make our insights accessible to anyone who wishes to learn innovative marketing strategies. That's why we've created a Marketing Insights Report that breaks down the latest trends in brand strategy, PPC, content marketing, and consumer behavior."}
+                </p>
+                <Link href={pageSettings?.ctaRightButtonUrl || "/market-trend-report"} className="cta-button cta-button-secondary">
+                  {pageSettings?.ctaRightButtonText || "Market Trend Report"}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      {/* FAQ Section - Now using pageSettings */}
       <div className="faq-section pt-100 pb-150 lg-pt-80 lg-pb-120" style={{ background: '#f8f9fa' }}>
         <div className="container">
           <div className="row">
             <div className="col-lg-8 mx-auto">
               <h2 className="faq-title text-center">FAQs</h2>
               <div className="faq-list">
-                {resource.faqs?.map((faq, index) => (
+                {pageSettings?.faqs?.map((faq, index) => (
                   <div key={faq.id} className="faq-item">
-                    <button 
+                    <button
                       className="faq-question"
                       onClick={() => toggleFaq(index)}
                       aria-expanded={expandedFaq === index}
@@ -199,8 +252,55 @@ const SingleCaseStudyPage = ({ resource, relatedResources }) => {
         </div>
       </div>
       
-      <FooterContent />
-      <CopyrightFooter />
+<div className="footer-style-nine theme-basic-footer zn2 position-relative">
+
+        <div className="bg-wrapper">
+
+          <div className="container">
+
+            <div className="row justify-content-between">
+
+              <div className="col-lg-2 footer-intro mb-40">
+
+                <div className="logo">
+
+                  <Link href="/">
+
+                    <Image src="/images/logo/logo_06.svg" alt="logo" width={115} height={80} />
+
+                  </Link>
+
+                </div>
+
+              </div>
+
+              <FooterContent />
+
+              <div className="col-lg-4 mb-30 form-widget">
+
+                <h5 className="footer-title fw-normal">Newsletter</h5>
+
+                <h6 className="pt-15 pb-20 text-white">Join our newsletter</h6>
+
+                <Subscribe />
+
+                <div className="fs-14 mt-10 text-white opacity-50">
+
+                  We only send interesting and relevant emails.
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <CopyrightFooter />
+
+      </div>
       <style jsx>{`
 
         /* Loading and Error States */
@@ -1432,10 +1532,11 @@ export async function getStaticPaths() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/case-studies`);
     const json = await res.json();
-    const normalize = (item) => item?.attributes ? { id: item.id, ...item.attributes } : item;
-    const paths = (json.data || []).map(normalize).map(item => ({
+    
+    const paths = (json.data || []).map(item => ({
       params: { slug: item.slug },
     })).filter(p => p.params.slug);
+    
     return { paths, fallback: 'blocking' };
   } catch (error) {
     console.error("Error in getStaticPaths:", error);
@@ -1445,18 +1546,19 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
+  
   try {
-    const normalize = (item) => item?.attributes ? { id: item.id, ...item.attributes } : item;
-
-    const resourceRes = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/case-studies?filters[slug][$eq]=${slug}&populate=deep`);
+    const resourceUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/case-studies?filters[slug][$eq]=${slug}&populate=*`;
+    const resourceRes = await fetch(resourceUrl);
     const resourceJson = await resourceRes.json();
-    const resource = normalize(resourceJson.data?.[0]) || null;
+    const resource = resourceJson.data?.[0] || null;
 
     let relatedResources = [];
     if (resource) {
-      const relatedRes = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/case-studies?filters[slug][$ne]=${slug}&pagination[limit]=3&populate=deep`);
+      const relatedUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/case-studies?filters[slug][$ne]=${slug}&pagination[limit]=3&populate=*`;
+      const relatedRes = await fetch(relatedUrl);
       const relatedJson = await relatedRes.json();
-      relatedResources = (relatedJson.data || []).map(normalize);
+      relatedResources = relatedJson.data || [];
     }
     
     if (!resource) {

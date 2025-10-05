@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "case_studies_pages",
+  "info": {
+    "singularName": "case-studies-page",
+    "pluralName": "case-studies-pages",
+    "displayName": "Case Studies Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "ctaLeftTitle": { "type": "string" },
+    "ctaLeftDescription": { "type": "text" },
+    "ctaLeftButtonText": { "type": "string" },
+    "ctaLeftButtonUrl": { "type": "string" },
+    "ctaRightTitle": { "type": "string" },
+    "ctaRightDescription": { "type": "text" },
+    "ctaRightButtonText": { "type": "string" },
+    "ctaRightButtonUrl": { "type": "string" },
+    "strategyTitle": { "type": "string" },
+    "strategyParagraph1": { "type": "text" },
+    "strategyParagraph2": { "type": "text" },
+    "strategyCta": { "type": "text" },
+    "faqs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "case-studies.faq-item"
+    }
+  }
+}

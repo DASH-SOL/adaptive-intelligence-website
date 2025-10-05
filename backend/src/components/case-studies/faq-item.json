@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_case_studies_faq_items",
+  "info": {
+    "displayName": "FAQ Item",
+    "description": ""
+  },
+  "attributes": {
+    "question": { "type": "string" },
+    "answer": { "type": "text" }
+  }
+}
