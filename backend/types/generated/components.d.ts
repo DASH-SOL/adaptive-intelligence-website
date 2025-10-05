@@ -1,5 +1,17 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface CaseStudiesFaqItem extends Struct.ComponentSchema {
+  collectionName: 'components_case_studies_faq_items';
+  info: {
+    description: '';
+    displayName: 'FAQ Item';
+  };
+  attributes: {
+    answer: Schema.Attribute.Text;
+    question: Schema.Attribute.String;
+  };
+}
+
 export interface HomepageCounterItem extends Struct.ComponentSchema {
   collectionName: 'components_homepage_counter_items';
   info: {
@@ -48,6 +60,7 @@ export interface SharedTag extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'case-studies.faq-item': CaseStudiesFaqItem;
       'homepage.counter-item': HomepageCounterItem;
       'homepage.feature-list-item': HomepageFeatureListItem;
       'shared.insight': SharedInsight;
