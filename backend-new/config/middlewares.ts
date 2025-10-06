@@ -1,7 +1,8 @@
 export default [
+  'strapi::logger',
   'strapi::errors',
   {
-    name: 'strapi::session',
+    name: 'strapi::security',
     config: {
       contentSecurityPolicy: {
         useDefaults: true,
@@ -11,33 +12,37 @@ export default [
             "'self'",
             'data:',
             'blob:',
-            'res.cloudinary.com', // Cloudinary images
           ],
           'media-src': [
             "'self'",
             'data:',
             'blob:',
-            'res.cloudinary.com',
           ],
           upgradeInsecureRequests: null,
         },
       },
-      key: 'strapi.sid',
-      secure: false,  // Disable secure requirement
-      sameSite: 'lax',
-      rolling: false,
-      renew: false,
-      proxy: true,  // Tell koa-session to trust proxy
     },
   },
-  'strapi::logger',
-  'strapi::errors',
-  'strapi::security',
   'strapi::cors',
   'strapi::poweredBy',
   'strapi::query',
   'strapi::body',
-  'strapi::session',
+  {
+    name: 'strapi::session',
+    config: {
+      key: 'strapi.sid',
+      secure: false,
+      sameSite: 'lax',
+      rolling: false,
+      renew: false,
+      proxy: true,
+    },
+  },
   'strapi::favicon',
-  'strapi::public',
+  {
+    name: 'strapi::public',
+    config: {
+      path: process.env.NODE_ENV === 'production' ? '/data/public' : './public',
+    },
+  },
 ];
