@@ -30,8 +30,6 @@ export default [
       proxy: true,  // Tell koa-session to trust proxy
     },
   },
-  'strapi::security',
-  'strapi::cors',
   'strapi::logger',
   'strapi::errors',
   'strapi::security',
