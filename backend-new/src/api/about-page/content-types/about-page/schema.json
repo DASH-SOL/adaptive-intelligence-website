@@ -1,0 +1,168 @@
+{
+  "kind": "singleType",
+  "collectionName": "about_pages",
+  "info": {
+    "singularName": "about-page",
+    "pluralName": "about-pages",
+    "displayName": "About Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroTitle": {
+      "type": "string"
+    },
+    "heroDescription": {
+      "type": "text"
+    },
+    "statsSubtitle": {
+      "type": "string"
+    },
+    "whoWeAreTagline": {
+      "type": "string"
+    },
+    "whoWeAreParagraph1": {
+      "type": "text"
+    },
+    "whoWeAreParagraph2": {
+      "type": "text"
+    },
+    "whoWeAreParagraph3": {
+      "type": "text"
+    },
+    "whoWeAreImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "whoWeAreBadgeNumber": {
+      "type": "string"
+    },
+    "whoWeAreBadgeText": {
+      "type": "string"
+    },
+    "whatWeDoTitle": {
+      "type": "string"
+    },
+    "whatWeDoDescription": {
+      "type": "text"
+    },
+    "valuesTagline": {
+      "type": "string"
+    },
+    "valuesTitle": {
+      "type": "string"
+    },
+    "values": {
+      "type": "component",
+      "component": "about.value-card",
+      "repeatable": true
+    },
+    "sustainabilityTagline": {
+      "type": "string"
+    },
+    "sustainabilityTitle": {
+      "type": "string"
+    },
+    "sustainabilityDescription": {
+      "type": "text"
+    },
+    "sustainabilityButtonText": {
+      "type": "string"
+    },
+    "sustainabilityButtonUrl": {
+      "type": "string"
+    },
+    "whyChooseUsTagline": {
+      "type": "string"
+    },
+    "whyChooseUsTitle": {
+      "type": "string"
+    },
+    "whyChooseUsDescription": {
+      "type": "string"
+    },
+    "whyChooseUsPoints": {
+      "type": "component",
+      "component": "about.bullet-point",
+      "repeatable": true
+    },
+    "letsTalkTitle": {
+      "type": "string"
+    },
+    "letsTalkParagraph1": {
+      "type": "text"
+    },
+    "letsTalkParagraph2": {
+      "type": "text"
+    },
+    "letsTalkButtonText": {
+      "type": "string"
+    },
+    "missionQuote": {
+      "type": "text"
+    },
+    "missionQuoteHighlight": {
+      "type": "string"
+    },
+    "missionAuthorName": {
+      "type": "string"
+    },
+    "missionAuthorTitle": {
+      "type": "string"
+    },
+    "missionImage1": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "missionImage2": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "missionImage3": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "missionImage4": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "missionRating": {
+      "type": "decimal"
+    },
+    "missionCustomerCount": {
+      "type": "string"
+    }
+  }
+}

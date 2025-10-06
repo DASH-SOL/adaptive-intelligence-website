@@ -1,7 +1,36 @@
 import Image from "next/image";
 import React from "react";
 
-const OurMission = () => {
+const OurMission = ({ data }) => {
+  if (!data) return null;
+
+  const image1Url = data.missionImage1?.url
+    ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${data.missionImage1.url}`
+    : '/images/media/img_97.jpg';
+
+  const image2Url = data.missionImage2?.url
+    ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${data.missionImage2.url}`
+    : '/images/media/img_98.jpg';
+
+  const image3Url = data.missionImage3?.url
+    ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${data.missionImage3.url}`
+    : '/images/media/img_99.jpg';
+
+  const image4Url = data.missionImage4?.url
+    ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${data.missionImage4.url}`
+    : '/images/media/img_100.jpg';
+
+  // Helper function to highlight a word in the quote
+  const highlightWord = (text, wordToHighlight) => {
+    if (!wordToHighlight) return text;
+    const parts = text.split(new RegExp(`(${wordToHighlight})`, 'gi'));
+    return parts.map((part, i) => 
+      part.toLowerCase() === wordToHighlight.toLowerCase() 
+        ? <span key={i}>{part}</span> 
+        : part
+    );
+  };
+
   return (
     <>
       <div className="row align-items-end">
@@ -16,18 +45,16 @@ const OurMission = () => {
               />
             </div>
             <p className="font-recoleta tx-dark mt-60 mb-65 lg-mt-40 lg-mb-40">
-                    Adaptive Intelligence is pushing the <span>boundaries</span> of creative norms, and our work showcases that.
-                  </p>
+              {highlightWord(data.missionQuote, data.missionQuoteHighlight)}
+            </p>
             <h6 className="tx-dark fs-20">
-              - Adam Isaac Itkoff.{" "}
+              - {data.missionAuthorName}.{" "}
               <span className="fs-18 fw-normal opacity-50">
-                CEO &amp; Founder Adaptive Intelligence International
+                {data.missionAuthorTitle}
               </span>
             </h6>
           </div>
-          {/* /.feedback-block-thirteen */}
         </div>
-        {/* End .col */}
 
         <div className="col-md-6 order-md-first" data-aos="fade-right">
           <div className="row align-items-end">
@@ -37,8 +64,8 @@ const OurMission = () => {
                   width={312}
                   height={332}
                   style={{ objectFit: "cover" }}
-                  src="/images/media/img_97.jpg"
-                  alt="media"
+                  src={image1Url}
+                  alt="mission image 1"
                   className="lazy-img w-100"
                 />
               </div>
@@ -49,26 +76,25 @@ const OurMission = () => {
                   width={312}
                   height={403}
                   style={{ objectFit: "cover" }}
-                  src="/images/media/img_98.jpg"
-                  alt="media"
+                  src={image2Url}
+                  alt="mission image 2"
                   className="lazy-img w-100"
                 />
                 <div
                   className="rating d-flex flex-column align-items-center justify-content-center"
                   data-aos="fade-up"
                 >
-                  <div className="font-recoleta tx-dark rating-value">4.8</div>
+                  <div className="font-recoleta tx-dark rating-value">
+                    {data.missionRating || '4.8'}
+                  </div>
                   <div className="fs-18 tx-dark">Rating</div>
                 </div>
-                {/* /.rating */}
-              </div>{" "}
-              {/* /.img-meta */}
+              </div>
             </div>
           </div>
         </div>
-        {/* End .col */}
       </div>
-      {/* End .row */}
+
       <div className="row justify-content-end" data-aos="fade-up">
         <div className="col-sm-4">
           <div className="img-meta mb-50 lg-mb-40">
@@ -76,8 +102,8 @@ const OurMission = () => {
               width={424}
               height={295}
               style={{ objectFit: "cover" }}
-              src="/images/media/img_99.jpg"
-              alt="media"
+              src={image3Url}
+              alt="mission image 3"
               className="lazy-img w-100"
             />
           </div>
@@ -88,18 +114,19 @@ const OurMission = () => {
               width={648}
               height={436}
               style={{ objectFit: "cover" }}
-              src="/images/media/img_100.jpg"
-              alt="media"
+              src={image4Url}
+              alt="mission image 4"
               className="lazy-img w-100"
             />
             <div
               className="customer-data d-flex flex-column align-items-center justify-content-center"
               data-aos="fade-up"
             >
-              <div className="fw-500 tx-dark amount">32k</div>
+              <div className="fw-500 tx-dark amount">
+                {data.missionCustomerCount || '32k'}
+              </div>
               <div className="fs-18 tx-dark">Customer</div>
-            </div>{" "}
-            {/* /.customer-data */}
+            </div>
           </div>
         </div>
       </div>

@@ -1,5 +1,27 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface AboutBulletPoint extends Struct.ComponentSchema {
+  collectionName: 'components_about_bullet_points';
+  info: {
+    displayName: 'Bullet Point';
+  };
+  attributes: {
+    text: Schema.Attribute.String;
+  };
+}
+
+export interface AboutValueCard extends Struct.ComponentSchema {
+  collectionName: 'components_about_value_cards';
+  info: {
+    displayName: 'Value Card';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface CaseStudiesPageFaqItem extends Struct.ComponentSchema {
   collectionName: 'components_case_studies_page_faq_items';
   info: {
@@ -104,6 +126,8 @@ export interface SharedTag extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'about.bullet-point': AboutBulletPoint;
+      'about.value-card': AboutValueCard;
       'case-studies-page.faq-item': CaseStudiesPageFaqItem;
       'creatives.benefit-item': CreativesBenefitItem;
       'creatives.value-item': CreativesValueItem;

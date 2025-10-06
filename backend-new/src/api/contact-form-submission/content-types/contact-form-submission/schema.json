@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_form_submissions",
+  "info": {
+    "singularName": "contact-form-submission",
+    "pluralName": "contact-form-submissions",
+    "displayName": "Contact Form Submission"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "companyName": {
+      "type": "string"
+    },
+    "emailOptin": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "servicesNeeded": {
+      "type": "json"
+    },
+    "leadSource": {
+      "type": "json"
+    },
+    "submittedAt": {
+      "type": "datetime"
+    }
+  }
+}

@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/router";
 import Grid from '@mui/material/Grid';
 import { 
   TextField,
@@ -15,6 +14,7 @@ import {
   FormGroup,
   FormHelperText,
   Button,
+  Alert,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -75,6 +75,8 @@ const WhiteFormControl = styled(FormControl)({
 });
 
 const ContactForm4 = () => {
+  const [submitStatus, setSubmitStatus] = useState(null);
+
   const serviceOptions = [
     {
       id: "marketing_consulting",
@@ -114,42 +116,13 @@ const ContactForm4 = () => {
   ];
 
   const leadSourceOptions = [
-    {
-      id: "website",
-      label: "Website",
-      description: "From our website"
-    },
-    {
-      id: "clutch ",
-      label: "Clutch",
-      description: "From Clutch"
-    },
-    {
-      id: "linkedin",
-      label: "LinkedIn",
-      description: "From LinkedIn"
-    },
-    {
-      id: "google",
-      label: "Google",
-      description: "From Google"
-    },
-    {
-      id: "referral",
-      label: "Referral",
-      description: "From a referral"
-    },
-    {
-      id: "instagram",
-      label: "Instagram",
-      description: "From Instagram"
-    },
-    {
-      id: "other",
-      label: "Other",
-      description: "From another source"
-    },
-    
+    { id: "website", label: "Website", description: "From our website" },
+    { id: "clutch", label: "Clutch", description: "From Clutch" },
+    { id: "linkedin", label: "LinkedIn", description: "From LinkedIn" },
+    { id: "google", label: "Google", description: "From Google" },
+    { id: "referral", label: "Referral", description: "From a referral" },
+    { id: "instagram", label: "Instagram", description: "From Instagram" },
+    { id: "other", label: "Other", description: "From another source" },
   ];
 
   const defaultValues = {
@@ -182,27 +155,40 @@ const ContactForm4 = () => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
+    reset,
   } = methods;
 
-  const testFunction = async () => {
-    const response = await window.ApolloMeetings.submit({
-      email: "test@test.com",
-      full_name: "Test User",
-      phone_number: "1234567890",
-      company_name: "Test Company",
-      consent_approval: "yes",
-      services_needed: ["marketing_consulting"],
-      lead_source: ["other"],
-    });
-    console.log(response);
-  }
-  
   const onSubmit = async (data) => {
-    console.log(data);
-
+    setSubmitStatus(null);
+    
     try {
-      // Open Apollo Meetings widget with form data
+      // Save to Strapi
+      const strapiResponse = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/contact-form-submissions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          data: {
+            firstName: data.first_name,
+            lastName: data.last_name,
+            email: data.email,
+            phone: data.phone,
+            companyName: data.company_name,
+            emailOptin: data.email_optin,
+            servicesNeeded: data.services_needed,
+            leadSource: data.lead_source,
+            submittedAt: new Date().toISOString(),
+          }
+        }),
+      });
+
+      if (!strapiResponse.ok) {
+        throw new Error('Failed to save form submission');
+      }
+
+      // Open Apollo Meetings widget
       if (typeof window !== 'undefined' && window.ApolloMeetings) {
         window.ApolloMeetings.submit({
           email: data.email,
@@ -214,25 +200,34 @@ const ContactForm4 = () => {
           lead_source: data.lead_source,
         });
       }
+
+      setSubmitStatus({ type: 'success', message: 'Form submitted successfully!' });
+      reset();
     } catch (error) {
-      console.error("Error opening Apollo Meetings widget:", error);
-    } finally {
-      // Reset form fields after submission
-      methods.reset();
+      console.error("Error submitting form:", error);
+      setSubmitStatus({ type: 'error', message: 'Failed to submit form. Please try again.' });
     }
   };
 
   return (
-    <FormControl onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={4}>
+        {submitStatus && (
+          <Grid item xs={12}>
+            <Alert severity={submitStatus.type} onClose={() => setSubmitStatus(null)}>
+              {submitStatus.message}
+            </Alert>
+          </Grid>
+        )}
+
         <Grid item xs={12} md={6}>
           <WhiteTextField
             fullWidth
             label="First Name"
             variant="outlined"
             {...register("first_name")}
-            error={!!methods.formState.errors.first_name}
-            helperText={methods.formState.errors.first_name?.message}
+            error={!!errors.first_name}
+            helperText={errors.first_name?.message}
             required
           />
         </Grid>
@@ -243,8 +238,8 @@ const ContactForm4 = () => {
             label="Last Name"
             variant="outlined"
             {...register("last_name")}
-            error={!!methods.formState.errors.last_name}
-            helperText={methods.formState.errors.last_name?.message}
+            error={!!errors.last_name}
+            helperText={errors.last_name?.message}
             required
           />
         </Grid>
@@ -256,8 +251,8 @@ const ContactForm4 = () => {
             variant="outlined"
             type="email"
             {...register("email")}
-            error={!!methods.formState.errors.email}
-            helperText={methods.formState.errors.email?.message}
+            error={!!errors.email}
+            helperText={errors.email?.message}
             required
           />
         </Grid>
@@ -268,8 +263,8 @@ const ContactForm4 = () => {
             label="Phone Number"
             variant="outlined"
             {...register("phone")}
-            error={!!methods.formState.errors.phone}
-            helperText={methods.formState.errors.phone?.message}
+            error={!!errors.phone}
+            helperText={errors.phone?.message}
             required
           />
         </Grid>
@@ -280,16 +275,16 @@ const ContactForm4 = () => {
             label="Company Name"
             variant="outlined"
             {...register("company_name")}
-            error={!!methods.formState.errors.company_name}
-            helperText={methods.formState.errors.company_name?.message}
+            error={!!errors.company_name}
+            helperText={errors.company_name?.message}
             required
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        
+        <Grid item xs={12} md={6}></Grid>
 
-        </Grid>
         <Grid item xs={12} md={6}>
-          <WhiteFormControl component="fieldset" error={!!methods.formState.errors.services_needed}>
+          <WhiteFormControl component="fieldset" error={!!errors.services_needed}>
             <FormLabel component="legend">Services Needed*</FormLabel>
             <FormGroup>
               {serviceOptions.map((service) => (
@@ -310,14 +305,14 @@ const ContactForm4 = () => {
                 />
               ))}
             </FormGroup>
-            {methods.formState.errors.services_needed && (
-              <FormHelperText>{methods.formState.errors.services_needed.message}</FormHelperText>
+            {errors.services_needed && (
+              <FormHelperText>{errors.services_needed.message}</FormHelperText>
             )}
           </WhiteFormControl>
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <WhiteFormControl component="fieldset" error={!!methods.formState.errors.lead_source}>
+          <WhiteFormControl component="fieldset" error={!!errors.lead_source}>
             <FormLabel component="legend">Lead Source*</FormLabel>
             <FormGroup>
               {leadSourceOptions.map((leadSource) => (
@@ -338,21 +333,21 @@ const ContactForm4 = () => {
                 />
               ))}
             </FormGroup>
-            {methods.formState.errors.lead_source && (
-              <FormHelperText>{methods.formState.errors.lead_source.message}</FormHelperText>
+            {errors.lead_source && (
+              <FormHelperText>{errors.lead_source.message}</FormHelperText>
             )}
           </WhiteFormControl>
         </Grid>
 
         <Grid item xs={12}>
-          <WhiteFormControl component="fieldset" error={!!methods.formState.errors.email_optin}>
+          <WhiteFormControl component="fieldset" error={!!errors.email_optin}>
             <FormLabel component="legend">I agree to receive other communications from Adaptive Intelligence International.*</FormLabel>
             <RadioGroup row {...register("email_optin")}>
               <FormControlLabel value="yes" control={<Radio />} label="Yes" />
               <FormControlLabel value="no" control={<Radio />} label="No" />
             </RadioGroup>
-            {methods.formState.errors.email_optin && (
-              <FormHelperText>{methods.formState.errors.email_optin.message}</FormHelperText>
+            {errors.email_optin && (
+              <FormHelperText>{errors.email_optin.message}</FormHelperText>
             )}
           </WhiteFormControl>
         </Grid>
@@ -368,7 +363,7 @@ const ContactForm4 = () => {
           </Button>
         </Grid>
       </Grid>
-    </FormControl>
+    </form>
   );
 };
 

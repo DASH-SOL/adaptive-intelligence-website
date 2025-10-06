@@ -430,6 +430,81 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
+  collectionName: 'about_pages';
+  info: {
+    displayName: 'About Page';
+    pluralName: 'about-pages';
+    singularName: 'about-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    heroDescription: Schema.Attribute.Text;
+    heroTitle: Schema.Attribute.String;
+    letsTalkButtonText: Schema.Attribute.String;
+    letsTalkParagraph1: Schema.Attribute.Text;
+    letsTalkParagraph2: Schema.Attribute.Text;
+    letsTalkTitle: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::about-page.about-page'
+    > &
+      Schema.Attribute.Private;
+    missionAuthorName: Schema.Attribute.String;
+    missionAuthorTitle: Schema.Attribute.String;
+    missionCustomerCount: Schema.Attribute.String;
+    missionImage1: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    missionImage2: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    missionImage3: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    missionImage4: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    missionQuote: Schema.Attribute.Text;
+    missionQuoteHighlight: Schema.Attribute.String;
+    missionRating: Schema.Attribute.Decimal;
+    publishedAt: Schema.Attribute.DateTime;
+    statsSubtitle: Schema.Attribute.String;
+    sustainabilityButtonText: Schema.Attribute.String;
+    sustainabilityButtonUrl: Schema.Attribute.String;
+    sustainabilityDescription: Schema.Attribute.Text;
+    sustainabilityTagline: Schema.Attribute.String;
+    sustainabilityTitle: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    values: Schema.Attribute.Component<'about.value-card', true>;
+    valuesTagline: Schema.Attribute.String;
+    valuesTitle: Schema.Attribute.String;
+    whatWeDoDescription: Schema.Attribute.Text;
+    whatWeDoTitle: Schema.Attribute.String;
+    whoWeAreBadgeNumber: Schema.Attribute.String;
+    whoWeAreBadgeText: Schema.Attribute.String;
+    whoWeAreImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    whoWeAreParagraph1: Schema.Attribute.Text;
+    whoWeAreParagraph2: Schema.Attribute.Text;
+    whoWeAreParagraph3: Schema.Attribute.Text;
+    whoWeAreTagline: Schema.Attribute.String;
+    whyChooseUsDescription: Schema.Attribute.String;
+    whyChooseUsPoints: Schema.Attribute.Component<'about.bullet-point', true>;
+    whyChooseUsTagline: Schema.Attribute.String;
+    whyChooseUsTitle: Schema.Attribute.String;
+  };
+}
+
 export interface ApiCaseStudiesPageCaseStudiesPage
   extends Struct.SingleTypeSchema {
   collectionName: 'case_studies_pages';
@@ -540,6 +615,43 @@ export interface ApiClientLogoClientLogo extends Struct.CollectionTypeSchema {
     logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiContactFormSubmissionContactFormSubmission
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'contact_form_submissions';
+  info: {
+    displayName: 'Contact Form Submission';
+    pluralName: 'contact-form-submissions';
+    singularName: 'contact-form-submission';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    companyName: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    emailOptin: Schema.Attribute.Enumeration<['yes', 'no']>;
+    firstName: Schema.Attribute.String;
+    lastName: Schema.Attribute.String;
+    leadSource: Schema.Attribute.JSON;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::contact-form-submission.contact-form-submission'
+    > &
+      Schema.Attribute.Private;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    servicesNeeded: Schema.Attribute.JSON;
+    submittedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1495,9 +1607,11 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::about-page.about-page': ApiAboutPageAboutPage;
       'api::case-studies-page.case-studies-page': ApiCaseStudiesPageCaseStudiesPage;
       'api::case-study.case-study': ApiCaseStudyCaseStudy;
       'api::client-logo.client-logo': ApiClientLogoClientLogo;
+      'api::contact-form-submission.contact-form-submission': ApiContactFormSubmissionContactFormSubmission;
       'api::creatives-page.creatives-page': ApiCreativesPageCreativesPage;
       'api::eco-page.eco-page': ApiEcoPageEcoPage;
       'api::faq.faq': ApiFaqFaq;

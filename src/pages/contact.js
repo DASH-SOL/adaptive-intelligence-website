@@ -91,5 +91,23 @@ const Contact = () => {
     </>
   );
 };
+export async function getStaticProps() {
+  let settings = null;
+  
+  try {
+    const settingsUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/setting?populate=*`;
+    const settingsRes = await fetch(settingsUrl);
+    const settingsJson = await settingsRes.json();
+    settings = settingsJson.data || null;
+  } catch (error) {
+    console.error("Error fetching settings:", error);
+  }
 
+  return {
+    props: {
+      settings
+    },
+    revalidate: 3600,
+  };
+}
 export default Contact;

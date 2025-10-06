@@ -125,71 +125,7 @@ const Header = ({ style, menuTextColor }) => {
             </button>
           </div>
 
-          <form onSubmit={handleSubmit} className="hamburger-form">
-            <div className="form-group">
-              <input
-                type="text"
-                name="firstName"
-                placeholder="First Name *"
-                value={formData.firstName}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name *"
-                value={formData.lastName}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address *"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <input
-                type="text"
-                name="company"
-                placeholder="Company Name *"
-                value={formData.company}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <textarea
-                name="message"
-                placeholder="Tell us a little bit more: *"
-                rows="4"
-                value={formData.message}
-                onChange={handleInputChange}
-                required
-              ></textarea>
-            </div>
-
-            <button type="submit" className="submit-btn">
-              Submit
-            </button>
-
-            <p className="privacy-text">
-              Learn more about how your information will be used in our{' '}
-              <Link href="/privacy-policy" className="privacy-link">Privacy Policy</Link>.
-            </p>
-          </form>
+          <script src="//embed.typeform.com/next/embed.js"></script>
 
           <div className="help-section">
             <h3>How else can we help?</h3>
