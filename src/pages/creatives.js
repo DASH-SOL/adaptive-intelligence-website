@@ -497,7 +497,7 @@ export async function getStaticProps() {
     
     return { 
       props: { pageData }, 
-      revalidate: 60
+      revalidate: 1
     };
   } catch (error) {
     console.error("Error fetching creatives page data:", error);

@@ -107,7 +107,7 @@ export async function getStaticProps() {
     props: {
       settings
     },
-    revalidate: 3600,
+    revalidate: 1,
   };
 }
 export default Contact;
