@@ -8,8 +8,12 @@ export default ({ env }) => ({
         api_secret: env('CLOUDINARY_SECRET'),
       },
       actionOptions: {
-        upload: {},
-        uploadStream: {},
+        upload: {
+          folder: 'strapi',
+        },
+        uploadStream: {
+          folder: 'strapi',
+        },
         delete: {},
       },
     },
