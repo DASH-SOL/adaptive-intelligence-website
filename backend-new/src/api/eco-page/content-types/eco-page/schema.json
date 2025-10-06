@@ -1,0 +1,104 @@
+{
+  "kind": "singleType",
+  "collectionName": "eco_pages",
+  "info": {
+    "singularName": "eco-page",
+    "pluralName": "eco-pages",
+    "displayName": "Eco Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroTitle": {
+      "type": "string"
+    },
+    "heroDescription": {
+      "type": "text"
+    },
+    "heroBackgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "commitmentTagline": {
+      "type": "string"
+    },
+    "commitmentTitle": {
+      "type": "string"
+    },
+    "commitmentDescription": {
+      "type": "text"
+    },
+    "hubCards": {
+      "type": "component",
+      "component": "eco.hub-card",
+      "repeatable": true
+    },
+    "impactTitle": {
+      "type": "string"
+    },
+    "impactDescription": {
+      "type": "text"
+    },
+    "impactBackgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "treeCardButtonText": {
+      "type": "string"
+    },
+    "treeCardButtonUrl": {
+      "type": "string"
+    },
+    "noaaTitle": {
+      "type": "string"
+    },
+    "noaaParagraph1": {
+      "type": "text"
+    },
+    "noaaParagraph2": {
+      "type": "text"
+    },
+    "noaaImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "noaaDownloadButtonText": {
+      "type": "string"
+    },
+    "noaaDownloadUrl": {
+      "type": "string"
+    },
+    "communityTitle": {
+      "type": "string"
+    },
+    "communityDescription": {
+      "type": "text"
+    },
+    "communityCtaText": {
+      "type": "string"
+    },
+    "communityEmail": {
+      "type": "email"
+    }
+  }
+}

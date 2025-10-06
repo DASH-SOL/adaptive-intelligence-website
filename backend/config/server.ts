@@ -5,7 +5,7 @@ export default ({ env }) => ({
     keys: env.array('APP_KEYS'),
   },
   proxy: true,
-  url: env('PUBLIC_URL', 'https://adaptive-intelligence-website-1.onrender.com'),
+  url: env('PUBLIC_URL'), // No default - only uses it if env var exists
   session: {
     clientBasedSessions: true,
     cookie: {

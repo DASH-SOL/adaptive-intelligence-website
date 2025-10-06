@@ -1,0 +1,87 @@
+{
+  "kind": "collectionType",
+  "collectionName": "case_studies",
+  "info": {
+    "singularName": "case-study",
+    "pluralName": "case-studies",
+    "displayName": "Case Study"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "badge": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "client": {
+      "type": "string"
+    },
+    "industry": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "results": {
+      "type": "string"
+    },
+    "heroImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "testimonialQuote": {
+      "type": "text"
+    },
+    "testimonialAuthor": {
+      "type": "string"
+    },
+    "testimonialPosition": {
+      "type": "string"
+    },
+    "insights": {
+      "type": "component",
+      "component": "shared.insight",
+      "repeatable": true
+    },
+    "tags": {
+      "type": "component",
+      "component": "shared.tag",
+      "repeatable": true
+    },
+    "metrics": {
+      "type": "json"
+    },
+    "downloadFile": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

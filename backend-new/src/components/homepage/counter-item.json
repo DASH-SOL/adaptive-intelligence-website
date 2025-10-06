@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_homepage_counter_items",
+  "info": {
+    "displayName": "Counter Item",
+    "icon": "chart-pie",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "value": {
+      "type": "integer"
+    },
+    "symbol": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    }
+  }
+}

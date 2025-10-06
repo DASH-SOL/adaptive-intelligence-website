@@ -16,54 +16,101 @@ const DownloadPage = () => {
   const [downloadComplete, setDownloadComplete] = useState(false);
   const [isReady, setIsReady] = useState(false);
 
-  // This function is now only called once we have the resource data
-  const handleDownload = async (resource) => {
-    setIsDownloading(true);
+const handleDownload = async (resource) => {
+  setIsDownloading(true);
 
-    try {
-      // Wait 3 seconds for good UX
-      await new Promise(resolve => setTimeout(resolve, 3000));
+  try {
+    // Wait 3 seconds for good UX
+    await new Promise(resolve => setTimeout(resolve, 3000));
 
-      // Trigger the download using the dynamic file path
-      const link = document.createElement('a');
-      link.href = `/downloads/${resource.fileName}`;
-      link.download = resource.downloadName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (error) {
-      console.error('Download error:', error);
-      // Fallback download for safety
-      window.open(`/downloads/${resource.fileName}`, '_blank');
-    } finally {
-      setIsDownloading(false);
-      setDownloadComplete(true);
-    }
-  };
-
-  useEffect(() => {
-    if (!router.isReady) return;
-
-    const emailParam = router.query.email;
-    const slugParam = router.query.slug || 'infstones-case-study'; // Keep a fallback just in case
+    // Get the download URL
+    const downloadUrl = resource.downloadUrl || `/downloads/${resource.fileName}`;
     
-    if (emailParam) {
-      const resource = resourceDatabase[slugParam];
-      if (resource) {
-        setResourceData(resource);
-        handleDownload(resource); // Pass the found resource to the download handler
-      } else {
-        // Fallback to a default resource if the slug is not found
-        const fallbackResource = resourceDatabase['infstones-case-study'];
-        setResourceData(fallbackResource);
-        handleDownload(fallbackResource);
-      }
-      setIsReady(true);
+    // Create a temporary link that forces download
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.target = '_blank'; // Open in new tab
+    link.rel = 'noopener noreferrer';
+    link.download = resource.downloadName || resource.fileName; // Force download
+    
+    // Trigger the download
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+  } catch (error) {
+    console.error('Download error:', error);
+    // Fallback
+    const fallbackUrl = resource.downloadUrl || `/downloads/${resource.fileName}`;
+    const link = document.createElement('a');
+    link.href = fallbackUrl;
+    link.target = '_blank';
+    link.download = resource.downloadName || resource.fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } finally {
+    setIsDownloading(false);
+    setDownloadComplete(true);
+  }
+};
+
+ // Add this function after the handleDownload function
+const fetchCaseStudyFile = async (slug) => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/case-studies?filters[slug][$eq]=${slug}&populate=downloadFile`);
+    const json = await res.json();
+    const caseStudy = json.data?.[0];
+    
+    if (caseStudy && caseStudy.downloadFile?.url) {
+      // Case study found with downloadable file from Strapi
+      const resource = {
+        ...resourceDatabase[slug], // Keep metadata from local database
+        title: caseStudy.title || resourceDatabase[slug]?.title,
+        description: caseStudy.description || resourceDatabase[slug]?.description,
+        downloadUrl: `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${caseStudy.downloadFile.url}`,
+        fileName: caseStudy.downloadFile.name
+      };
+      setResourceData(resource);
+      handleDownload(resource);
+    } else if (resourceDatabase[slug]) {
+      // Fallback to local file if no Strapi file found
+      const resource = resourceDatabase[slug];
+      setResourceData(resource);
+      handleDownload(resource);
     } else {
-      // If no email is in the URL, redirect to the main case studies page
+      // No resource found at all, redirect
+      console.error('Resource not found:', slug);
       router.push('/case-studies');
     }
-  }, [router.isReady, router.query]);
+  } catch (error) {
+    console.error('Error fetching case study file:', error);
+    // Fallback to local database on error
+    if (resourceDatabase[slug]) {
+      const resource = resourceDatabase[slug];
+      setResourceData(resource);
+      handleDownload(resource);
+    } else {
+      router.push('/case-studies');
+    }
+  }
+};
+
+// Replace your existing useEffect with this
+useEffect(() => {
+  if (!router.isReady) return;
+
+  const emailParam = router.query.email;
+  const slugParam = router.query.slug;
+  
+  if (emailParam && slugParam) {
+    fetchCaseStudyFile(slugParam);
+    setIsReady(true);
+  } else {
+    // No email or slug, redirect to case studies page
+    router.push('/case-studies');
+  }
+}, [router.isReady, router.query]);
 
 
   if (!isReady || !resourceData) {
@@ -110,7 +157,7 @@ const DownloadPage = () => {
                   <div className="download-benefits">
                     <h4>What's included in your download:</h4>
                     <ul>
-                      {resourceData.benefits.map((benefit, index) => (
+                      {resourceData.benefits?.map((benefit, index) => (
                         <li key={index}>{benefit}</li>
                       ))}
                     </ul>
@@ -153,8 +200,8 @@ const DownloadPage = () => {
                       Your file has been downloaded to your device. 
                       If the download didn't start automatically, 
                       <a href={`/downloads/${resourceData.fileName}`} 
-                         download 
-                         className="download-link"> click here to download</a>.
+   download 
+   className="download-link"> click here to download</a>.
                     </p>
                   </div>
 

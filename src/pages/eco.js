@@ -6,7 +6,57 @@ import FooterContent from '@/components/footer/FooterContent';
 import Subscribe from '@/components/footer/Subscribe';
 import CopyrightFooter from '@/components/footer/CopyrightFooter';
 
-const EcoPage = ({ treeCardStats }) => {
+// Icon mapping function for hub cards
+const getHubIconByType = (iconType) => {
+  const icons = {
+    tools: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+      </svg>
+    ),
+    research: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+      </svg>
+    ),
+    community: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+    )
+  };
+  
+  return icons[iconType] || icons.tools;
+};
+
+const EcoPage = ({ treeCardStats, pageData }) => {
+  if (!pageData) {
+    return (
+      <>
+        <Header />
+        <div style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <p>Loading...</p>
+        </div>
+      </>
+    );
+  }
+
+  const heroImageUrl = pageData.heroBackgroundImage?.url
+    ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageData.heroBackgroundImage.url}`
+    : 'https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2400&q=80';
+
+  const impactImageUrl = pageData.impactBackgroundImage?.url
+    ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageData.impactBackgroundImage.url}`
+    : 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2342&q=80';
+
+  const noaaImageUrl = pageData.noaaImage?.url
+    ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageData.noaaImage.url}`
+    : '/images/assets/environmental-impact.jpeg';
+
   return (
     <>
       <Header />
@@ -15,8 +65,8 @@ const EcoPage = ({ treeCardStats }) => {
       <section className="eco-hero">
         <div className="hero-background">
           <Image
-            src="https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2400&q=80"
-            alt="Lush green landscape with rolling hills and a river"
+            src={heroImageUrl}
+            alt="Lush green landscape"
             layout="fill"
             objectFit="cover"
             quality={80}
@@ -28,20 +78,19 @@ const EcoPage = ({ treeCardStats }) => {
           <div className="row">
             <div className="col-lg-9 mx-auto text-center">
               <h1 className="main-title">
-                Sustainability at Adaptive 
-                <span className="position-relative d-inline-block"> {/* Ensure span is inline-block to wrap content */}
-                  Intelligence
+                {pageData.heroTitle || 'Sustainability at Adaptive Intelligence'}
+                <span className="position-relative d-inline-block">
                   <Image
                     src="/images/shape/shape_122.svg"
                     alt="underline"
                     width={400}
                     height={8}
-                    style={{position: 'absolute', bottom: -5, left: '50%', transform: 'translateX(-50%)' }} /* Centering the underline */
+                    style={{position: 'absolute', bottom: -5, left: '50%', transform: 'translateX(-50%)' }}
                   />
                 </span>
               </h1>
               <p className="hero-subtitle">
-                At Adaptive Intelligence, sustainability isn’t a side note—it’s at the center of how we work. We believe building the future of industries means protecting the future of our planet.
+                {pageData.heroDescription}
               </p>
             </div>
           </div>
@@ -53,44 +102,25 @@ const EcoPage = ({ treeCardStats }) => {
         <div className="container">
           <div className="row">
             <div className="col-lg-8 mx-auto text-center">
-              <div className="sc-title">Our Commitment</div>
-              <h2 className="section-title">A Living Resource for Growth and Responsibility</h2>
+              <div className="sc-title">{pageData.commitmentTagline || 'Our Commitment'}</div>
+              <h2 className="section-title">{pageData.commitmentTitle}</h2>
               <p className="section-description">
-                This page is more than an introduction to our values—it’s a resource. Here you’ll find practical tools, critical research, and a community hub for leaders, creatives, and innovators.
+                {pageData.commitmentDescription}
               </p>
             </div>
           </div>
           <div className="row g-4 justify-content-center">
-            {/* Item 1: Tools */}
-            <div className="col-md-6 col-lg-4">
-              <div className="hub-card">
-                <div className="card-icon">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+            {pageData.hubCards?.map((card, index) => (
+              <div key={card.id || index} className="col-md-6 col-lg-4">
+                <div className="hub-card">
+                  <div className="card-icon">
+                    {getHubIconByType(card.iconType)}
+                  </div>
+                  <h3 className="card-title">{card.title}</h3>
+                  <p className="card-text">{card.description}</p>
                 </div>
-                <h3 className="card-title">Practical Tools & Frameworks</h3>
-                <p className="card-text">Actionable resources for embedding sustainability directly into your business model.</p>
               </div>
-            </div>
-            {/* Item 2: Research */}
-            <div className="col-md-6 col-lg-4">
-              <div className="hub-card">
-                <div className="card-icon">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-                </div>
-                <h3 className="card-title">Archived Research & Reports</h3>
-                <p className="card-text">Access to critical documents, including NOAA papers, that are not always easy to find.</p>
-              </div>
-            </div>
-            {/* Item 3: Community */}
-            <div className="col-md-6 col-lg-4">
-              <div className="hub-card">
-                <div className="card-icon">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                </div>
-                <h3 className="card-title">A Hub for Innovators</h3>
-                <p className="card-text">A place to share ideas and collaborate on keeping our businesses and our environment thriving.</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -98,9 +128,9 @@ const EcoPage = ({ treeCardStats }) => {
       {/* Section 3: Impact By The Numbers (TreeCard) */}
       <section className="impact-section">
         <div className="impact-background">
-           <Image
-            src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2342&q=80"
-            alt="Sunlight filtering through a dense green forest canopy"
+          <Image
+            src={impactImageUrl}
+            alt="Forest canopy"
             layout="fill"
             objectFit="cover"
             quality={75}
@@ -110,10 +140,16 @@ const EcoPage = ({ treeCardStats }) => {
         <div className="container">
           <div className="row">
             <div className="col-12 text-center">
-              <Image src="/images/logo/62fbf4327b17746206b87f63_white logo.svg" alt="TreeCard Logo" width={150} height={50} style={{ margin: '0 auto 20px auto' }} /> {/* Centering TreeCard logo */}
-              <h2 className="section-title text-white">Our Environmental Impact</h2>
+              <Image 
+                src="/images/logo/62fbf4327b17746206b87f63_white logo.svg" 
+                alt="TreeCard Logo" 
+                width={150} 
+                height={50} 
+                style={{ margin: '0 auto 20px auto' }} 
+              />
+              <h2 className="section-title text-white">{pageData.impactTitle}</h2>
               <p className="section-description text-white-70">
-                In partnership with TreeCard, we track our agency's contribution to reforestation and ocean cleanup.
+                {pageData.impactDescription}
               </p>
             </div>
           </div>
@@ -145,8 +181,13 @@ const EcoPage = ({ treeCardStats }) => {
           </div>
           <div className="row">
             <div className="col-12 text-center cta-container">
-              <a href="https://www.treecard.org/#getcard" target="_blank" rel="noopener noreferrer" className="eco-button">
-                <span>Join TreeCard</span>
+              <a 
+                href={pageData.treeCardButtonUrl || 'https://www.treecard.org/#getcard'} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="eco-button"
+              >
+                <span>{pageData.treeCardButtonText || 'Join TreeCard'}</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -162,8 +203,8 @@ const EcoPage = ({ treeCardStats }) => {
           <div className="row align-items-center">
             <div className="col-lg-6">
               <Image
-                src="/images/assets/environmental-impact.jpeg"
-                alt="Archived scientific documents and papers"
+                src={noaaImageUrl}
+                alt="Environmental research documents"
                 width={600}
                 height={500}
                 objectFit="cover"
@@ -171,12 +212,19 @@ const EcoPage = ({ treeCardStats }) => {
               />
             </div>
             <div className="col-lg-6">
-              <h2 className="section-title">Why We’re Hosting the NOAA Papers</h2>
-              <p>The NOAA has produced decades of critical research on the state of our environment. Recently, much of this information has been made harder to find. We believe that limiting access to science doesn’t make the problems go away, it only makes them harder to solve.</p>
-              <p>At Adaptive Intelligence, we’re committed to keeping these resources accessible. The more we understand the realities of climate change, the better equipped we are to make informed decisions and push for real solutions.</p>
-              <a href="https://we.tl/t-v5QlQl4Kao" className="download-button" target="_blank" rel="noopener noreferrer">
-                Download NOAA Papers
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <h2 className="section-title">{pageData.noaaTitle}</h2>
+              <p>{pageData.noaaParagraph1}</p>
+              <p>{pageData.noaaParagraph2}</p>
+              <a 
+                href={pageData.noaaDownloadUrl || 'https://we.tl/t-v5QlQl4Kao'} 
+                className="download-button" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                {pageData.noaaDownloadButtonText || 'Download NOAA Papers'}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </a>
             </div>
           </div>
@@ -188,13 +236,15 @@ const EcoPage = ({ treeCardStats }) => {
         <div className="container">
           <div className="row">
             <div className="col-lg-8 mx-auto text-center">
-              <h2 className="section-title">Community Connection</h2>
+              <h2 className="section-title">{pageData.communityTitle}</h2>
               <p className="section-description">
-                Infusing business with real sustainability can’t be done alone. We’ve created this space to share ideas, resources, and practical steps that help us all make our businesses a little better.
+                {pageData.communityDescription}
               </p>
               <p className="community-cta">
-                Have something to add? Send your suggestions to:
-                <a href="mailto:eco@aii.agency" className="email-link">eco@aii.agency</a>
+                {pageData.communityCtaText}
+                <a href={`mailto:${pageData.communityEmail || 'eco@aii.agency'}`} className="email-link">
+                  {pageData.communityEmail || 'eco@aii.agency'}
+                </a>
               </p>
             </div>
           </div>
@@ -297,41 +347,47 @@ export async function getStaticProps() {
   const fallbackData = { trees: 311, acres: 1.2, carbon: 328, bottles: 1674 };
   let finalStats = fallbackData;
 
+  // Fetch TreeCard stats from Google Sheets
   try {
     const sheetId = '1ICb8PWttvv0leKmfmJWXSGhXkZz5UAxChmFamV_bh1c';
     const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=Sheet1`;
     const response = await fetch(url);
-    if (!response.ok) {
-        throw new Error(`Failed to fetch Google Sheet: ${response.statusText}`);
-    }
-    
-    const csvText = await response.text();
-    const rows = csvText.replace(/"/g, '').split('\n');
-    const parsedData = {};
-    rows.forEach(row => {
-      const [key, value] = row.split(',');
-      if (key && value) {
-        parsedData[key.trim().toLowerCase()] = parseFloat(value.trim());
-      }
-    });
+    if (response.ok) {
+      const csvText = await response.text();
+      const rows = csvText.replace(/"/g, '').split('\n');
+      const parsedData = {};
+      rows.forEach(row => {
+        const [key, value] = row.split(',');
+        if (key && value) {
+          parsedData[key.trim().toLowerCase()] = parseFloat(value.trim());
+        }
+      });
 
-    // Ensure all required keys exist, otherwise use fallback
-    if (parsedData.trees !== undefined && parsedData.acres !== undefined && parsedData.carbon !== undefined && parsedData.bottles !== undefined) {
+      if (parsedData.trees !== undefined && parsedData.acres !== undefined && parsedData.carbon !== undefined && parsedData.bottles !== undefined) {
         finalStats = parsedData;
-    } else {
-        console.warn("Parsed Google Sheet data was incomplete. Using fallback data.");
+      }
     }
-
   } catch (error) {
-    console.error('Error in getStaticProps for Eco page:', error.message);
-    // On error, we'll use the hardcoded fallback data
+    console.error('Error fetching TreeCard stats:', error.message);
+  }
+
+  // Fetch Eco Page content from Strapi
+  let pageData = null;
+  try {
+    const pageUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/eco-page?populate=*`;
+    const pageRes = await fetch(pageUrl);
+    const pageJson = await pageRes.json();
+    pageData = pageJson.data || null;
+  } catch (error) {
+    console.error("Error fetching eco page data:", error);
   }
 
   return {
     props: {
       treeCardStats: finalStats,
+      pageData
     },
-    revalidate: 3600, // Re-generate the page at most once per hour
+    revalidate: 3600,
   };
 }
 

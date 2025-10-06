@@ -430,47 +430,6 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiCaseStudiesPageCaseStudiesPage
-  extends Struct.SingleTypeSchema {
-  collectionName: 'case_studies_pages';
-  info: {
-    displayName: 'Case Studies Page';
-    pluralName: 'case-studies-pages';
-    singularName: 'case-studies-page';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    ctaLeftButtonText: Schema.Attribute.String;
-    ctaLeftButtonUrl: Schema.Attribute.String;
-    ctaLeftDescription: Schema.Attribute.Text;
-    ctaLeftTitle: Schema.Attribute.String;
-    ctaRightButtonText: Schema.Attribute.String;
-    ctaRightButtonUrl: Schema.Attribute.String;
-    ctaRightDescription: Schema.Attribute.Text;
-    ctaRightTitle: Schema.Attribute.String;
-    faqs: Schema.Attribute.Component<'case-studies.faq-item', true>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::case-studies-page.case-studies-page'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    strategyCta: Schema.Attribute.Text;
-    strategyParagraph1: Schema.Attribute.Text;
-    strategyParagraph2: Schema.Attribute.Text;
-    strategyTitle: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiCaseStudyCaseStudy extends Struct.CollectionTypeSchema {
   collectionName: 'case_studies';
   info: {
@@ -1391,7 +1350,6 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::case-studies-page.case-studies-page': ApiCaseStudiesPageCaseStudiesPage;
       'api::case-study.case-study': ApiCaseStudyCaseStudy;
       'api::client-logo.client-logo': ApiClientLogoClientLogo;
       'api::faq.faq': ApiFaqFaq;

@@ -1,0 +1,83 @@
+{
+  "kind": "singleType",
+  "collectionName": "creatives_pages",
+  "info": {
+    "singularName": "creatives-page",
+    "pluralName": "creatives-pages",
+    "displayName": "Creatives Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroTagline": {
+      "type": "string"
+    },
+    "heroTitle": {
+      "type": "string"
+    },
+    "heroDescription": {
+      "type": "text"
+    },
+    "missionTitle": {
+      "type": "string"
+    },
+    "missionParagraph1": {
+      "type": "text"
+    },
+    "missionParagraph2": {
+      "type": "text"
+    },
+    "missionImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "valuesTagline": {
+      "type": "string"
+    },
+    "valuesTitle": {
+      "type": "string"
+    },
+    "values": {
+      "type": "component",
+      "component": "creatives.value-item",
+      "repeatable": true
+    },
+    "benefitsTagline": {
+      "type": "string"
+    },
+    "benefitsTitle": {
+      "type": "string"
+    },
+    "benefits": {
+      "type": "component",
+      "component": "creatives.benefit-item",
+      "repeatable": true
+    },
+    "ctaTitle": {
+      "type": "string"
+    },
+    "ctaDescription": {
+      "type": "text"
+    },
+    "applyButtonText": {
+      "type": "string"
+    },
+    "applyButtonUrl": {
+      "type": "string"
+    },
+    "contactButtonText": {
+      "type": "string"
+    },
+    "hrEmail": {
+      "type": "email"
+    }
+  }
+}

@@ -1,0 +1,286 @@
+{
+  "kind": "singleType",
+  "collectionName": "homepages",
+  "info": {
+    "singularName": "homepage",
+    "pluralName": "homepages",
+    "displayName": "Homepage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroTitle": {
+      "type": "string"
+    },
+    "heroHighlightedText": {
+      "type": "string"
+    },
+    "heroSubtitleStart": {
+      "type": "text"
+    },
+    "heroSubtitleBold": {
+      "type": "string"
+    },
+    "heroSubtitleEnd": {
+      "type": "string"
+    },
+    "heroButtonText": {
+      "type": "string"
+    },
+    "feedbackAvatar": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "feedbackQuoteStart": {
+      "type": "string"
+    },
+    "feedbackQuoteHighlight": {
+      "type": "string"
+    },
+    "feedbackQuoteEnd": {
+      "type": "string"
+    },
+    "feedbackAuthorName": {
+      "type": "string"
+    },
+    "feedbackAuthorTitle": {
+      "type": "string"
+    },
+    "featureImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "featureTagline": {
+      "type": "string"
+    },
+    "featureTitle": {
+      "type": "string"
+    },
+    "featureTitleHighlight": {
+      "type": "string"
+    },
+    "featureDescription": {
+      "type": "text"
+    },
+    "featureListItems": {
+      "type": "component",
+      "component": "homepage.feature-list-item",
+      "repeatable": true
+    },
+    "featureLinkText": {
+      "type": "string"
+    },
+    "featureButtonText": {
+      "type": "string"
+    },
+    "featureButtonUrl": {
+      "type": "string"
+    },
+    "servicesTitle": {
+      "type": "string"
+    },
+    "servicesTitleHighlight": {
+      "type": "string"
+    },
+    "servicesSubtitle": {
+      "type": "string"
+    },
+    "whyUsTagline": {
+      "type": "string"
+    },
+    "whyUsTitle": {
+      "type": "string"
+    },
+    "whyUsTitleHighlight": {
+      "type": "string"
+    },
+    "whyUsTitleEnd": {
+      "type": "string"
+    },
+    "whyUsDescription": {
+      "type": "text"
+    },
+    "whyUsInfoBox1Icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "whyUsInfoBox1Title": {
+      "type": "string"
+    },
+    "whyUsInfoBox2Icon1": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "whyUsInfoBox2Icon2": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "whyUsInfoBox2Title": {
+      "type": "string"
+    },
+    "whyUsButtonText": {
+      "type": "string"
+    },
+    "whyUsButtonUrl": {
+      "type": "string"
+    },
+    "whyUsMainImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "whyUsImageCardStat": {
+      "type": "string"
+    },
+    "whyUsImageCardLabel": {
+      "type": "string"
+    },
+    "whyUsCounterItems": {
+      "type": "component",
+      "component": "homepage.counter-item",
+      "repeatable": true
+    },
+    "services": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service.service"
+    },
+     "successStoriesTagline": {
+    "type": "string"
+  },
+  "successStoriesTitle": {
+    "type": "string"
+  },
+  "successStoriesTitleHighlight": {
+    "type": "string"
+  },
+  "successStoriesTitleEnd": {
+    "type": "string"
+  },
+  
+  "successStory1Image": {
+    "type": "media",
+    "multiple": false,
+    "required": false,
+    "allowedTypes": [
+      "images"
+    ]
+  },
+  "successStory1QuoteStart": {
+    "type": "text"
+  },
+  "successStory1QuoteHighlight": {
+    "type": "string"
+  },
+  "successStory1QuoteEnd": {
+    "type": "text"
+  },
+  "successStory1AuthorName": {
+    "type": "string"
+  },
+  "successStory1AuthorCompany": {
+    "type": "string"
+  },
+  
+  "successStoriesRatingValue": {
+    "type": "string"
+  },
+  "successStoriesRatingLabel": {
+    "type": "string"
+  },
+  
+  "successStory2QuoteStart": {
+    "type": "text"
+  },
+  "successStory2QuoteHighlight": {
+    "type": "string"
+  },
+  "successStory2QuoteEnd": {
+    "type": "text"
+  },
+  "successStory2AuthorName": {
+    "type": "string"
+  },
+  "successStory2AuthorCompany": {
+    "type": "string"
+  },
+  
+  "successStoriesCustomerCount": {
+    "type": "string"
+  },
+  "successStoriesCustomerLabel": {
+    "type": "string"
+  },
+  "testimonialsTagline": {
+    "type": "string"
+  },
+  "testimonialsTitle": {
+    "type": "string"
+  },
+  "testimonialsTitleHighlight": {
+    "type": "string"
+  },
+  "testimonialsTitleEnd": {
+    "type": "string"
+  },
+   "faqTagline": {
+    "type": "string"
+  },
+  "faqTitle": {
+    "type": "string"
+  },
+  "faqTitleHighlight": {
+    "type": "string"
+  },
+  "faqTitleEnd": {
+    "type": "string"
+  },
+  "ctaTitle": {
+    "type": "text"
+  },
+  "ctaTitleHighlight": {
+    "type": "string"
+  },
+  "ctaTitleEnd": {
+    "type": "string"
+  },
+  "ctaDescription": {
+    "type": "text"
+  },
+  "ctaButtonText": {
+    "type": "string"
+  },
+  "ctaButtonUrl": {
+    "type": "string"
+  }
+  }
+}
