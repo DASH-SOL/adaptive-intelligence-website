@@ -3,6 +3,25 @@ export default [
   {
     name: 'strapi::session',
     config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          'connect-src': ["'self'", 'https:'],
+          'img-src': [
+            "'self'",
+            'data:',
+            'blob:',
+            'res.cloudinary.com', // Cloudinary images
+          ],
+          'media-src': [
+            "'self'",
+            'data:',
+            'blob:',
+            'res.cloudinary.com',
+          ],
+          upgradeInsecureRequests: null,
+        },
+      },
       key: 'strapi.sid',
       secure: false,  // Disable secure requirement
       sameSite: 'lax',
