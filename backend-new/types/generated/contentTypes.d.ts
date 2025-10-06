@@ -897,6 +897,40 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiLetsTalkSubmissionLetsTalkSubmission
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'lets_talk_submissions';
+  info: {
+    displayName: 'Lets Talk Submission';
+    pluralName: 'lets-talk-submissions';
+    singularName: 'lets-talk-submission';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    company: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    firstName: Schema.Attribute.String;
+    lastName: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::lets-talk-submission.lets-talk-submission'
+    > &
+      Schema.Attribute.Private;
+    message: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    submittedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiServiceService extends Struct.CollectionTypeSchema {
   collectionName: 'services';
   info: {
@@ -1616,6 +1650,7 @@ declare module '@strapi/strapi' {
       'api::eco-page.eco-page': ApiEcoPageEcoPage;
       'api::faq.faq': ApiFaqFaq;
       'api::homepage.homepage': ApiHomepageHomepage;
+      'api::lets-talk-submission.lets-talk-submission': ApiLetsTalkSubmissionLetsTalkSubmission;
       'api::service.service': ApiServiceService;
       'api::services-page.services-page': ApiServicesPageServicesPage;
       'api::setting.setting': ApiSettingSetting;

@@ -1,0 +1,38 @@
+:root {
+  --primary-color: #FF1292;
+  --primary-dark: #e60d82;
+  --background-dark: #151937;
+}
+
+[class*='Login_loginContainer'] {
+  background: linear-gradient(135deg, #151937 0%, #000 100%);
+}
+
+[class*='Login_formContainer'] {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+[class*='MainNav_mainNavWrapper'] {
+  background: #151937 !important;
+}
+
+button[class*='Button-primary'] {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+button[class*='Button-primary']:hover {
+  background-color: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
+}
+
+a[class*='active'] {
+  color: var(--primary-color) !important;
+}
+
+[class*='Header_headerContainer'] {
+  background: white;
+  border-bottom: 1px solid #e5e5e5;
+}

@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lets_talk_submissions",
+  "info": {
+    "singularName": "lets-talk-submission",
+    "pluralName": "lets-talk-submissions",
+    "displayName": "Lets Talk Submission"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "company": {
+      "type": "string"
+    },
+    "message": {
+      "type": "text"
+    },
+    "submittedAt": {
+      "type": "datetime"
+    }
+  }
+}
