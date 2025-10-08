@@ -266,7 +266,7 @@ export async function getStaticProps() {
     const json = await res.json();
     const normalize = (item) => item?.attributes ? { id: item.id, ...item.attributes } : item;
     const allCaseStudies = (json.data || []).map(normalize);
-    return { props: { allCaseStudies }, revalidate: 60 };
+    return { props: { allCaseStudies }, };
   } catch (error) {
     console.error("Error fetching case studies:", error);
     return { props: { allCaseStudies: [] } };

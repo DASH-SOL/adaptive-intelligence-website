@@ -386,7 +386,6 @@ export async function getStaticProps() {
     
     return { 
       props: { allCaseStudies }, 
-      revalidate: 1 // Changed from 60 to 1 for development
     };
   } catch (error) {
     console.error("Error fetching case studies:", error);

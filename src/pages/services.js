@@ -1041,7 +1041,6 @@ export async function getStaticProps() {
     
     return { 
       props: { servicesPageData }, 
-      revalidate: 1 
     };
   } catch (error) {
     console.error("Error in getStaticProps:", error);

@@ -226,7 +226,7 @@ export async function getStaticProps() {
     if (!res.ok) throw new Error(`API fetch failed: ${res.status}`);
     const data = await res.json();
     const homepageData = data?.data?.attributes || data?.data || null; // Handles both structures
-    return { props: { homepageData }, revalidate: 1 };
+    return { props: { homepageData },};
   } catch (error) {
     console.error("Error in getStaticProps:", error);
     return { props: { homepageData: null } };

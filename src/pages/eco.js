@@ -387,7 +387,6 @@ export async function getStaticProps() {
       treeCardStats: finalStats,
       pageData
     },
-    revalidate: 1,
   };
 }
 

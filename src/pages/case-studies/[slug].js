@@ -434,7 +434,6 @@ export async function getStaticProps({ params }) {
     
     return {
       props: { resource, relatedResources, pageSettings },
-      revalidate: 1,
     };
   } catch (error) {
     console.error(`Error fetching case study for slug: ${slug}`, error);
