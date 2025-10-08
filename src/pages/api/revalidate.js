@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-  // Check for the secret token
   if (req.query.secret !== process.env.REVALIDATION_SECRET) {
     return res.status(401).json({ message: 'Invalid token' });
   }
@@ -11,16 +10,33 @@ export default async function handler(req, res) {
     if (req.query.path) {
       pathsToRevalidate.push(req.query.path);
     } 
-    // If webhook body contains entry data (for dynamic pages like case studies)
+    // If webhook body contains entry data
     else if (req.body && req.body.entry) {
       const entry = req.body.entry;
       
       // For case studies with slugs
       if (entry.slug) {
         pathsToRevalidate.push(`/case-studies/${entry.slug}`);
+        pathsToRevalidate.push('/case-studies'); // Also revalidate listing
       }
+    }
+
+    // Special handling: If revalidateAll query param is set, fetch all case study slugs
+    if (req.query.revalidateAll === 'case-studies') {
+      const caseStudiesRes = await fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/case-studies?fields[0]=slug`
+      );
+      const caseStudiesJson = await caseStudiesRes.json();
+      const allSlugs = caseStudiesJson.data || [];
       
-      // Also revalidate the case studies listing page
+      // Add all case study pages
+      allSlugs.forEach(cs => {
+        if (cs.slug) {
+          pathsToRevalidate.push(`/case-studies/${cs.slug}`);
+        }
+      });
+      
+      // Also add the listing page
       pathsToRevalidate.push('/case-studies');
     }
 
@@ -28,14 +44,18 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'No path to revalidate' });
     }
 
+    // Remove duplicates
+    pathsToRevalidate = [...new Set(pathsToRevalidate)];
+
     // Revalidate all paths
-    const results = await Promise.all(
+    await Promise.all(
       pathsToRevalidate.map(path => res.revalidate(path))
     );
     
     return res.json({ 
       revalidated: true, 
-      paths: pathsToRevalidate 
+      paths: pathsToRevalidate,
+      count: pathsToRevalidate.length
     });
   } catch (err) {
     console.error('Revalidation error:', err);
