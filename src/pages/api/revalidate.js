@@ -1,22 +1,23 @@
-// File: src/pages/api/revalidate.js
 export default async function handler(req, res) {
-  // Check for the secret token to prevent unauthorized access
-  if (req.query.secret !== process.env.REVALIDATION_TOKEN) {
+  // Check for the secret token
+  if (req.query.secret !== process.env.REVALIDATION_SECRET) {
     return res.status(401).json({ message: 'Invalid token' });
   }
 
   try {
-    // This is the key part: re-generate the page for the path provided in the webhook body
-    // Strapi will send a body like { model: 'homepage', entry: { slug: '...' } }
-    // We will need to map the model to the path.
-    const pathToRevalidate = req.body.entry.slug 
-      ? `/case-studies/${req.body.entry.slug}` 
-      : '/'; // Default to homepage if no slug
+    // Get path from query parameter (simpler approach)
+    const path = req.query.path || '/';
+    
+    if (!path) {
+      return res.status(400).json({ message: 'Path is required' });
+    }
 
-    await res.revalidate(pathToRevalidate);
-    return res.json({ revalidated: true });
+    // Revalidate the specified path
+    await res.revalidate(path);
+    
+    return res.json({ revalidated: true, path });
   } catch (err) {
-    // If there was an error, Next.js will continue to show the last successfully generated page
-    return res.status(500).send('Error revalidating');
+    console.error('Revalidation error:', err);
+    return res.status(500).json({ message: 'Error revalidating', error: err.message });
   }
 }
