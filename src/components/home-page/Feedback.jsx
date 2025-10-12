@@ -2,7 +2,36 @@ import Image from "next/image";
 import React from "react";
 
 const Feedback = ({ feedbackData }) => {
-  const images = [ /* ...your shapes array... */ ];
+  const images = [
+    {
+      src: "/images/ChromeShapes/Shape_FatCylinder2.png",
+      alt: "shape",
+      className: "lazy-img shapes shape-one",
+      width: 236,
+      height: 200,
+    },
+    {
+      src: "/images/ChromeShapes/Shape_JellyCube1.png",
+      alt: "shape",
+      className: "lazy-img shapes shape-two",
+      width: 170,
+      height: 150,
+    },
+    {
+      src: "/images/ChromeShapes/Shape_Macaroni2.png",
+      alt: "shape",
+      className: "lazy-img shapes shape-three",
+      width: 153,
+      height: 100,
+    },
+    {
+      src: "/images/ChromeShapes/Shape_Ring1.png",
+      alt: "shape",
+      className: "lazy-img shapes shape-four",
+      width: 200,
+      height: 225,
+    },
+  ];
 
   // CORRECTED: The avatar URL path is now simpler to match your Strapi data.
   const avatarUrl = feedbackData?.feedbackAvatar?.url
