@@ -58,39 +58,6 @@ const SuccessStory = ({ successStoryData }) => {
               </div>
             </div>
           </div>
-          <div className="feedback-block-nine position-relative mt-110">
-            <div className="row">
-              <div className="col-lg-10 ms-auto">
-                <div
-                  className="rating d-flex flex-column align-items-center justify-content-center mb-55 lg-mb-30"
-                  data-aos="fade-up"
-                >
-                  <div className="font-recoleta tx-dark rating-value">{ratingValue}</div>
-                  <div className="fs-20 tx-dark">{ratingLabel}</div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-lg-5 ms-auto" data-aos="fade-right">
-                <h4 className="text-white fw-normal mb-25">
-                  {story2AuthorName} <span className="opacity-75">{story2AuthorCompany}</span>
-                </h4>
-                <p className="m0">
-                  "{story2QuoteStart}<span style={{ color: "#00FFFF" }}>{story2QuoteHighlight}</span> {story2QuoteEnd}"
-                </p>
-              </div>
-              <div className="col-lg-5">
-                <Image
-                  src="/images/ChromeShapes/Shape_JellyCube1.png"
-                  alt="img"
-                  className="lazy-img img-two "
-                  data-aos="fade-up"
-                  width={414}
-                  height={378}
-                />
-              </div>
-            </div>
-          </div>
         </div>
         <div
           className="customer-data d-flex flex-column align-items-center justify-content-center"
