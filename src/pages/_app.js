@@ -17,13 +17,13 @@ const customStyle = {
     desktop: {
       xOffset: '15',
       yOffset: '15',
-      position: 'bl'
+      position: 'br'
     },
 
     mobile: {
       xOffset: 15,
       yOffset: 15,
-      position: 'bl'
+      position: 'br'
     }
   }
 };
