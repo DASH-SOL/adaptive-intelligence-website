@@ -107,23 +107,15 @@ const MainMenu = () => {
           
           {/* UPDATED: About link with its specific dropdown */}
           {/* FIXED: About link that goes to /about page AND has dropdown */}
-<li className="nav-item dropdown">
+<li className="nav-item">
   <Link
     href="/about"
-    className={`nav-link dropdown-toggle ${isActive("/about") ? "active-menu" : ""}`}
+    className={`nav-link ${isActive("/about") ? "active-menu" : ""}`}
     style={{ userSelect: "none" }}
   >
     About
   </Link>
-  <ul className="dropdown-menu">
-    {aboutDropdownItems.map((item, index) => (
-      <li key={index}>
-        <Link href={item.link} className="dropdown-item">
-          <span>{item.name}</span>
-        </Link>
-      </li>
-    ))}
-  </ul>
+
 </li>
         </ul>
       </div>
