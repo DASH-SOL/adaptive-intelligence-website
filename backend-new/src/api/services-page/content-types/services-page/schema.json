@@ -49,17 +49,10 @@
     "approachDescription": {
       "type": "text"
     },
-    "approachStat1Number": {
-      "type": "string"
-    },
-    "approachStat1Label": {
-      "type": "string"
-    },
-    "approachStat2Number": {
-      "type": "string"
-    },
-    "approachStat2Label": {
-      "type": "string"
+    "approachPhases": {
+      "type": "component",
+      "component": "shared.key-phase",
+      "repeatable": true
     },
     "approachImage": {
       "type": "media",
@@ -67,76 +60,6 @@
       "allowedTypes": [
         "images"
       ]
-    },
-    "approachOverlayTitle": {
-      "type": "string"
-    },
-    "approachOverlayDescription": {
-      "type": "string"
-    },
-    "approachFeature1Title": {
-      "type": "string"
-    },
-    "approachFeature1Description": {
-      "type": "string"
-    },
-    "approachFeature2Title": {
-      "type": "string"
-    },
-    "approachFeature2Description": {
-      "type": "string"
-    },
-    "capabilitiesTagline": {
-      "type": "string"
-    },
-    "capabilitiesTitle": {
-      "type": "string"
-    },
-    "capabilitiesTitleHighlight": {
-      "type": "string"
-    },
-    "capabilitiesDescription": {
-      "type": "text"
-    },
-    "capabilitiesImage": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "capability1Title": {
-      "type": "string"
-    },
-    "capability1Description": {
-      "type": "string"
-    },
-    "capability2Title": {
-      "type": "string"
-    },
-    "capability2Description": {
-      "type": "string"
-    },
-    "capability3Title": {
-      "type": "string"
-    },
-    "capability3Description": {
-      "type": "string"
-    },
-    "capability4Title": {
-      "type": "string"
-    },
-    "capability4Description": {
-      "type": "string"
-    },
-    "capabilitiesBottomText": {
-      "type": "text"
-    },
-    "capabilitiesButtonText": {
-      "type": "string"
-    },
-    "capabilitiesButtonUrl": {
-      "type": "string"
     },
     "testimonialsTagline": {
       "type": "string"
@@ -181,6 +104,64 @@
       "type": "string"
     },
     "ctaButtonUrl": {
+      "type": "string"
+    },
+    "approachButtonText": {
+      "type": "string"
+    },
+    "approachButtonUrl": {
+      "type": "string"
+    },
+    "insightsHeading": {
+      "type": "string"
+    },
+    "insightsBodyText": {
+      "type": "text"
+    },
+    "insightsButtonText": {
+      "type": "string"
+    },
+    "insightsButtonUrl": {
+      "type": "string"
+    },
+    "insightsImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "industriesHeading": {
+      "type": "string"
+    },
+    "industriesHeadingHighlight": {
+      "type": "string"
+    },
+    "industriesList": {
+      "type": "component",
+      "component": "shared.industry-item",
+      "repeatable": true
+    },
+    "industriesSubtext": {
+      "type": "text"
+    },
+    "industriesImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "industriesButtonText": {
+      "type": "string"
+    },
+    "industriesButtonUrl": {
       "type": "string"
     }
   }

@@ -163,6 +163,16 @@
     },
     "missionCustomerCount": {
       "type": "string"
+    },
+    "counterItems": {
+      "type": "component",
+      "component": "homepage.counter-item",
+      "repeatable": true
+    },
+    "whatWeDoCards": {
+      "type": "component",
+      "component": "about.what-we-do-card",
+      "repeatable": true
     }
   }
 }

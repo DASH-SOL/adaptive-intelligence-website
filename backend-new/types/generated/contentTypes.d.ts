@@ -441,6 +441,7 @@ export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    counterItems: Schema.Attribute.Component<'homepage.counter-item', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -487,6 +488,7 @@ export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
     values: Schema.Attribute.Component<'about.value-card', true>;
     valuesTagline: Schema.Attribute.String;
     valuesTitle: Schema.Attribute.String;
+    whatWeDoCards: Schema.Attribute.Component<'about.what-we-do-card', true>;
     whatWeDoDescription: Schema.Attribute.Text;
     whatWeDoTitle: Schema.Attribute.String;
     whoWeAreBadgeNumber: Schema.Attribute.String;
@@ -996,37 +998,14 @@ export interface ApiServicesPageServicesPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    approachButtonText: Schema.Attribute.String;
+    approachButtonUrl: Schema.Attribute.String;
     approachDescription: Schema.Attribute.Text;
-    approachFeature1Description: Schema.Attribute.String;
-    approachFeature1Title: Schema.Attribute.String;
-    approachFeature2Description: Schema.Attribute.String;
-    approachFeature2Title: Schema.Attribute.String;
     approachImage: Schema.Attribute.Media<'images'>;
-    approachOverlayDescription: Schema.Attribute.String;
-    approachOverlayTitle: Schema.Attribute.String;
-    approachStat1Label: Schema.Attribute.String;
-    approachStat1Number: Schema.Attribute.String;
-    approachStat2Label: Schema.Attribute.String;
-    approachStat2Number: Schema.Attribute.String;
+    approachPhases: Schema.Attribute.Component<'shared.key-phase', true>;
     approachTagline: Schema.Attribute.String;
     approachTitle: Schema.Attribute.String;
     approachTitleHighlight: Schema.Attribute.String;
-    capabilitiesBottomText: Schema.Attribute.Text;
-    capabilitiesButtonText: Schema.Attribute.String;
-    capabilitiesButtonUrl: Schema.Attribute.String;
-    capabilitiesDescription: Schema.Attribute.Text;
-    capabilitiesImage: Schema.Attribute.Media<'images'>;
-    capabilitiesTagline: Schema.Attribute.String;
-    capabilitiesTitle: Schema.Attribute.String;
-    capabilitiesTitleHighlight: Schema.Attribute.String;
-    capability1Description: Schema.Attribute.String;
-    capability1Title: Schema.Attribute.String;
-    capability2Description: Schema.Attribute.String;
-    capability2Title: Schema.Attribute.String;
-    capability3Description: Schema.Attribute.String;
-    capability3Title: Schema.Attribute.String;
-    capability4Description: Schema.Attribute.String;
-    capability4Title: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1040,6 +1019,22 @@ export interface ApiServicesPageServicesPage extends Struct.SingleTypeSchema {
     faqTitle: Schema.Attribute.String;
     faqTitleEnd: Schema.Attribute.String;
     faqTitleHighlight: Schema.Attribute.String;
+    industriesButtonText: Schema.Attribute.String;
+    industriesButtonUrl: Schema.Attribute.String;
+    industriesHeading: Schema.Attribute.String;
+    industriesHeadingHighlight: Schema.Attribute.String;
+    industriesImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    industriesList: Schema.Attribute.Component<'shared.industry-item', true>;
+    industriesSubtext: Schema.Attribute.Text;
+    insightsBodyText: Schema.Attribute.Text;
+    insightsButtonText: Schema.Attribute.String;
+    insightsButtonUrl: Schema.Attribute.String;
+    insightsHeading: Schema.Attribute.String;
+    insightsImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

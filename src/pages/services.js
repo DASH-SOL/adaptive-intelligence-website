@@ -11,6 +11,7 @@ import CopyrightFooter from "@/components/footer/CopyrightFooter";
 import Testimonial from "@/components/home-page/Testimonial";
 import Faq from "@/components/home-page/Faq";
 import ClientCarousel from "@/components/ClientCarousel"; // Import the new client component
+import LatestCaseStudiesSection from '@/components/case-studies/LatestCaseStudiesSection'; // Import the component
 
 
 const ServicesHeroContent = ({ servicesData }) => {
@@ -79,6 +80,7 @@ const ServicesPage = ({ servicesPageData }) => {
                       width={220}
                       height={5}
                     />
+            
                   </span>
                 </h2>
                 <p className="fs-20 mt-20" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
@@ -124,231 +126,191 @@ const ServicesPage = ({ servicesPageData }) => {
         </div>
       </div>
      {/* Approach Section - White Background */}
+{/* 👇 REPLACEMENT Approach Section - White Background 👇 */}
 <div className="fancy-feature-thirtyOne position-relative zn2 pt-180 pb-180 lg-pt-140 lg-pb-140" style={{ background: 'white' }}>
   <div className="container">
-    <div className="row align-items-center">
-      <div className="col-lg-6">
-        <div className="approach-content-white">
+    <div className="row">
+      <div className="col-lg-10 mx-auto">
+        <div className="approach-content-white text-center">
+          {/* Section Title */}
           <div className="sc-title" style={{ color: '#FF1292', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '14px', fontWeight: '600', marginBottom: '20px' }}>
             {servicesPageData?.approachTagline || "Our Approach"}
           </div>
           <h2 className="main-title font-recoleta fw-normal tx-dark">
-            {servicesPageData?.approachTitle || "Strategic"}
+            {servicesPageData?.approachTitle || "Our 5 Key"}
             <span className="position-relative">
               {" "}
-              {servicesPageData?.approachTitleHighlight || "Excellence"}
+              {servicesPageData?.approachTitleHighlight || "Phases"}
               <Image
                 src="/images/shape/shape_122.svg"
                 alt="icon shape"
                 width={220}
                 height={5}
+                className="mx-auto"
               />
             </span>
           </h2>
-          <p className="approach-text-dark">
-            {servicesPageData?.approachDescription || "While we deploy tried and true marketing methodology and brand strategy to each of our accounts, we also emphasize a bespoke approach that takes a deeper look at your marketplace positioning and what's needed to make a splash that both your audience and industry will care about."}
-          </p>
-          <div className="approach-stats-dark">
-            <div className="stat-item-dark">
-              <div className="stat-number-dark">{servicesPageData?.approachStat1Number || "500+"}</div>
-              <div className="stat-label-dark">{servicesPageData?.approachStat1Label || "Projects Delivered"}</div>
-            </div>
-            <div className="stat-item-dark">
-              <div className="stat-number-dark">{servicesPageData?.approachStat2Number || "98%"}</div>
-              <div className="stat-label-dark">{servicesPageData?.approachStat2Label || "Client Satisfaction"}</div>
-            </div>
+
+          {/* New 5 Key Phases List */}
+          <div className="phases-container mt-80 lg-mt-50 text-start">
+            {servicesPageData?.approachPhases?.map((phase, index) => (
+              <div key={index} className="phase-item-static">
+                <div className="phase-number-static">{`0${index + 1}`}</div>
+                <div className="phase-text-content">
+                  <h4 className="phase-title-static">{phase.title}</h4>
+                  <p className="phase-description-static">{phase.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-      </div>
-   
-<div className="col-lg-6">
-  <div className="approach-visual-white">
-    <div className="approach-image-wrapper">
-      <Image 
-        src={
-          servicesPageData?.approachImage?.url
-            ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${servicesPageData.approachImage.url}`
-            : "/images/assets/Strategic-Excellence-How-We-Help-Organizations-Achieve-Sustainable-Success-scaled.jpg"
-        }
-        alt="Our strategic approach"
-        width={600}
-        height={400}
-        className="approach-main-image"
-      />
-      <div className="approach-overlay-card">
-        <h4>{servicesPageData?.approachOverlayTitle || "Strategic Planning"}</h4>
-        <p>{servicesPageData?.approachOverlayDescription || "Data-driven insights for market positioning"}</p>
-      </div>
-    </div>
-    <div className="approach-features-white">
-      <div className="feature-item-dark">
-        <div className="feature-icon">
-          <Image
-            src="/images/icon/innovation.png"
-            alt="Creative Excellence"
-            width={30}
-            height={30}
-          />
-        </div>
-        <div>
-          <h4>{servicesPageData?.approachFeature1Title || "Creative Excellence"}</h4>
-          <p>{servicesPageData?.approachFeature1Description || "Award-winning design and content creation"}</p>
-        </div>
-      </div>
-      <div className="feature-item-dark">
-        <div className="feature-icon">
-          <Image
-            src="/images/icon/focus.png"
-            alt="Results Focus"
-            width={30}
-            height={30}
-          />
-        </div>
-        <div>
-          <h4>{servicesPageData?.approachFeature2Title || "Results Focus"}</h4>
-          <p>{servicesPageData?.approachFeature2Description || "Measurable outcomes that drive growth"}</p>
+          
+          {/* Body Text with CTA */}
+          <div className="col-lg-8 mx-auto">
+              <p className="approach-text-dark mt-60 lg-mt-40 fs-20">
+              {servicesPageData?.approachDescription || "This structured process ensures we cover every critical step, from initial understanding to a successful market launch, delivering results that are both measurable and impactful."}
+              </p>
+              <LetsTalkButton 
+                  buttonText={servicesPageData?.approachButtonText || "Start Your Project"} 
+                  href={servicesPageData?.approachButtonUrl || "/contact"}
+              />
+          </div>
+
         </div>
       </div>
     </div>
   </div>
 </div>
+
+{/* 👇 NEW Marketing Insights Section 👇 */}
+      <div className="insights-section-wrapper" style={{ background: '#f8f9fa' }}>
+        <div className="container">
+          <div className="row align-items-center">
+            {/* Image Column */}
+            <div className="col-lg-6">
+              <div className="insights-image-container" data-aos="fade-right">
+                <Image 
+                  src={
+                    servicesPageData?.insightsImage?.url
+                      ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${servicesPageData.insightsImage.url}`
+                      : "/images/assets/marketing_insights_placeholder.jpg" // Add a good placeholder image to this path
+                  }
+                  alt={servicesPageData?.insightsHeading || "Marketing Insights"}
+                  width={600}
+                  height={550}
+                  className="insights-main-image"
+                />
+              </div>
+            </div>
+            
+            {/* Text Content Column */}
+            <div className="col-lg-6">
+              <div className="insights-text-content" data-aos="fade-left">
+                <h2 className="main-title font-recoleta fw-normal tx-dark">
+                  {servicesPageData?.insightsHeading || "Marketing Insights"}
+                </h2>
+                <p className="body-text fs-20 mt-30 mb-50 lg-mb-30">
+                  {servicesPageData?.insightsBodyText || "Stay ahead of the curve with our data-driven analysis and strategic guidance. We help you navigate the complexities of the market to make informed decisions that drive success."}
+                </p>
+                <LetsTalkButton 
+                  buttonText={servicesPageData?.insightsButtonText || "Market Trend Report"}
+                  href={servicesPageData?.insightsButtonUrl || "/contact"}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Enhanced Capabilities Section - Navy Background */}
-<div className="fancy-feature-thirtyOne position-relative zn2 pt-180 pb-180 lg-pt-140 lg-pb-140" style={{ background: '#151937' }}>
-  <div className="container">
-    <div className="row">
-      <div className="col-xl-8 col-lg-9 m-auto">
-        <div
-          className="title-style-ten text-center pb-40 lg-pb-20"
-          data-aos="fade-up"
-        >
-          <div className="sc-title" style={{ color: '#FF1292', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '14px', fontWeight: '600', marginBottom: '20px' }}>
-            {servicesPageData?.capabilitiesTagline || "Our Capabilities"}
-          </div>
-          <h2 className="main-title font-recoleta fw-normal" style={{ color: 'white' }}>
-            {servicesPageData?.capabilitiesTitle || "Industry-Leading"}
-            <span className="position-relative">
-              {" "}
-              {servicesPageData?.capabilitiesTitleHighlight || "Expertise"}
-              <Image
-                src="/images/shape/shape_122.svg"
-                alt="icon shape"
-                width={220}
-                height={5}
-              />
-            </span>
-          </h2>
-          <p className="fs-20 mt-20" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-            {servicesPageData?.capabilitiesDescription || "Our set of services have been built and refined for over a decade, which is why our client success ratings are among the highest in the industry."}
-          </p>
-        </div>
-      </div>
-    </div>
-    
-    <div className="row align-items-center">
-      <div className="col-lg-6">
-        <div className="capabilities-image-section">
-          <div className="capabilities-image-wrapper">
-            <Image 
-              src={
-                servicesPageData?.capabilitiesImage?.url
-                  ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${servicesPageData.capabilitiesImage.url}`
-                  : "/images/assets/team-diverse-analysts-consultants-reviewing-data-checklists_482257-125957.jpg"
-              }
-              alt="Our team capabilities"
-              width={600}
-              height={450}
-              className="capabilities-main-image"
-            />
-          </div>
-        </div>
-      </div>
-      
-      <div className="col-lg-6">
-        <div className="capabilities-content">
-          <div className="capabilities-grid-enhanced">
-            <div className="capability-card-enhanced">
-              <div className="capability-icon">
-                <Image 
-                  src="/images/icon/support.png" 
-                  alt="Support"
-                  width={35}
-                  height={35}
-                />
+   {/* 👇 REVISED Industries Section (with Image and CTA) - Navy Background 👇 */}
+      <div className="fancy-feature-thirtyOne position-relative zn2 pt-180 pb-180 lg-pt-140 lg-pb-140" style={{ background: '#151937' }}>
+        <div className="container">
+          {/* Section Heading */}
+          <div className="row">
+            <div className="col-xl-8 col-lg-9 m-auto">
+              <div
+                className="title-style-ten text-center pb-80 lg-pb-50"
+                data-aos="fade-up"
+              >
+                <h2 className="main-title font-recoleta fw-normal" style={{ color: 'white' }}>
+                  {servicesPageData?.industriesHeading || "Industries We Have"}
+                  <span className="position-relative">
+                    {" "}
+                    {servicesPageData?.industriesHeadingHighlight || "Served"}
+                    <Image
+                      src="/images/shape/shape_122.svg"
+                      alt="icon shape"
+                      width={220}
+                      height={5}
+                      className="mx-auto"
+                    />
+                  </span>
+                </h2>
               </div>
-              <div className="capability-content">
-                <h4>{servicesPageData?.capability1Title || "24/7 Support"}</h4>
-                <p>{servicesPageData?.capability1Description || "Available whenever you need us"}</p>
-              </div>
-              <div className="capability-number">01</div>
-            </div>
-            
-            <div className="capability-card-enhanced">
-              <div className="capability-icon">
-                <Image 
-                  src="/images/icon/reach.png" 
-                  alt="Global Reach"
-                  width={35}
-                  height={35}
-                />
-              </div>
-              <div className="capability-content">
-                <h4>{servicesPageData?.capability2Title || "Global Reach"}</h4>
-                <p>{servicesPageData?.capability2Description || "Serving clients worldwide"}</p>
-              </div>
-              <div className="capability-number">02</div>
-            </div>
-            
-            <div className="capability-card-enhanced">
-              <div className="capability-icon">
-                <Image 
-                  src="/images/icon/trophy.png" 
-                  alt="Award Winning"
-                  width={35}
-                  height={35}
-                />
-              </div>
-              <div className="capability-content">
-                <h4>{servicesPageData?.capability3Title || "Award Winning"}</h4>
-                <p>{servicesPageData?.capability3Description || "Recognized industry excellence"}</p>
-              </div>
-              <div className="capability-number">03</div>
-            </div>
-            
-            <div className="capability-card-enhanced">
-              <div className="capability-icon">
-                <Image 
-                  src="/images/icon/innovation.png" 
-                  alt="Innovation"
-                  width={35}
-                  height={35}
-                />
-              </div>
-              <div className="capability-content">
-                <h4>{servicesPageData?.capability4Title || "Innovation"}</h4>
-                <p>{servicesPageData?.capability4Description || "Cutting-edge solutions"}</p>
-              </div>
-              <div className="capability-number">04</div>
             </div>
           </div>
-          
-          <div className="capabilities-bottom-content">
-            <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '1rem', lineHeight: '1.6', marginBottom: '25px' }}>
-              {servicesPageData?.capabilitiesBottomText || "Simply put, expertly crafted content and innovative creative strategy is our bread and butter."}
-            </p>
-            <LetsTalkButton 
-              buttonText={servicesPageData?.capabilitiesButtonText || "View Our Work"}
-              href={servicesPageData?.capabilitiesButtonUrl || "/case-studies"}
-            />
+
+          {/* Main Content: Image + Grid */}
+          <div className="row align-items-center">
+            {/* Image Column */}
+            <div className="col-lg-6" data-aos="fade-right">
+                <div className="capabilities-image-wrapper">
+                    <Image 
+                    src={
+                        servicesPageData?.industriesImage?.url
+                        ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${servicesPageData.industriesImage.url}`
+                        : "/images/assets/team-diverse-analysts-consultants-reviewing-data-checklists_482257-125957.jpg"
+                    }
+                    alt="Industries served"
+                    width={600}
+                    height={450}
+                    className="capabilities-main-image"
+                    />
+                </div>
+            </div>
+
+            {/* Industries Grid and CTA Column */}
+            <div className="col-lg-6" data-aos="fade-left">
+              <div className="capabilities-content ps-lg-5">
+                <div className="capabilities-grid-enhanced">
+                  {/* Dynamically render industries */}
+                  {servicesPageData?.industriesList?.map((industry, index) => (
+                    <div key={index} className="capability-card-enhanced industry-card">
+                      <div className="capability-icon">
+                        <Image 
+                          src={
+                            industry.icon?.url
+                              ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${industry.icon.url}`
+                              : "/images/icon/innovation.png" // Fallback icon
+                          } 
+                          alt={`${industry.name} icon`} 
+                          width={35} 
+                          height={35} 
+                        />
+                      </div>
+                      <div className="capability-content">
+                        <h4>{industry.name}</h4>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Subtext and CTA */}
+                <div className="mt-50">
+                  <p className="industries-subtext" style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '1.1rem', marginBottom: '30px' }}>
+                    {servicesPageData?.industriesSubtext || "Not seeing your industry? Reach out to our team."}
+                  </p>
+                  <LetsTalkButton 
+                    buttonText={servicesPageData?.industriesButtonText || "Discuss Your Project"}
+                    href={servicesPageData?.industriesButtonUrl || "/contact"}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+
+      <LatestCaseStudiesSection />
 
       {/* THIS SECTION IS NOW DYNAMIC */}
       <div className="clients-section pt-100 pb-100" style={{ background: '#f8f9fa' }}>
@@ -789,7 +751,7 @@ const ServicesPage = ({ servicesPageData }) => {
           position: relative;
           transition: all 0.3s ease;
           display: flex;
-          align-items: flex-start;
+          align-items: center;
           gap: 15px;
         }
 
@@ -1020,6 +982,103 @@ const ServicesPage = ({ servicesPageData }) => {
             height: 250px;
           }
         }
+
+        .phases-container {
+        max-width: 800px;
+        margin: 0 auto; /* Center the container */
+    }
+
+    .phase-item-static {
+        display: flex;
+        align-items: flex-start; /* Align number to the top of the text */
+        gap: 25px;
+        padding: 30px 0;
+        border-bottom: 1px solid #e9ecef;
+    }
+    
+    .phase-item-static:last-child {
+        border-bottom: none; /* Remove border from the last item */
+    }
+
+    .phase-number-static {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #FF1292;
+        font-family: 'Recoleta', serif;
+        line-height: 1.2;
+    }
+
+    .phase-text-content {
+        flex: 1;
+    }
+
+    .phase-title-static {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #151937;
+        font-family: 'Recoleta', serif;
+        margin: 0 0 10px;
+    }
+    
+    .phase-description-static {
+        color: #666;
+        line-height: 1.7;
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+    @media (max-width: 768px) {
+        .phase-item-static {
+            padding: 25px 0;
+            gap: 15px;
+        }
+        .phase-title-static {
+            font-size: 1.3rem;
+        }
+        .phase-description-static {
+            font-size: 1rem;
+        }
+    }
+        .insights-section-wrapper {
+        padding: 120px 0;
+    }
+
+    .insights-image-container {
+        position: relative;
+    }
+
+    .insights-main-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    }
+    
+    .insights-text-content {
+        padding-left: 40px;
+    }
+
+    .insights-text-content .main-title {
+        line-height: 1.3;
+    }
+    
+    .insights-text-content .body-text {
+        color: #555;
+        line-height: 1.7;
+    }
+    
+    /* Responsive styles for the new section */
+    @media (max-width: 991px) {
+        .insights-text-content {
+            padding-left: 0;
+            margin-top: 50px;
+            text-align: center;
+        }
+        .insights-section-wrapper {
+            padding: 100px 0;
+        }
+    }
       `}</style>
     </>
   );

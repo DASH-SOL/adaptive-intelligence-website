@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_industry_items",
+  "info": {
+    "displayName": "Industry Item"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

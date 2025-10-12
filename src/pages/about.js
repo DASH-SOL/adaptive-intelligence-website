@@ -12,6 +12,7 @@ import Block2 from "@/components/about/Block2";
 import CounterSection from "@/components/home-page/Counter";
 import Hero from "@/components/home-page/hero";
 import LetsTalkButton from '@/components/LetsTalkButton';
+import Counter from "@/components/home-page/Counter";
 
 export const metadata = {
   title: "About Adaptive Intelligence | About Our Agency",
@@ -99,17 +100,11 @@ const About = ({ treeCardStats, pageData }) => {
         </div>
       </Hero>
 
-      {/* Stats Section */}
-      <div className="fancy-feature-fiftyEight position-relative zn2 pt-180 md-pt-150">
+       {/* Counter Section */}
+      <div className="wrapper mt-90 lg-mt-30">
         <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-10">
-              <CounterSection />
-              <div className="text-center mt-30" data-aos="fade-up" data-aos-delay="200">
-                <p className="fs-20 tx-dark fw-500">{pageData?.statsSubtitle || '3x Top Creative Agency - Upwork'}</p>
-              </div>
-            </div>
-          </div>
+          {/* Pass the counter items from the About Page data */}
+          <CounterSection counterData={pageData?.counterItems} />
         </div>
       </div>
 
@@ -207,10 +202,10 @@ const About = ({ treeCardStats, pageData }) => {
             </h2>
           </div>
           <div className="card-wrapper pt-45 lg-pt-20 pb-55 lg-pb-30 mt-85 lg-mt-50">
-            <div className="row justify-content-center">
-              <Block2 />
-            </div>
-          </div>
+  <div className="row justify-content-center">
+    <Block2 cards={pageData?.whatWeDoCards} />
+  </div>
+</div>
           <div className="row">
             <div className="col-xl-10 m-auto">
               <p className="text-lg tx-dark text-center lh-lg mt-25 md-mt-20" data-aos="fade-up">

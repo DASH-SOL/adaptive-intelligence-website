@@ -37,11 +37,15 @@ const CounterSection = ({ counterData }) => {
     { id: 3, title: "Cities", value: 4, symbol: "+", color: "#00FCFC" },
     { id: 4, title: "Successful Projects", value: 439, symbol: "+", color: "#9671FF" },
   ];
+  // Determine the column class based on the number of items
+  const columnClass = items.length === 5 
+    ? "col-lg col-sm-6" // If 5 items, use flexible columns on large screens
+    : "col-lg-3 col-sm-6"; // Default to 4 columns if not 5 items
 
   return (
     <div className="row">
       {items.map((item) => (
-        <div className="col-lg-3 col-sm-6" key={item.id}>
+        <div className={columnClass} key={item.id}>
           <CounterItem data={item} />
         </div>
       ))}

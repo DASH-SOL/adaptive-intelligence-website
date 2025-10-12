@@ -22,6 +22,18 @@ export interface AboutValueCard extends Struct.ComponentSchema {
   };
 }
 
+export interface AboutWhatWeDoCard extends Struct.ComponentSchema {
+  collectionName: 'components_about_what_we_do_cards';
+  info: {
+    displayName: 'What We Do Card';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface CaseStudiesPageFaqItem extends Struct.ComponentSchema {
   collectionName: 'components_case_studies_page_faq_items';
   info: {
@@ -103,6 +115,17 @@ export interface HomepageFeatureListItem extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedIndustryItem extends Struct.ComponentSchema {
+  collectionName: 'components_shared_industry_items';
+  info: {
+    displayName: 'Industry Item';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    name: Schema.Attribute.String;
+  };
+}
+
 export interface SharedInsight extends Struct.ComponentSchema {
   collectionName: 'components_shared_insights';
   info: {
@@ -110,6 +133,17 @@ export interface SharedInsight extends Struct.ComponentSchema {
   };
   attributes: {
     text: Schema.Attribute.String;
+  };
+}
+
+export interface SharedKeyPhase extends Struct.ComponentSchema {
+  collectionName: 'components_shared_key_phases';
+  info: {
+    displayName: 'Key Phase';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
   };
 }
 
@@ -128,13 +162,16 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'about.bullet-point': AboutBulletPoint;
       'about.value-card': AboutValueCard;
+      'about.what-we-do-card': AboutWhatWeDoCard;
       'case-studies-page.faq-item': CaseStudiesPageFaqItem;
       'creatives.benefit-item': CreativesBenefitItem;
       'creatives.value-item': CreativesValueItem;
       'eco.hub-card': EcoHubCard;
       'homepage.counter-item': HomepageCounterItem;
       'homepage.feature-list-item': HomepageFeatureListItem;
+      'shared.industry-item': SharedIndustryItem;
       'shared.insight': SharedInsight;
+      'shared.key-phase': SharedKeyPhase;
       'shared.tag': SharedTag;
     }
   }
