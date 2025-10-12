@@ -45,10 +45,18 @@
     "valuesTitle": {
       "type": "string"
     },
-    "values": {
-      "type": "component",
-      "component": "creatives.value-item",
-      "repeatable": true
+    "valuesDescription": {
+      "type": "text"
+    },
+    "valuesImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "benefitsTagline": {
       "type": "string"
@@ -56,10 +64,18 @@
     "benefitsTitle": {
       "type": "string"
     },
-    "benefits": {
-      "type": "component",
-      "component": "creatives.benefit-item",
-      "repeatable": true
+    "benefitsDescription": {
+      "type": "text"
+    },
+    "benefitsImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "ctaTitle": {
       "type": "string"

@@ -135,56 +135,66 @@ const Creatives = ({ pageData }) => {
         </div>
       </div>
 
-      {/* Values Section */}
+{/* --- REVISED Values Section (Image Left) --- */}
       <div className="values-section pt-150 pb-150 lg-pt-120 lg-pb-120" style={{ background: '#f8f9fa' }}>
         <div className="container">
-          <div className="row">
-            <div className="col-12 text-center mb-60">
-              <div className="sc-title">{pageData.valuesTagline || 'Our Values'}</div>
-              <h2 className="section-title font-recoleta">{pageData.valuesTitle || 'What Drives Us'}</h2>
-            </div>
-          </div>
-          <div className="row g-4">
-            {pageData.values?.map((value, index) => (
-              <div key={value.id || index} className="col-lg-6 col-md-6">
-                <div className="value-card">
-                  <div className="value-number" style={{ color: value.color || '#FF1292' }}>
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
-                  <h3 className="value-title">{value.title}</h3>
-                  <p className="value-description">{value.description}</p>
-                </div>
+          <div className="row align-items-center">
+            <div className="col-lg-6">
+              <div className="mission-image">
+                <Image
+                  src={
+                    pageData.valuesImage?.url
+                      ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageData.valuesImage.url}`
+                      : '/images/media/img_133.jpg' // Fallback
+                  }
+                  alt={pageData.valuesTitle || 'Our Values'}
+                  width={600}
+                  height={450}
+                  className="rounded-img"
+                />
               </div>
-            ))}
+            </div>
+            <div className="col-lg-6">
+              <div className="mission-content ps-lg-5">
+                <div className="sc-title">{pageData.valuesTagline || 'Our Values'}</div>
+                <h2 className="section-title font-recoleta">{pageData.valuesTitle || 'What Drives Us'}</h2>
+                <p className="mission-text mt-30">
+                  {pageData.valuesDescription}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Benefits Section */}
+{/* --- REVISED Benefits Section (Image Right) --- */}
       <div className="benefits-section pt-150 pb-150 lg-pt-120 lg-pb-120" style={{ background: 'white' }}>
         <div className="container">
-          <div className="row">
-            <div className="col-12 text-center mb-60">
-              <div className="sc-title">{pageData.benefitsTagline || 'Why Join Us'}</div>
-              <h2 className="section-title font-recoleta">{pageData.benefitsTitle || 'Benefits & Perks'}</h2>
-            </div>
-          </div>
-          <div className="row g-4">
-            {pageData.benefits?.map((benefit, index) => (
-              <div key={benefit.id || index} className="col-lg-4 col-md-6">
-                <div 
-                  className="benefit-card"
-                  onMouseEnter={() => setHoveredBenefit(index)}
-                  onMouseLeave={() => setHoveredBenefit(null)}
-                >
-                  <div className="benefit-icon">
-                    {getIconByType(benefit.iconType)}
-                  </div>
-                  <h4 className="benefit-title">{benefit.title}</h4>
-                  <p className="benefit-description">{benefit.description}</p>
-                </div>
+          <div className="row align-items-center">
+            <div className="col-lg-6 order-lg-last">
+              <div className="mission-image">
+                <Image
+                  src={
+                    pageData.benefitsImage?.url
+                      ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageData.benefitsImage.url}`
+                      : '/images/media/img_133.jpg' // Fallback
+                  }
+                  alt={pageData.benefitsTitle || 'Benefits & Perks'}
+                  width={600}
+                  height={450}
+                  className="rounded-img"
+                />
               </div>
-            ))}
+            </div>
+            <div className="col-lg-6">
+              <div className="mission-content pe-lg-5">
+                <div className="sc-title">{pageData.benefitsTagline || 'Why Join Us'}</div>
+                <h2 className="section-title font-recoleta">{pageData.benefitsTitle || 'Benefits & Perks'}</h2>
+                <p className="mission-text mt-30">
+                  {pageData.benefitsDescription}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

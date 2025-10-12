@@ -45,39 +45,6 @@ export interface CaseStudiesPageFaqItem extends Struct.ComponentSchema {
   };
 }
 
-export interface CreativesBenefitItem extends Struct.ComponentSchema {
-  collectionName: 'components_creatives_benefit_items';
-  info: {
-    displayName: 'Benefit Item';
-  };
-  attributes: {
-    description: Schema.Attribute.Text;
-    iconType: Schema.Attribute.Enumeration<
-      [
-        'remote',
-        'growth',
-        'innovation',
-        'sustainability',
-        'results',
-        'collaborative',
-      ]
-    >;
-    title: Schema.Attribute.String;
-  };
-}
-
-export interface CreativesValueItem extends Struct.ComponentSchema {
-  collectionName: 'components_creatives_value_items';
-  info: {
-    displayName: 'Value Item';
-  };
-  attributes: {
-    color: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#FF1292'>;
-    description: Schema.Attribute.Text;
-    title: Schema.Attribute.String;
-  };
-}
-
 export interface EcoHubCard extends Struct.ComponentSchema {
   collectionName: 'components_eco_hub_cards';
   info: {
@@ -164,8 +131,6 @@ declare module '@strapi/strapi' {
       'about.value-card': AboutValueCard;
       'about.what-we-do-card': AboutWhatWeDoCard;
       'case-studies-page.faq-item': CaseStudiesPageFaqItem;
-      'creatives.benefit-item': CreativesBenefitItem;
-      'creatives.value-item': CreativesValueItem;
       'eco.hub-card': EcoHubCard;
       'homepage.counter-item': HomepageCounterItem;
       'homepage.feature-list-item': HomepageFeatureListItem;

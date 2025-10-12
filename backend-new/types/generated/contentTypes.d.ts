@@ -673,7 +673,10 @@ export interface ApiCreativesPageCreativesPage extends Struct.SingleTypeSchema {
   attributes: {
     applyButtonText: Schema.Attribute.String;
     applyButtonUrl: Schema.Attribute.String;
-    benefits: Schema.Attribute.Component<'creatives.benefit-item', true>;
+    benefitsDescription: Schema.Attribute.Text;
+    benefitsImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     benefitsTagline: Schema.Attribute.String;
     benefitsTitle: Schema.Attribute.String;
     contactButtonText: Schema.Attribute.String;
@@ -702,7 +705,10 @@ export interface ApiCreativesPageCreativesPage extends Struct.SingleTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    values: Schema.Attribute.Component<'creatives.value-item', true>;
+    valuesDescription: Schema.Attribute.Text;
+    valuesImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     valuesTagline: Schema.Attribute.String;
     valuesTitle: Schema.Attribute.String;
   };
