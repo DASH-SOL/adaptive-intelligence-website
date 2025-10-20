@@ -66,7 +66,7 @@ const HomePage = ({ homepageData }) => {
           </div>
           <div className="row">
             {/* PASS THE REPEATER DATA TO THE LEADS COMPONENT */}
-           <Leads />
+          <Leads services={homepageData?.services} />
           </div>
         </div>
       </div>

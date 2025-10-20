@@ -1,44 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Image from "next/image";
 import LetsTalkButton from "@/components/LetsTalkButton";
 
-const Leads = () => {
-  const [leadItems, setLeadItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/services?populate=icon`;
-        const res = await fetch(apiUrl);
-        if (!res.ok) throw new Error('Failed to fetch services');
-        
-        const json = await res.json();
-        // The structure of the response is likely flat, so we use it directly.
-        setLeadItems(json.data || json || []); 
-      } catch (error) {
-        console.error("Error fetching services in Leads component:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchServices();
-  }, []);
-
-  if (isLoading) {
-    return <div>Loading services...</div>;
-  }
+// This component now receives the services as a prop
+const Leads = ({ services }) => {
+  // Use the 'services' prop. If it's empty or not provided, render nothing.
+  const leadItems = services || [];
 
   if (leadItems.length === 0) {
-    return <div>No services found.</div>;
+    return null; // Don't show anything if no services are passed
   }
 
   return (
     <div className="row g-4">
       {leadItems.map((item, index) => {
-        // THE FIX: We use 'item' directly because your API response is flat.
-        // We also use the simpler 'item.icon.url' path.
         const iconUrl = item.icon?.url
           ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${item.icon.url}`
           : "/images/shape/content.png";
