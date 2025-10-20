@@ -52,7 +52,9 @@ export async function getStaticProps() {
   // Fetch About Page data from Strapi
   let pageData = null;
   try {
-    const pageUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/about-page?populate=*`;
+    const pageUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/about-page?` +
+  'populate[whatWeDoCards][populate]=*&' +
+  'populate[values][populate]=*';
     const pageRes = await fetch(pageUrl);
     const pageJson = await pageRes.json();
     pageData = pageJson.data || null;
@@ -69,6 +71,8 @@ export async function getStaticProps() {
 }
 
 const About = ({ treeCardStats, pageData }) => {
+  
+
   // Fallback data if Strapi fetch fails
   const whoWeAreImageUrl = pageData?.whoWeAreImage?.url
     ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageData.whoWeAreImage.url}`
@@ -100,27 +104,26 @@ const About = ({ treeCardStats, pageData }) => {
         </div>
       </Hero>
 
-       {/* Counter Section */}
+      {/* Counter Section */}
       <div className="wrapper mt-90 lg-mt-30">
         <div className="container">
-          {/* Pass the counter items from the About Page data */}
           <CounterSection counterData={pageData?.counterItems} />
         </div>
       </div>
 
-{/* Our Mission Section */}
-<div className="fancy-feature-fiftyEight position-relative zn2 pt-120 md-pt-100" id="mission">
-  <div className="container position-relative">
-    <OurMission data={pageData} />
-    <Image
-      width={449}
-      height={808}
-      src="/images/shape/shape_187.svg"
-      alt="shape"
-      className="lazy-img shapes shape-one"
-    />
-  </div>
-</div>
+      {/* Our Mission Section */}
+      <div className="fancy-feature-fiftyEight position-relative zn2 pt-120 md-pt-100" id="mission">
+        <div className="container position-relative">
+          <OurMission data={pageData} />
+          <Image
+            width={449}
+            height={808}
+            src="/images/shape/shape_187.svg"
+            alt="shape"
+            className="lazy-img shapes shape-one"
+          />
+        </div>
+      </div>
 
       {/* Who We Are Section */}
       <section className="fancy-feature-thirtyTwo mt-180 lg-mt-120">
@@ -202,10 +205,10 @@ const About = ({ treeCardStats, pageData }) => {
             </h2>
           </div>
           <div className="card-wrapper pt-45 lg-pt-20 pb-55 lg-pb-30 mt-85 lg-mt-50">
-  <div className="row justify-content-center">
-    <Block2 cards={pageData?.whatWeDoCards} />
-  </div>
-</div>
+            <div className="row justify-content-center">
+              <Block2 cards={pageData?.whatWeDoCards} />
+            </div>
+          </div>
           <div className="row">
             <div className="col-xl-10 m-auto">
               <p className="text-lg tx-dark text-center lh-lg mt-25 md-mt-20" data-aos="fade-up">
@@ -216,7 +219,7 @@ const About = ({ treeCardStats, pageData }) => {
         </div>
       </div>
 
-      {/* Our Values Section */}
+      {/* Our Values Section - WITH EXTENSIVE DEBUG */}
       <section className="values-section fancy-feature-thirtyTwo mt-140 lg-mt-120" id="vision">
         <div className="container">
           <div className="title-style-ten text-center" data-aos="fade-up">
@@ -228,24 +231,78 @@ const About = ({ treeCardStats, pageData }) => {
               </span>
             </h2>
           </div>
+          
           <div className="row gx-xxl-5 mt-60 lg-mt-40">
-            {pageData?.values?.map((value, index) => {
-              const iconUrl = value.icon?.url
-                ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${value.icon.url}`
-                : '/images/icon/icon_175.svg';
+            {(() => {
+              // Try to find values in different possible locations
+              const valuesData = pageData?.values || 
+                                pageData?.attributes?.values || 
+                                pageData?.data?.attributes?.values ||
+                                [];
               
-              return (
-                <div key={value.id || index} className="col-md-6 col-lg-3 d-flex" data-aos="fade-up" data-aos-delay={index * 100}>
-                  <div className="card-style-fifteen tran3s text-center h-100">
-                    <div className="icon m-auto tran3s">
-                      <Image src={iconUrl} alt={value.title} className="lazy-img" width={32} height={32} />
+              console.log('Rendering values. Count:', valuesData?.length);
+              
+              if (!valuesData || valuesData.length === 0) {
+                return (
+                  <div className="col-12">
+                    <div style={{ 
+                      background: '#fff3cd', 
+                      padding: '20px', 
+                      borderRadius: '8px',
+                      border: '1px solid #ffc107'
+                    }}>
+                      <h4>⚠️ No Values Data Found</h4>
+                      <p>The values array is empty or not found in pageData.</p>
+                      <p>Check the console for detailed debug information.</p>
                     </div>
-                    <h4 className="fw-bold tx-dark mt-35 mb-20">{value.title}</h4>
-                    <p>{value.description}</p>
                   </div>
-                </div>
-              );
-            })}
+                );
+              }
+              
+              return valuesData.map((value, index) => {
+                // Handle different icon structures
+                let iconUrl = '/images/icon/icon_175.svg';
+                
+                if (value?.icon?.data?.attributes?.url) {
+                  iconUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${value.icon.data.attributes.url}`;
+                } else if (value?.icon?.url) {
+                  iconUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${value.icon.url}`;
+                } else if (value?.icon?.data?.url) {
+                  iconUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${value.icon.data.url}`;
+                } else if (typeof value?.icon === 'string') {
+                  iconUrl = value.icon.startsWith('http') ? value.icon : `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${value.icon}`;
+                }
+                
+                return (
+                  <div 
+                    key={value?.id || index} 
+                    className="col-md-6 col-lg-3 d-flex" 
+                    data-aos="fade-up" 
+                    data-aos-delay={index * 100}
+                  >
+                    <div className="card-style-fifteen tran3s text-center h-100">
+                      <div className="icon m-auto tran3s">
+                        <Image 
+                          src={iconUrl} 
+                          alt={value?.title || 'Value icon'} 
+                          className="lazy-img" 
+                          width={32} 
+                          height={32}
+                          onError={(e) => {
+                            console.error('Image load error for:', iconUrl);
+                            e.currentTarget.src = '/images/icon/icon_175.svg';
+                          }}
+                        />
+                      </div>
+                      <h4 className="fw-bold tx-dark mt-35 mb-20">
+                        {value?.title || 'Untitled'}
+                      </h4>
+                      <p>{value?.description || 'No description'}</p>
+                    </div>
+                  </div>
+                );
+              });
+            })()}
           </div>
         </div>
       </section>

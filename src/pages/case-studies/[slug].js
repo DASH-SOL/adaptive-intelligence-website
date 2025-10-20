@@ -97,7 +97,7 @@ const SingleCaseStudyPage = ({ resource, relatedResources, pageSettings }) => {
       <div className="benefits-section pt-100 pb-150 lg-pt-80 lg-pb-120" style={{ background: '#f8f9fa' }}>
         <div className="container">
           <div className="row">
-            <div className="col-lg-8 mx-auto text-center">
+            <div className="col-lg-10 mx-auto text-center">
               <h2 className="benefits-title">
                 Join leading marketers and founders who use our {resource.type}s to:
               </h2>

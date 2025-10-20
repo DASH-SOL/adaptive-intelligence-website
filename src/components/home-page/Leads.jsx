@@ -37,7 +37,7 @@ const Leads = ({ services }) => {
                 <p className="service-description">{item.description}</p>
               </div>
               <div className="service-footer">
-                <LetsTalkButton buttonText="Learn More" href={item.buttonUrl || '/services'} showIcon={true} />
+                <LetsTalkButton buttonText={item.buttonText || "Learn More"} href={item.buttonUrl || '/services'} showIcon={true} />
               </div>
               <div className="service-accent" style={{ backgroundColor: item.color }}></div>
             </div>

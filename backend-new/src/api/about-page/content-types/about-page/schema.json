@@ -23,6 +23,9 @@
     "whoWeAreTagline": {
       "type": "string"
     },
+    "whoWeAreTitle": {
+      "type": "string"
+    },
     "whoWeAreParagraph1": {
       "type": "text"
     },

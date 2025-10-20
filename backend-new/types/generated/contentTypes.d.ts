@@ -500,6 +500,7 @@ export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
     whoWeAreParagraph2: Schema.Attribute.Text;
     whoWeAreParagraph3: Schema.Attribute.Text;
     whoWeAreTagline: Schema.Attribute.String;
+    whoWeAreTitle: Schema.Attribute.String;
     whyChooseUsDescription: Schema.Attribute.String;
     whyChooseUsPoints: Schema.Attribute.Component<'about.bullet-point', true>;
     whyChooseUsTagline: Schema.Attribute.String;
@@ -971,6 +972,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    buttonText: Schema.Attribute.String;
     buttonUrl: Schema.Attribute.String;
     color: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
