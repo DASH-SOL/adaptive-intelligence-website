@@ -178,7 +178,7 @@ useEffect(() => {
                 </div>
               ) : downloadComplete ? (
                 <div className="download-success">
-                  <h2>Download Complete!</h2>
+                  <h2>Download Complete!!</h2>
                   <p>Check your downloads folder for the {resourceData.title}.</p>
                   
                   <div className="resource-summary">
