@@ -178,7 +178,7 @@ useEffect(() => {
                 </div>
               ) : downloadComplete ? (
                 <div className="download-success">
-                  <h2>Download Complete!!</h2>
+                  <h2>Download Complete!</h2>
                   <p>Check your downloads folder for the {resourceData.title}.</p>
                   
                   <div className="resource-summary">
@@ -197,12 +197,13 @@ useEffect(() => {
                   <div className="download-confirmation">
                     <div className="success-icon">✓</div>
                     <p className="confirmation-text">
-                      Your file has been downloaded to your device. 
-                      If the download didn't start automatically, 
-                      <a href={`/uploads/${resourceData.fileName}`} 
-   download 
-   className="download-link"> click here to download</a>.
-                    </p>
+  Your file has been downloaded to your device.
+  If the download didn't start automatically,
+  {/* --- USE downloadUrl HERE --- */}
+  <a href={resourceData.downloadUrl || '#'} // Use the correct URL
+    download={resourceData.downloadName || resourceData.fileName} // Keep the suggested filename
+    className="download-link"> click here to download</a>.
+</p>
                   </div>
 
                   <div className="next-steps">
