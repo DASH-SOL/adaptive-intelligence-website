@@ -24,19 +24,25 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "logoFooter": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "favicon": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "copyrightText": {
       "type": "string"
@@ -96,6 +102,9 @@
       "type": "string"
     },
     "youtubeUrl": {
+      "type": "string"
+    },
+    "spotifyUrl": {
       "type": "string"
     }
   }

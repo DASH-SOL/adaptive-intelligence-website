@@ -1112,6 +1112,7 @@ export interface ApiSettingSetting extends Struct.SingleTypeSchema {
     siteDescription: Schema.Attribute.Text;
     siteTagline: Schema.Attribute.String;
     siteTitle: Schema.Attribute.String;
+    spotifyUrl: Schema.Attribute.String;
     supportEmail: Schema.Attribute.Email;
     twitterUrl: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
