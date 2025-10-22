@@ -199,7 +199,7 @@ useEffect(() => {
                     <p className="confirmation-text">
                       Your file has been downloaded to your device. 
                       If the download didn't start automatically, 
-                      <a href={`/downloads/${resourceData.fileName}`} 
+                      <a href={`/uploads/${resourceData.fileName}`} 
    download 
    className="download-link"> click here to download</a>.
                     </p>
