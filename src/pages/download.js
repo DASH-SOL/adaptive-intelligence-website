@@ -8,6 +8,7 @@ import CopyrightFooter from '@/components/footer/CopyrightFooter';
 import FooterContent from '@/components/footer/FooterContent';
 import Subscribe from '@/components/footer/Subscribe';
 import { resourceDatabase } from '@/data/resources'; // UPDATED: Import from central file
+import FooterWithSettings from "@/components/footer/FooterWithSettings";
 
 const DownloadPage = () => {
   const router = useRouter();
@@ -227,48 +228,7 @@ useEffect(() => {
         </div>
       </div>
 
-      {/* Footer */}
-      <div className="footer-style-nine theme-basic-footer zn2 position-relative">
-        <div className="bg-wrapper">
-          <div className="container">
-            <div className="row justify-content-between">
-              <div className="col-lg-2 footer-intro mb-40">
-                <div className="logo">
-                  <Link href="/">
-                    <Image
-                      src="/images/logo/logo_06.svg"
-                      alt="logo"
-                      width={115}
-                      height={80}
-                    />
-                  </Link>
-                </div>
-              </div>
-              <FooterContent />
-
-              <div className="col-lg-4 mb-30 form-widget">
-                <h5 className="footer-title fw-normal">Newsletter</h5>
-                <h6 className="pt-15 pb-20 text-white">Join our newsletter</h6>
-                <Subscribe />
-                <div className="fs-14 mt-10 text-white opacity-50">
-                  We only send interesting and relevant emails.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <CopyrightFooter />
-
-        <div className="shapes shape-one" />
-        <Image
-          width={84}
-          height={104}
-          src="/images/shape/shape_134.svg"
-          alt="shape"
-          className="lazy-img shapes shape-two"
-        />
-      </div>
+     <FooterWithSettings />
 
       <style jsx>{`
         /* All your existing styles for this page */

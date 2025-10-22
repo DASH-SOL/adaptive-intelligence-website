@@ -5,6 +5,7 @@ import Header from '@/components/header/Header';
 import FooterContent from '@/components/footer/FooterContent';
 import Subscribe from '@/components/footer/Subscribe';
 import CopyrightFooter from '@/components/footer/CopyrightFooter';
+import FooterWithSettings from "@/components/footer/FooterWithSettings";
 
 // Icon mapping function for hub cards
 const getHubIconByType = (iconType) => {
@@ -251,29 +252,7 @@ const EcoPage = ({ treeCardStats, pageData }) => {
         </div>
       </section>
 
-      {/* Footer */}
-      <div className="footer-style-nine theme-basic-footer zn2 position-relative">
-        <div className="bg-wrapper">
-          <div className="container">
-            <div className="row justify-content-between">
-              <div className="col-lg-2 footer-intro mb-40">
-                <div className="logo">
-                  <Link href="/">
-                    <Image src="/images/logo/logo_06.svg" alt="logo" width={115} height={80} />
-                  </Link>
-                </div>
-              </div>
-              <FooterContent />
-              <div className="col-lg-4 mb-30 form-widget">
-                <h5 className="footer-title fw-normal">Newsletter</h5>
-                <h6 className="pt-15 pb-20 text-white">Join our newsletter</h6>
-                <Subscribe />
-              </div>
-            </div>
-          </div>
-        </div>
-        <CopyrightFooter />
-      </div>
+<FooterWithSettings />
 
       <style jsx>{`
         /* White Header Fix for This Page */

@@ -212,7 +212,6 @@ const HomePage = ({ homepageData }) => {
   </div>
   <div className="shapes shape-one" />
 </div>
-
 <FooterWithSettings />
     </>
   );
