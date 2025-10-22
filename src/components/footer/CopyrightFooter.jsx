@@ -12,14 +12,23 @@ const CopyrightFooter = () => {
   console.log("Loading:", loading);
 
   if (loading) {
-    return <div>Loading footer...</div>;
+    // Keep a minimal structure while loading to avoid layout shifts
+    return (
+      <div className="bottom-footer" style={{ minHeight: '50px' }}>
+        <div className="container">
+          <div className="row">
+            <div className="col-12 text-center"><p>Loading...</p></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   // Default social links as fallback
   const defaultIcons = [
     {
-      icon: "fab fa-twitter",
-      href: "https://twitter.com/aii_agency",
+      icon: "fab fa-spotify", // <-- Changed from fa-twitter
+      href: "https://open.spotify.com/playlist/37i9dQZF1EpoYM2VvfSDDr?si=c035b4827ce043b9&nd=1&dlsi=227d0bfc319349d4", // <-- Add a default Spotify URL if you have one
     },
     {
       icon: "fab fa-linkedin-in",
@@ -42,8 +51,8 @@ const CopyrightFooter = () => {
   // Use settings if available, otherwise use defaults
   const icons = settings ? [
     {
-      icon: "fab fa-twitter",
-      href: settings.twitterUrl || "https://twitter.com/aii_agency",
+      icon: "fab fa-spotify", // <-- Changed from fa-twitter
+      href: settings.spotifyUrl || "#", // <-- Changed from twitterUrl, add default if needed
     },
     {
       icon: "fab fa-linkedin-in",
@@ -64,24 +73,26 @@ const CopyrightFooter = () => {
   ] : defaultIcons;
 
   const IconItem = ({ icon, href }) => {
+    // Handles custom image icons (like Upwork)
     if (icon.startsWith("/images/icon/")) {
       return (
         <li style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Link href={href} target="_blank" rel="noopener noreferrer" className="social-icon-link">
-            <Image 
-              src={icon} 
-              alt="social icon" 
-              width={24} 
-              height={24} 
-              style={{ filter: 'brightness(0) invert(1)', transition: 'all 0.3s ease' }} 
+          <Link href={href || '#'} target="_blank" rel="noopener noreferrer" className="social-icon-link">
+            <Image
+              src={icon}
+              alt="social icon"
+              width={24}
+              height={24}
+              style={{ filter: 'brightness(0) invert(1)', transition: 'all 0.3s ease' }}
             />
           </Link>
         </li>
       );
     }
+    // Handles Font Awesome icons
     return (
       <li>
-        <Link href={href} target="_blank" rel="noopener noreferrer">
+        <Link href={href || '#'} target="_blank" rel="noopener noreferrer">
           <i className={icon} />
         </Link>
       </li>
@@ -91,12 +102,13 @@ const CopyrightFooter = () => {
   return (
     <div className="bottom-footer">
       <div className="container">
-        <div className="row">
+        <div className="row align-items-center"> {/* Added align-items-center */}
           <div className="col-lg-4 order-lg-0 mt-15">
             <ul className="d-flex justify-content-center justify-content-lg-start footer-nav style-none">
               <li>
                 <Link href="/contact">Contact Us</Link>
               </li>
+              {/* Add other links like Privacy Policy if needed */}
             </ul>
           </div>
           <div className="col-lg-4 order-lg-2 mt-15">
