@@ -324,48 +324,130 @@ const EcoPage = ({ treeCardStats, pageData }) => {
 
 export async function getStaticProps() {
   const fallbackData = { trees: 311, acres: 1.2, carbon: 328, bottles: 1674 };
-  let finalStats = fallbackData;
+  let finalStats = { ...fallbackData }; // Start with fallback
+
+  console.log("--- Starting getStaticProps for EcoPage ---");
 
   // Fetch TreeCard stats from Google Sheets
   try {
     const sheetId = '1ICb8PWttvv0leKmfmJWXSGhXkZz5UAxChmFamV_bh1c';
-    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=Sheet1`;
+    const sheetName = 'Total%20Footprint'; // CORRECTED Sheet Name (URL Encoded)
+    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${sheetName}`;
+    console.log("Fetching Google Sheet URL:", url);
+
     const response = await fetch(url);
+
     if (response.ok) {
       const csvText = await response.text();
-      const rows = csvText.replace(/"/g, '').split('\n');
-      const parsedData = {};
-      rows.forEach(row => {
-        const [key, value] = row.split(',');
-        if (key && value) {
-          parsedData[key.trim().toLowerCase()] = parseFloat(value.trim());
-        }
-      });
+      // console.log("Raw CSV Text Received:\n", csvText); // Keep for debugging if needed
 
-      if (parsedData.trees !== undefined && parsedData.acres !== undefined && parsedData.carbon !== undefined && parsedData.bottles !== undefined) {
-        finalStats = parsedData;
+      // Split CSV into rows, remove quotes
+      const rows = csvText.replace(/"/g, '').split('\n');
+      console.log(`CSV split into ${rows.length} rows initially.`);
+
+      // Check if we have at least a header and one data row
+      if (rows.length >= 2) {
+        let totalTrees = 0;
+        let totalAcres = 0;
+        let totalCarbon = 0;
+        let totalBottles = 0;
+        let processedRowCount = 0;
+
+        // Loop through rows, explicitly skipping header (index 0) and potential totals/empty rows
+        for (let i = 1; i < rows.length; i++) {
+          const rowText = rows[i].trim();
+          if (rowText === '') continue; // Skip empty rows
+
+          const columns = rowText.split(',');
+          // Ensure row has enough columns AND first column isn't "TOTALS" (case-insensitive)
+          if (columns.length >= 5 && columns[0]?.toLowerCase().trim() !== 'totals') {
+            
+            // Parse values, default to 0 if parsing fails or cell is empty
+            const trees = parseFloat(columns[1]?.trim().replace(/,/g, '')) || 0;
+            const acres = parseFloat(columns[2]?.trim().replace(/,/g, '')) || 0;
+            const carbon = parseFloat(columns[3]?.trim().replace(/,/g, '')) || 0;
+            const bottles = parseFloat(columns[4]?.trim().replace(/,/g, '')) || 0;
+            
+            // Add to totals
+            totalTrees += trees;
+            totalAcres += acres;
+            totalCarbon += carbon;
+            totalBottles += bottles;
+            processedRowCount++; // Count how many rows we actually summed
+
+          } else {
+             // Log rows that are skipped (excluding empty ones already handled)
+             console.warn(`Skipping row ${i + 1} due to insufficient columns or being a totals row:`, columns);
+          }
+        }
+        
+        console.log(`Processed ${processedRowCount} data rows for summation.`);
+        
+        // Round acres to one decimal place
+        totalAcres = parseFloat(totalAcres.toFixed(1)); 
+
+        const calculatedTotals = {
+            trees: totalTrees,
+            acres: totalAcres,
+            carbon: totalCarbon,
+            bottles: totalBottles
+        };
+        
+        console.log("Calculated Totals:", calculatedTotals);
+        
+        // Update finalStats only if we processed at least one row
+        if (processedRowCount > 0) {
+             console.log("✅ Calculated totals successfully. Updating finalStats.");
+             finalStats = calculatedTotals;
+        } else {
+             console.warn("⚠️ No valid data rows found to calculate totals. Using fallback.");
+        }
+
+      } else {
+         console.warn("⚠️ Not enough rows in CSV (need header + data). Using fallback.");
       }
+    } else {
+       console.error("❌ Failed to fetch Google Sheet. Status:", response.status);
     }
   } catch (error) {
-    console.error('Error fetching TreeCard stats:', error.message);
+    console.error('❌ Error during Google Sheet fetch/parse:', error.message);
   }
 
-  // Fetch Eco Page content from Strapi
-  let pageData = null;
+  console.log("Final TreeCard stats passed to props:", finalStats);
+
+  // --- Fetch Eco Page content from Strapi ---
+  let strapiPageData = null;
   try {
     const pageUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/eco-page?populate=*`;
+    console.log("Fetching Strapi URL:", pageUrl);
     const pageRes = await fetch(pageUrl);
-    const pageJson = await pageRes.json();
-    pageData = pageJson.data || null;
+
+    if (!pageRes.ok) {
+      console.error("❌ Failed to fetch Strapi Eco Page data. Status:", pageRes.status);
+      const errorText = await pageRes.text();
+      console.error("Strapi Error Response:", errorText.substring(0, 500) + "..."); // Log part of error response
+      // Keep strapiPageData as null
+    } else {
+      const pageJson = await pageRes.json();
+      // Correctly access attributes for Strapi v4
+      strapiPageData = pageJson.data?.attributes || pageJson.data || null;
+      console.log("✅ Successfully fetched Strapi data.");
+      // Optional: Log parts of the Strapi data to verify
+      // console.log("Strapi Data (partial):", { heroTitle: strapiPageData?.heroTitle, hubCardsCount: strapiPageData?.hubCards?.length });
+    }
+
   } catch (error) {
-    console.error("Error fetching eco page data:", error);
+    console.error("❌ Error fetching/processing Strapi eco page data:", error.message);
   }
+
+  console.log("--- Finished getStaticProps for EcoPage ---");
 
   return {
     props: {
       treeCardStats: finalStats,
-      pageData
+      pageData: strapiPageData // Pass the possibly null Strapi data
     },
+     revalidate: 60, // Optional: Re-fetch data every 60 seconds
   };
 }
 

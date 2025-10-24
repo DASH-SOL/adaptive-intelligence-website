@@ -841,6 +841,15 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
     feedbackQuoteEnd: Schema.Attribute.String;
     feedbackQuoteHighlight: Schema.Attribute.String;
     feedbackQuoteStart: Schema.Attribute.String;
+    heroBackgroundImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    heroBackgroundType: Schema.Attribute.Enumeration<
+      ['Shapes', 'Image', 'Video']
+    >;
+    heroBackgroundVideo: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     heroButtonText: Schema.Attribute.String;
     heroHighlightedText: Schema.Attribute.String;
     heroSubtitleBold: Schema.Attribute.String;

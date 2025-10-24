@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import HeroContent from "./HeroContent";
 import Partners from "./Partners";
-
+import Image from "next/image";
 const backgroundAnimations = `
   @keyframes slowZoom {
     0% { transform: scale(1); }
@@ -348,7 +348,10 @@ const AnimatedShape = ({
   );
 };
 
-const HomePageContent = ({ heroData }) => { // FIX #1: This component now accepts the heroData prop
+const HomePageContent = ({ isHomePage = false, children, heroData }) => { // FIX #1: This component now accepts the heroData prop
+  const backgroundType = heroData?.heroBackgroundType || 'Shapes'; // Default to Shapes
+  const bgImage = heroData?.heroBackgroundImage; // May need .data.attributes depending on your setup
+  const bgVideo = heroData?.heroBackgroundVideo; // May need .data.attributes depending on your setup
   return (
     <>
       <div className="container">
@@ -371,6 +374,8 @@ const HomePageContent = ({ heroData }) => { // FIX #1: This component now accept
 };
 
 const Hero = ({ isHomePage = false, children, heroData }) => {
+  const backgroundType = heroData?.heroBackgroundType || 'Shapes';
+
   return (
     <>
       <style jsx>{backgroundAnimations}</style>
@@ -382,6 +387,7 @@ const Hero = ({ isHomePage = false, children, heroData }) => {
         }}
       >
         {/* Animated Individual Shape Background - Replace single background image */}
+        {backgroundType === 'Shapes' && (
         <div
           style={{
             position: "absolute",
@@ -623,8 +629,43 @@ const Hero = ({ isHomePage = false, children, heroData }) => {
             zIndex={1}
             hideOnMobile={false}  // Hide this shape on mobile to reduce clutter
           />
+{/* Option 2: Background Image */}
+        {backgroundType === 'Image' && bgImageUrl && (
+          <div className="media-background-wrapper" style={{ position: 'absolute', inset: 0, zIndex: -1 }}>
+            <Image
+              src={bgImageUrl}
+              alt="Hero Background"
+              layout="fill"
+              objectFit="cover"
+              quality={85}
+              priority // Load hero image quickly
+            />
+            {/* Optional Overlay for text contrast */}
+            <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }} />
+          </div>
+        )}
+
+        {/* Option 3: Background Video */}
+        {backgroundType === 'Video' && bgVideoUrl && (
+          <div className="media-background-wrapper" style={{ position: 'absolute', inset: 0, zIndex: -1 }}>
+            <video
+              key={bgVideoUrl} // Add key to force re-render if URL changes
+              autoPlay
+              loop
+              muted
+              playsInline // Important for mobile playback
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            >
+              <source src={bgVideoUrl} type={bgVideo?.mime || 'video/mp4'} />
+              Your browser does not support the video tag.
+            </video>
+            {/* Optional Overlay for text contrast */}
+            <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.4)' }} />
+          </div>
+        )}
           
         </div>
+         )}
 
         {isHomePage ? (
           // This now correctly calls your layout wrapper and passes the data
