@@ -460,6 +460,7 @@ export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
     missionAuthorName: Schema.Attribute.String;
     missionAuthorTitle: Schema.Attribute.String;
     missionCustomerCount: Schema.Attribute.String;
+    missionCustomerLabel: Schema.Attribute.String;
     missionImage1: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
@@ -485,10 +486,44 @@ export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    values: Schema.Attribute.Component<'about.value-card', true>;
+    value1_Description: Schema.Attribute.Text;
+    value1_Image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    value1_Title: Schema.Attribute.String;
+    value2_Description: Schema.Attribute.Text;
+    value2_Image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    value2_Title: Schema.Attribute.String;
+    value3_Description: Schema.Attribute.Text;
+    value3_Image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    value3_Title: Schema.Attribute.String;
+    value4_Description: Schema.Attribute.Text;
+    value4_Image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    value4_Title: Schema.Attribute.String;
+    valuesDescription: Schema.Attribute.Text;
     valuesTagline: Schema.Attribute.String;
     valuesTitle: Schema.Attribute.String;
-    whatWeDoCards: Schema.Attribute.Component<'about.what-we-do-card', true>;
+    whatWeDoCard1_Description: Schema.Attribute.Text;
+    whatWeDoCard1_Icon: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    whatWeDoCard1_Title: Schema.Attribute.String;
+    whatWeDoCard2_Description: Schema.Attribute.Text;
+    whatWeDoCard2_Icon: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    whatWeDoCard2_Title: Schema.Attribute.String;
+    whatWeDoCard3_Description: Schema.Attribute.Text;
+    whatWeDoCard3_Icon: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    whatWeDoCard3_Title: Schema.Attribute.String;
     whatWeDoDescription: Schema.Attribute.Text;
     whatWeDoTitle: Schema.Attribute.String;
     whoWeAreBadgeNumber: Schema.Attribute.String;
@@ -908,6 +943,35 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiIndustryIndustry extends Struct.CollectionTypeSchema {
+  collectionName: 'industries';
+  info: {
+    displayName: 'Industry';
+    pluralName: 'industries';
+    singularName: 'industry';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::industry.industry'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiLetsTalkSubmissionLetsTalkSubmission
   extends Struct.CollectionTypeSchema {
   collectionName: 'lets_talk_submissions';
@@ -1036,6 +1100,19 @@ export interface ApiServicesPageServicesPage extends Struct.SingleTypeSchema {
     faqTitle: Schema.Attribute.String;
     faqTitleEnd: Schema.Attribute.String;
     faqTitleHighlight: Schema.Attribute.String;
+    heroBackgroundImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    heroBackgroundType: Schema.Attribute.Enumeration<
+      ['Shapes', 'Image', 'Video']
+    >;
+    heroBackgroundVideo: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    industries: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::industry.industry'
+    >;
     industriesButtonText: Schema.Attribute.String;
     industriesButtonUrl: Schema.Attribute.String;
     industriesHeading: Schema.Attribute.String;
@@ -1043,8 +1120,8 @@ export interface ApiServicesPageServicesPage extends Struct.SingleTypeSchema {
     industriesImage: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
-    industriesList: Schema.Attribute.Component<'shared.industry-item', true>;
     industriesSubtext: Schema.Attribute.Text;
+    industriesSubtext2: Schema.Attribute.Text;
     insightsBodyText: Schema.Attribute.Text;
     insightsButtonText: Schema.Attribute.String;
     insightsButtonUrl: Schema.Attribute.String;
@@ -1129,6 +1206,39 @@ export interface ApiSettingSetting extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     upworkUrl: Schema.Attribute.String;
     youtubeUrl: Schema.Attribute.String;
+  };
+}
+
+export interface ApiTeamMemberTeamMember extends Struct.CollectionTypeSchema {
+  collectionName: 'team_members';
+  info: {
+    displayName: 'Team Member';
+    pluralName: 'team-members';
+    singularName: 'team-member';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    bio_long: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    group: Schema.Attribute.Enumeration<['Executive', 'Creative']>;
+    headshot: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    linkedin_url: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::team-member.team-member'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1684,11 +1794,13 @@ declare module '@strapi/strapi' {
       'api::eco-page.eco-page': ApiEcoPageEcoPage;
       'api::faq.faq': ApiFaqFaq;
       'api::homepage.homepage': ApiHomepageHomepage;
+      'api::industry.industry': ApiIndustryIndustry;
       'api::lets-talk-submission.lets-talk-submission': ApiLetsTalkSubmissionLetsTalkSubmission;
       'api::newsletter.newsletter': ApiNewsletterNewsletter;
       'api::service.service': ApiServiceService;
       'api::services-page.services-page': ApiServicesPageServicesPage;
       'api::setting.setting': ApiSettingSetting;
+      'api::team-member.team-member': ApiTeamMemberTeamMember;
       'api::testimonial.testimonial': ApiTestimonialTestimonial;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

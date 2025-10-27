@@ -1,22 +1,84 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'; // Added useState, useEffect
 import Image from "next/image";
 import LetsTalkButton from "@/components/LetsTalkButton";
 
-// This component now receives the services as a prop
-const Leads = ({ services }) => {
-  // Use the 'services' prop. If it's empty or not provided, render nothing.
-  const leadItems = services || [];
+// This component now fetches its own data
+const Leads = () => {
+  // Add state for data, loading, and errors
+  const [leadItems, setLeadItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (leadItems.length === 0) {
-    return null; // Don't show anything if no services are passed
+  // Fetch data when the component mounts
+  useEffect(() => {
+    const fetchServices = async () => {
+      setIsLoading(true);
+      setError(null); // Reset error state on new fetch
+      try {
+        // Fetch services and populate the icon
+        const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/services?populate=icon`;
+        console.log("Leads component fetching from:", apiUrl); // Log URL
+        const res = await fetch(apiUrl);
+
+        if (!res.ok) {
+           const errorText = await res.text();
+           console.error(`Failed to fetch services: ${res.status}`, errorText);
+           throw new Error(`API fetch failed: ${res.status}`);
+        }
+
+        const json = await res.json();
+        console.log("Leads component received raw data:", json); // Log raw response
+
+        // Format data (assuming Strapi v5 flat structure)
+        const formattedServices = (json.data || []).map(item => ({
+          // Make sure these field names match your Strapi 'Service' collection type
+          id: item.id,
+          title: item.title,
+          subtitle: item.subtitle,
+          description: item.description,
+          buttonText: item.buttonText,
+          buttonUrl: item.buttonUrl,
+          color: item.color,
+          // Use simple .url access for v5 icon
+          icon: item.icon?.url
+            ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${item.icon.url}`
+            : "/images/shape/content.png" // Fallback
+        }));
+        console.log("Leads component formatted data:", formattedServices); // Log formatted data
+        setLeadItems(formattedServices);
+
+      } catch (error) {
+        console.error("Error fetching services in Leads component:", error.message);
+        setError(error.message);
+        setLeadItems([]); // Clear data on error
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []); // Empty array ensures this runs only once
+
+  // --- Render based on state ---
+  if (isLoading) {
+    return <p className="text-center">Loading services...</p>; // Simple loading text
   }
 
+  if (error) {
+     return <p className="text-center text-danger">Error loading services. Please try again later.</p>; // Error message
+  }
+
+  if (leadItems.length === 0) {
+    // Don't show anything if no services are fetched or available
+    return null;
+  }
+
+  // --- Main Render ---
   return (
     <div className="row g-4">
       {leadItems.map((item, index) => {
-        const iconUrl = item.icon?.url
-          ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${item.icon.url}`
-          : "/images/shape/content.png";
+        // Use the 'icon' property directly from the formatted data
+        const iconUrl = item.icon;
 
         return (
           <div className="col-lg-4 col-md-6" key={item.id}>
@@ -28,23 +90,30 @@ const Leads = ({ services }) => {
               <div className="service-header">
                 <div className="service-number">0{index + 1}</div>
                 <div className="service-icon-wrapper">
-                  <Image src={iconUrl} alt={`${item.title} icon`} width={80} height={80} />
+                   {/* Add onError for debugging */}
+                   <Image
+                      src={iconUrl}
+                      alt={`${item.title || 'Service'} icon`}
+                      width={80} height={80}
+                      onError={(e) => console.error(`Image load error for ${iconUrl}`, e.target.src)}
+                    />
                 </div>
               </div>
               <div className="service-content">
-                <h3 className="service-title">{item.title}</h3>
-                <h4 className="service-subtitle">{item.subtitle}</h4>
-                <p className="service-description">{item.description}</p>
+                <h3 className="service-title">{item.title || 'Untitled Service'}</h3>
+                <h4 className="service-subtitle">{item.subtitle || ''}</h4>
+                <p className="service-description">{item.description || 'No description.'}</p>
               </div>
               <div className="service-footer">
                 <LetsTalkButton buttonText={item.buttonText || "Learn More"} href={item.buttonUrl || '/services'} showIcon={true} />
               </div>
-              <div className="service-accent" style={{ backgroundColor: item.color }}></div>
+              <div className="service-accent" style={{ backgroundColor: item.color || '#cccccc' }}></div>
             </div>
           </div>
         );
       })}
-      
+
+      {/* Styles remain unchanged */}
       <style jsx>{`
         /* All your original CSS styles remain here, unchanged. */
         .service-card-modern {

@@ -140,11 +140,6 @@
     "industriesHeadingHighlight": {
       "type": "string"
     },
-    "industriesList": {
-      "type": "component",
-      "component": "shared.industry-item",
-      "repeatable": true
-    },
     "industriesSubtext": {
       "type": "text"
     },
@@ -163,6 +158,42 @@
     },
     "industriesButtonUrl": {
       "type": "string"
+    },
+    "industriesSubtext2": {
+      "type": "text"
+    },
+    "industries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::industry.industry"
+    },
+    "heroBackgroundType": {
+      "type": "enumeration",
+      "enum": [
+        "Shapes",
+        "Image",
+        "Video"
+      ]
+    },
+    "heroBackgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "heroBackgroundVideo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

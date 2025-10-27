@@ -63,10 +63,8 @@
     "valuesTitle": {
       "type": "string"
     },
-    "values": {
-      "type": "component",
-      "component": "about.value-card",
-      "repeatable": true
+    "valuesDescription": {
+      "type": "text"
     },
     "sustainabilityTagline": {
       "type": "string"
@@ -172,10 +170,120 @@
       "component": "homepage.counter-item",
       "repeatable": true
     },
-    "whatWeDoCards": {
-      "type": "component",
-      "component": "about.what-we-do-card",
-      "repeatable": true
+    "whatWeDoCard1_Title": {
+      "type": "string"
+    },
+    "whatWeDoCard1_Description": {
+      "type": "text"
+    },
+    "whatWeDoCard1_Icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "whatWeDoCard2_Title": {
+      "type": "string"
+    },
+    "whatWeDoCard2_Description": {
+      "type": "text"
+    },
+    "whatWeDoCard2_Icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "whatWeDoCard3_Title": {
+      "type": "string"
+    },
+    "whatWeDoCard3_Description": {
+      "type": "text"
+    },
+    "whatWeDoCard3_Icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "value1_Title": {
+      "type": "string"
+    },
+    "value1_Description": {
+      "type": "text"
+    },
+    "value1_Image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "value2_Title": {
+      "type": "string"
+    },
+    "value2_Description": {
+      "type": "text"
+    },
+    "value2_Image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "value3_Title": {
+      "type": "string"
+    },
+    "value3_Description": {
+      "type": "text"
+    },
+    "value3_Image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "value4_Title": {
+      "type": "string"
+    },
+    "value4_Description": {
+      "type": "text"
+    },
+    "value4_Image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "missionCustomerLabel": {
+      "type": "string"
     }
   }
 }

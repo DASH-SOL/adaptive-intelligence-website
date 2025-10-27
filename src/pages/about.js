@@ -114,9 +114,7 @@ export async function getStaticProps() {
   // Fetch About Page data from Strapi
   let pageData = null;
   try {
-    const pageUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/about-page?` +
-  'populate[whatWeDoCards][populate]=*&' +
-  'populate[values][populate]=*';
+    const pageUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/about-page?populate=*`;
     const pageRes = await fetch(pageUrl);
     const pageJson = await pageRes.json();
     pageData = pageJson.data || null;
@@ -258,8 +256,7 @@ const About = ({ treeCardStats, pageData }) => {
               {pageData?.whatWeDoTitle || 'What We Do Best'}
               <span className="position-relative">
                 <Image
-                  width={235}
-                  height={9}
+                  width={235} height={9}
                   src="/images/shape/shape_188.svg"
                   alt="shape"
                 />
@@ -268,23 +265,72 @@ const About = ({ treeCardStats, pageData }) => {
           </div>
           <div className="card-wrapper pt-45 lg-pt-20 pb-55 lg-pb-30 mt-85 lg-mt-50">
             <div className="row justify-content-center">
-              <Block2 cards={pageData?.whatWeDoCards} />
+              {/* Card 1 */}
+              {pageData?.whatWeDoCard1_Title && (
+                <div className="col-lg-4 col-sm-6" data-aos="fade-up" data-aos-delay="0">
+                  <div className="card-style-twentySix text-center mt-25">
+                    <div className="icon rounded-circle m-auto d-flex align-items-center justify-content-center">
+                      <Image
+                        width={31} height={30} // Already present
+                        src={pageData.whatWeDoCard1_Icon?.url ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageData.whatWeDoCard1_Icon.url}` : '/images/icon/icon_175.svg'}
+                        alt={pageData.whatWeDoCard1_Title || 'Icon'} className="lazy-img"
+                      />
+                    </div>
+                    <h5 className="tx-dark mt-40 lg-mt-30 mb-5">{pageData.whatWeDoCard1_Title}</h5>
+                    <p className="fs-18">{pageData.whatWeDoCard1_Description}</p>
+                  </div>
+                </div>
+              )}
+              {/* Card 2 */}
+              {pageData?.whatWeDoCard2_Title && (
+                 <div className="col-lg-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+                   <div className="card-style-twentySix text-center mt-25">
+                    <div className="icon rounded-circle m-auto d-flex align-items-center justify-content-center">
+                       {/* --- ADDED width, height, alt, className --- */}
+                       <Image
+                         width={31} height={30}
+                         src={pageData.whatWeDoCard2_Icon?.url ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageData.whatWeDoCard2_Icon.url}` : '/images/icon/icon_175.svg'}
+                         alt={pageData.whatWeDoCard2_Title || 'Icon'} className="lazy-img"
+                       />
+                    </div>
+                    <h5 className="tx-dark mt-40 lg-mt-30 mb-5">{pageData.whatWeDoCard2_Title}</h5>
+                    <p className="fs-18">{pageData.whatWeDoCard2_Description}</p>
+                   </div>
+                 </div>
+              )}
+               {/* Card 3 */}
+              {pageData?.whatWeDoCard3_Title && (
+                 <div className="col-lg-4 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+                   <div className="card-style-twentySix text-center mt-25">
+                     <div className="icon rounded-circle m-auto d-flex align-items-center justify-content-center">
+                       {/* --- ADDED width, height, alt, className --- */}
+                       <Image
+                         width={31} height={30}
+                         src={pageData.whatWeDoCard3_Icon?.url ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageData.whatWeDoCard3_Icon.url}` : '/images/icon/icon_175.svg'}
+                         alt={pageData.whatWeDoCard3_Title || 'Icon'} className="lazy-img"
+                       />
+                    </div>
+                    <h5 className="tx-dark mt-40 lg-mt-30 mb-5">{pageData.whatWeDoCard3_Title}</h5>
+                    <p className="fs-18">{pageData.whatWeDoCard3_Description}</p>
+                   </div>
+                 </div>
+              )}
             </div>
           </div>
           <div className="row">
             <div className="col-xl-10 m-auto">
-              <p className="text-lg tx-dark text-center lh-lg mt-25 md-mt-20" data-aos="fade-up">
-                {pageData?.whatWeDoDescription}
-              </p>
+               <p className="text-lg tx-dark text-center lh-lg mt-25 md-mt-20" data-aos="fade-up">
+                 {pageData?.whatWeDoDescription}
+               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Our Values Section - WITH EXTENSIVE DEBUG */}
+    {/* Our Values Section */}
       <section className="values-section fancy-feature-thirtyTwo mt-140 lg-mt-120" id="vision">
         <div className="container">
-          <div className="title-style-ten text-center" data-aos="fade-up">
+         <div className="title-style-ten text-center" data-aos="fade-up">
             <div className="sc-title">{pageData?.valuesTagline || 'OUR VISION'}</div>
             <h2 className="main-title font-recoleta fw-normal tx-dark">
               {pageData?.valuesTitle || 'The Principles That Guide Us'}
@@ -292,79 +338,83 @@ const About = ({ treeCardStats, pageData }) => {
                 <Image width={219} height={7} src="/images/shape/shape_132.svg" alt="shape"/>
               </span>
             </h2>
+            {/* --- MOVED Description Paragraph INSIDE title block --- */}
+            {pageData?.valuesDescription && ( // Conditionally render
+               <p className="text-lg tx-dark lh-lg mt-25 md-mt-20" data-aos="fade-up" data-aos-delay="100"> {/* Added delay */}
+                 {pageData.valuesDescription}
+               </p>
+            )}
+            {/* --- END Description Paragraph --- */}
           </div>
-          
           <div className="row gx-xxl-5 mt-60 lg-mt-40">
-            {(() => {
-              // Try to find values in different possible locations
-              const valuesData = pageData?.values || 
-                                pageData?.attributes?.values || 
-                                pageData?.data?.attributes?.values ||
-                                [];
-              
-              console.log('Rendering values. Count:', valuesData?.length);
-              
-              if (!valuesData || valuesData.length === 0) {
-                return (
-                  <div className="col-12">
-                    <div style={{ 
-                      background: '#fff3cd', 
-                      padding: '20px', 
-                      borderRadius: '8px',
-                      border: '1px solid #ffc107'
-                    }}>
-                      <h4>⚠️ No Values Data Found</h4>
-                      <p>The values array is empty or not found in pageData.</p>
-                      <p>Check the console for detailed debug information.</p>
-                    </div>
+            {/* Value 1 */}
+            {pageData?.value1_Title && (
+              <div className="col-md-6 col-lg-3 d-flex" data-aos="fade-up" data-aos-delay="0">
+                <div className="card-style-fifteen tran3s text-center h-100 d-flex flex-column">
+                  <div className="icon m-auto tran3s"> {/* Keep class 'icon' for styling */}
+                    <Image
+                      // --- CORRECTED: Access _Image field ---
+                      src={pageData.value1_Image?.url ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageData.value1_Image.url}` : '/images/icon/icon_175.svg'}
+                      alt={pageData.value1_Title || 'Value icon'}
+                      className="lazy-img" width={32} height={32}
+                    />
                   </div>
-                );
-              }
-              
-              return valuesData.map((value, index) => {
-                // Handle different icon structures
-                let iconUrl = '/images/icon/icon_175.svg';
-                
-                if (value?.icon?.data?.attributes?.url) {
-                  iconUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${value.icon.data.attributes.url}`;
-                } else if (value?.icon?.url) {
-                  iconUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${value.icon.url}`;
-                } else if (value?.icon?.data?.url) {
-                  iconUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${value.icon.data.url}`;
-                } else if (typeof value?.icon === 'string') {
-                  iconUrl = value.icon.startsWith('http') ? value.icon : `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${value.icon}`;
-                }
-                
-                return (
-                  <div 
-                    key={value?.id || index} 
-                    className="col-md-6 col-lg-3 d-flex" 
-                    data-aos="fade-up" 
-                    data-aos-delay={index * 100}
-                  >
-                    <div className="card-style-fifteen tran3s text-center h-100">
-                      <div className="icon m-auto tran3s">
-                        <Image 
-                          src={iconUrl} 
-                          alt={value?.title || 'Value icon'} 
-                          className="lazy-img" 
-                          width={32} 
-                          height={32}
-                          onError={(e) => {
-                            console.error('Image load error for:', iconUrl);
-                            e.currentTarget.src = '/images/icon/icon_175.svg';
-                          }}
-                        />
-                      </div>
-                      <h4 className="fw-bold tx-dark mt-35 mb-20">
-                        {value?.title || 'Untitled'}
-                      </h4>
-                      <p>{value?.description || 'No description'}</p>
-                    </div>
-                  </div>
-                );
-              });
-            })()}
+                  <h4 className="fw-bold tx-dark mt-35 mb-20">{pageData.value1_Title}</h4>
+                  <p className="flex-grow-1">{pageData.value1_Description}</p>
+                </div>
+              </div>
+            )}
+            {/* Value 2 */}
+            {pageData?.value2_Title && (
+              <div className="col-md-6 col-lg-3 d-flex" data-aos="fade-up" data-aos-delay="100">
+                <div className="card-style-fifteen tran3s text-center h-100 d-flex flex-column">
+                   <div className="icon m-auto tran3s">
+                     <Image
+                       // --- CORRECTED: Access _Image field ---
+                       src={pageData.value2_Image?.url ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageData.value2_Image.url}` : '/images/icon/icon_175.svg'}
+                       alt={pageData.value2_Title || 'Value icon'}
+                       className="lazy-img" width={32} height={32}
+                     />
+                   </div>
+                   <h4 className="fw-bold tx-dark mt-35 mb-20">{pageData.value2_Title}</h4>
+                   <p className="flex-grow-1">{pageData.value2_Description}</p>
+                </div>
+              </div>
+            )}
+            {/* Value 3 */}
+            {pageData?.value3_Title && (
+              <div className="col-md-6 col-lg-3 d-flex" data-aos="fade-up" data-aos-delay="200">
+                <div className="card-style-fifteen tran3s text-center h-100 d-flex flex-column">
+                   <div className="icon m-auto tran3s">
+                     <Image
+                       // --- CORRECTED: Access _Image field ---
+                       src={pageData.value3_Image?.url ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageData.value3_Image.url}` : '/images/icon/icon_175.svg'}
+                       alt={pageData.value3_Title || 'Value icon'}
+                       className="lazy-img" width={32} height={32}
+                     />
+                   </div>
+                   <h4 className="fw-bold tx-dark mt-35 mb-20">{pageData.value3_Title}</h4>
+                   <p className="flex-grow-1">{pageData.value3_Description}</p>
+                </div>
+              </div>
+            )}
+            {/* Value 4 */}
+            {pageData?.value4_Title && (
+              <div className="col-md-6 col-lg-3 d-flex" data-aos="fade-up" data-aos-delay="300">
+                <div className="card-style-fifteen tran3s text-center h-100 d-flex flex-column">
+                   <div className="icon m-auto tran3s">
+                     <Image
+                       // --- CORRECTED: Access _Image field ---
+                       src={pageData.value4_Image?.url ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageData.value4_Image.url}` : '/images/icon/icon_175.svg'}
+                       alt={pageData.value4_Title || 'Value icon'}
+                       className="lazy-img" width={32} height={32}
+                     />
+                   </div>
+                   <h4 className="fw-bold tx-dark mt-35 mb-20">{pageData.value4_Title}</h4>
+                   <p className="flex-grow-1">{pageData.value4_Description}</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -420,45 +470,7 @@ const About = ({ treeCardStats, pageData }) => {
         </div>
       </section>
       
-      {/* Why Brands Choose Us Section */}
-      <section className="why-choose-us-section fancy-feature-thirtyTwo mt-140 lg-mt-120" style={{background: '#f8f9fa', padding: '120px 0'}}>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6 order-lg-last" data-aos="fade-left">
-              <div className="ps-lg-5">
-                <div className="title-style-ten">
-                  <div className="sc-title">{pageData?.whyChooseUsTagline || 'CLIENT SUCCESS'}</div>
-                  <h2 className="main-title font-recoleta fw-normal tx-dark">
-                    {pageData?.whyChooseUsTitle || 'Why Brands Choose Us.'}
-                  </h2>
-                </div>
-                <p className="text-lg tx-dark lh-lg mt-35 mb-45">
-                  {pageData?.whyChooseUsDescription}
-                </p>
-                <ul className="style-none list-item fs-18">
-                  {pageData?.whyChooseUsPoints?.map((point, index) => (
-                    <li key={point.id || index}>{point.text}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="col-lg-6 order-lg-first" data-aos="fade-right">
-              <div className="client-logos-wrapper text-center">
-                {pageData?.clientLogos?.map((logo, index) => {
-                  const logoUrl = logo.url
-                    ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${logo.url}`
-                    : '/images/logo/P-2.svg';
-                  return (
-                    <div key={logo.id || index} className="logo-item">
-                      <Image src={logoUrl} alt={`Client logo ${index + 1}`} width={120} height={40} />
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    
 
       {/* FAQ Section */}
       <div className="fancy-feature-thirtyThree mt-180 lg-mt-120">
@@ -510,26 +522,26 @@ const About = ({ treeCardStats, pageData }) => {
 
       <style jsx>{`
         .values-section .card-style-fifteen {
-          background: #F8F9FA;
-          border-radius: 20px;
-          padding: 35px;
-          border: 1px solid #E5E5E5;
-          transition: all 0.3s ease;
-        }
+      background: #F8F9FA;
+      border-radius: 20px;
+      padding: 35px;
+      border: 1px solid #E5E5E5;
+      transition: all 0.3s ease;
+  }
         .values-section .card-style-fifteen:hover {
           border-color: #FF1292;
           box-shadow: 0 10px 30px rgba(0,0,0,0.07);
         }
         .values-section .icon {
-          width: 60px;
-          height: 60px;
-          border-radius: 50%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background: #FF1292;
-          transition: background 0.3s ease;
-        }
+      width: 60px; /* Fixed size */
+      height: 60px; /* Fixed size */
+      border-radius: 50%;
+      display: flex; /* Centers the image inside the icon circle */
+      justify-content: center;
+      align-items: center;
+      background: #FF1292;
+      transition: background 0.3s ease;
+  }
         .values-section .icon img {
           filter: brightness(0) invert(1);
           transition: filter 0.3s ease;

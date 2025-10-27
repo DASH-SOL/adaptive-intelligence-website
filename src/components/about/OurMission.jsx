@@ -125,7 +125,7 @@ const OurMission = ({ data }) => {
               <div className="fw-500 tx-dark amount">
                 {data.missionCustomerCount || '32k'}
               </div>
-              <div className="fs-18 tx-dark">Customer</div>
+              <div className="fs-18 tx-dark">{data.missionCustomerLabel || 'Customers'}</div>
             </div>
           </div>
         </div>

@@ -8,7 +8,15 @@ const MainMenu = () => {
   const pathname = usePathname();
 
   const isActive = (link) => {
-    // Check if the current path starts with the link's path
+    // Check if the current path starts with the link's path,
+    // handling the exact "/" case separately.
+    if (link === "/") {
+      return pathname === "/";
+    }
+    // For dropdowns, check if any item is active
+    if (Array.isArray(link)) {
+        return link.some(item => pathname.startsWith(item.link));
+    }
     return pathname.startsWith(link);
   };
 
@@ -17,12 +25,7 @@ const MainMenu = () => {
     { name: "Case Studies", link: "/case-studies" }
   ];
 
-  // UPDATED: This array now only contains the dropdown items for "About"
-  const aboutDropdownItems = [
-    { name: "Our Mission", link: "/about#mission" },
-    { name: "Our Vision", link: "/about#vision" }
-  ];
-
+  // Helper for single links (no changes needed)
   const renderSingleNavItem = (label, link) => {
     return (
       <li className="nav-item">
@@ -54,6 +57,7 @@ const MainMenu = () => {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <li className="d-block d-lg-none">
+            {/* ... Mobile Logo ... */}
             <div className="logo mobile-logo">
               <Link href="/" className="d-block">
                 <Image
@@ -67,20 +71,19 @@ const MainMenu = () => {
             </div>
           </li>
 
-          <li className="nav-item">
-            <Link
-              href="/"
-              className={pathname === "/" ? "nav-link active-menu" : "nav-link"}
-              style={{ userSelect: "none" }}
-            >
-              Home
-            </Link>
-          </li>
-          
-          {/* Clients Dropdown */}
+          {/* --- REORDERED MENU ITEMS --- */}
+
+          {/* 1. Home */}
+          {renderSingleNavItem("Home", "/")}
+
+          {/* 2. Creatives */}
+          {renderSingleNavItem("Creatives", "/creatives")}
+
+          {/* 3. Clients Dropdown */}
           <li className="nav-item dropdown">
             <a
-              className={`nav-link dropdown-toggle ${clientsItems.some(item => isActive(item.link)) ? "active-menu" : ""}`}
+              // Pass the array of links to isActive for dropdown state
+              className={`nav-link dropdown-toggle ${isActive(clientsItems) ? "active-menu" : ""}`}
               href="#"
               role="button"
               data-bs-toggle="dropdown"
@@ -93,7 +96,8 @@ const MainMenu = () => {
             <ul className="dropdown-menu">
               {clientsItems.map((item, index) => (
                 <li key={index}>
-                  <Link href={item.link} className={`dropdown-item ${isActive(item.link) ? "active" : ""}`}>
+                  {/* Check individual item links for active state */}
+                  <Link href={item.link} className={`dropdown-item ${pathname.startsWith(item.link) ? "active" : ""}`}>
                     <span>{item.name}</span>
                   </Link>
                 </li>
@@ -101,22 +105,14 @@ const MainMenu = () => {
             </ul>
           </li>
 
-          {renderSingleNavItem("Creatives", "/creatives")}
-          
+          {/* 4. Eco */}
           {renderSingleNavItem("Eco", "/eco")}
-          
-          {/* UPDATED: About link with its specific dropdown */}
-          {/* FIXED: About link that goes to /about page AND has dropdown */}
-<li className="nav-item">
-  <Link
-    href="/about"
-    className={`nav-link ${isActive("/about") ? "active-menu" : ""}`}
-    style={{ userSelect: "none" }}
-  >
-    About
-  </Link>
 
-</li>
+          {/* 5. About */}
+          {renderSingleNavItem("About", "/about")}
+
+          {/* --- END REORDERED MENU ITEMS --- */}
+
         </ul>
       </div>
     </nav>

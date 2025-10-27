@@ -12,6 +12,8 @@ import Testimonial from "@/components/home-page/Testimonial";
 import Faq from "@/components/home-page/Faq";
 import ClientCarousel from "@/components/ClientCarousel"; // Import the new client component
 import LatestCaseStudiesSection from '@/components/case-studies/LatestCaseStudiesSection'; // Import the component
+import IndustriesGrid from '@/components/IndustriesGrid';
+import ServicesGridDark from "@/components/ServicesGridDark";
 
 import FooterWithSettings from "@/components/footer/FooterWithSettings";
 const ServicesHeroContent = ({ servicesData }) => {
@@ -54,9 +56,9 @@ const ServicesPage = ({ servicesPageData }) => {
       <Header />
       
       {/* Hero Section using your existing Hero component */}
-     <Hero isHomePage={false}>
-        <ServicesHeroContent servicesData={servicesPageData} />
-      </Hero>
+     <Hero isHomePage={false} heroData={servicesPageData}>
+       <ServicesHeroContent servicesData={servicesPageData} />
+     </Hero>
 
       <div className="fancy-feature-thirtyOne position-relative zn2 pt-180 pb-140 lg-pt-140 lg-pb-100" style={{ background: 'linear-gradient(135deg, #000 0%, #1a1a1a 100%)' }}>
         <div className="container">
@@ -90,38 +92,7 @@ const ServicesPage = ({ servicesPageData }) => {
             </div>
           </div>
           <div className="row g-4">
-            {servicesData.map((service, index) => (
-              <div key={service.id || index} className="col-lg-4 col-md-6">
-                <div className="service-card-dark">
-                  <div className="service-header-dark">
-                    <div className="service-number-dark">0{index + 1}</div>
-                    <div className="service-icon-dark">
-                      <Image 
-                        src={service.icon || "/images/shape/content.png"}
-                        alt={service.title}
-                        width={50}
-                        height={50}
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="service-content-dark">
-                    <h3 className="service-title-dark">{service.title}</h3>
-                    <p className="service-subtitle-dark">{service.subtitle}</p>
-                    <p className="service-description-dark">{service.description}</p>
-
-                    <div className="service-cta-dark">
-                      <LetsTalkButton 
-                        buttonText="Learn More" 
-                        href={`/contact`}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="service-accent-dark" style={{ backgroundColor: service.color || '#FF1292' }}></div>
-                </div>
-              </div>
-            ))}
+            <ServicesGridDark />
           </div>
         </div>
       </div>
@@ -221,14 +192,14 @@ const ServicesPage = ({ servicesPageData }) => {
         </div>
       </div>
 
-   {/* 👇 REVISED Industries Section (with Image and CTA) - Navy Background 👇 */}
+   {/* --- Industries Section (Reverted to Image Left + Grid/Text Right) --- */}
       <div className="fancy-feature-thirtyOne position-relative zn2 pt-180 pb-180 lg-pt-140 lg-pb-140" style={{ background: '#151937' }}>
         <div className="container">
           {/* Section Heading */}
           <div className="row">
             <div className="col-xl-8 col-lg-9 m-auto">
               <div
-                className="title-style-ten text-center pb-80 lg-pb-50"
+                className="title-style-ten text-center pb-80 lg-pb-50" // Adjusted padding bottom
                 data-aos="fade-up"
               >
                 <h2 className="main-title font-recoleta fw-normal" style={{ color: 'white' }}>
@@ -238,10 +209,8 @@ const ServicesPage = ({ servicesPageData }) => {
                     {servicesPageData?.industriesHeadingHighlight || "Served"}
                     <Image
                       src="/images/shape/shape_122.svg"
-                      alt="icon shape"
-                      width={220}
-                      height={5}
-                      className="mx-auto"
+                      alt="underline"
+                      width={220} height={5} className="mx-auto"
                     />
                   </span>
                 </h2>
@@ -253,53 +222,40 @@ const ServicesPage = ({ servicesPageData }) => {
           <div className="row align-items-center">
             {/* Image Column */}
             <div className="col-lg-6" data-aos="fade-right">
-                <div className="capabilities-image-wrapper">
-                    <Image 
+                <div className="capabilities-image-wrapper"> {/* Reusing class names from previous version */}
+                    <Image
                     src={
+                        // Use the correct path for Strapi v5 media
                         servicesPageData?.industriesImage?.url
                         ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${servicesPageData.industriesImage.url}`
-                        : "/images/assets/team-diverse-analysts-consultants-reviewing-data-checklists_482257-125957.jpg"
+                        : "/images/assets/team-diverse-analysts-consultants-reviewing-data-checklists_482257-125957.jpg" // Fallback
                     }
-                    alt="Industries served"
+                    alt={servicesPageData?.industriesHeading || "Industries served"}
                     width={600}
                     height={450}
-                    className="capabilities-main-image"
+                    className="capabilities-main-image" // Reusing class name
                     />
                 </div>
             </div>
 
             {/* Industries Grid and CTA Column */}
             <div className="col-lg-6" data-aos="fade-left">
-              <div className="capabilities-content ps-lg-5">
-                <div className="capabilities-grid-enhanced">
-                  {/* Dynamically render industries */}
-                  {servicesPageData?.industriesList?.map((industry, index) => (
-                    <div key={index} className="capability-card-enhanced industry-card">
-                      <div className="capability-icon">
-                        <Image 
-                          src={
-                            industry.icon?.url
-                              ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${industry.icon.url}`
-                              : "/images/icon/innovation.png" // Fallback icon
-                          } 
-                          alt={`${industry.name} icon`} 
-                          width={35} 
-                          height={35} 
-                        />
-                      </div>
-                      <div className="capability-content">
-                        <h4>{industry.name}</h4>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                
+              <div className="capabilities-content ps-lg-5"> {/* Reusing class name */}
+
+                {/* --- CALL THE NEW COMPONENT --- */}
+                {/* It will fetch and display ALL industries */}
+                <IndustriesGrid />
+                {/* ----------------------------- */}
+
                 {/* Subtext and CTA */}
                 <div className="mt-50">
                   <p className="industries-subtext" style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '1.1rem', marginBottom: '30px' }}>
                     {servicesPageData?.industriesSubtext || "Not seeing your industry? Reach out to our team."}
                   </p>
-                  <LetsTalkButton 
+                  <p className="industries-subtext" style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '1.1rem', marginBottom: '30px' }}>
+                    {servicesPageData?.industriesSubtext2 || "Not seeing your industry? Reach out to our team."}
+                  </p>
+                  <LetsTalkButton
                     buttonText={servicesPageData?.industriesButtonText || "Discuss Your Project"}
                     href={servicesPageData?.industriesButtonUrl || "/contact"}
                   />
